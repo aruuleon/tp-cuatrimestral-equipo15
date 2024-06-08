@@ -10,5 +10,13 @@ namespace tp_cuatrimestral_equipo15 {
         protected void Page_Load(object sender, EventArgs e) {
 
         }
+        public void MostrarMenu() {
+            PanelMenu.Visible = true;
+            PanelMenuLogin.Visible = false;
+        }
+        public void MostrarMenuLogin() {
+            PanelMenu.Visible = false;
+            PanelMenuLogin.Visible = true;
+        }
     }
 }
