@@ -20,7 +20,7 @@
                 <p class="card-text">Este curso es el comienzo del código. Ideal para arrancar desde cero, complementar con el curso gratis u ordenar los conocimientos que tengas si ya venís intentando aprender. No requiere conocimientos previos.</p>
             </div>
             <button type="button" class="btn btn-success w-50 mx-auto mb-3">
-                <a href="Detalles.aspx?id=<%#Eval("Id")%>" class="w-100 btn btn-success">Obtener</a>
+                <a href="" class="w-100 btn btn-success">Obtener</a>
             </button>
         </div>
     </div>
