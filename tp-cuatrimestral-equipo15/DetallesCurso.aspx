@@ -39,24 +39,6 @@
   </div>  
 
 
-<div class="container row justify-content-center" style="margin:20px; margin-top:50px; margin-left:300px">
-
-        <div class="col-md-5" style="padding:0px; text-align:center; margin:10px">
-            <h2 class="display-5  text-body-emphasis">Conocimientos requeridos</h2>
-        </div>
-            
-        <div class="col-md-5" style="padding:20px; text-align:justify; border-left:dotted; border-left-color:darkgrey">
-            <p style="">
-                Para poder aprovechar este curso al máximo es necesario que cuentes con una base
-                sólida en fundamentos de la programación, que conozcas el paradigma de
-                Programación Orientada a Objetos y que al menos tengas nociones sobre .NET (o algún
-                otro Framework). Los conocimientos necesarios los vemos en los Niveles 1 y 2, aunque
-                vos podés tenerlos de otro lado, claro.
-            </p>    
-        </div>
-</div>
-
-
     <div class="justify-content-center" style="text-align:center; align-content:center; margin-top:100px" >
         <asp:Button ID="btnComprarFinal" runat="server" CssClass="btn btn-primary btn-lg px-4 gap-3" Text="Comprar"/>
         <asp:Button ID="btnPrograma" runat="server" CssClass="btn btn-secondary btn-lg px-4 gap-3" Text="Programa"/>

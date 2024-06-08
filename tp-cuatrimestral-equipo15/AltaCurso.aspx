@@ -31,44 +31,6 @@
                  <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
              </div>
 
-             
-             <asp:Panel ID="panelSeccion1" runat="server" Visible="true">
-             <div class="mb-3" style="border-top:dotted;">
-                 <div>
-                <label class="form-label" style="margin-top:10px; text-align:center">Seccion 1 (NO obligatorio)</label>
-                 </div>
-                <label class="form-label" style="margin-top:10px">Titulo</label>
-                <asp:TextBox ID="txtTitulo1" runat="server" CssClass="form-control"></asp:TextBox>
-                <label class="form-label">Cuerpo</label>
-                <asp:TextBox ID="txtCuerpo1" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-            </div>
-            </asp:Panel>
-          
-             <asp:Panel ID="panelSeccion2" runat="server" Visible="true">
-             <div class=" style="border-top:dotted;">
-                 <div>
-                <label class="form-label" style="margin-top:10px; text-align:center">Seccion 2 (NO obligatorio)</label>
-                 </div>
-                <label class="form-label" style="margin-top:10px">Titulo</label>
-                <asp:TextBox ID="txtTitulo2" runat="server" CssClass="form-control"></asp:TextBox>
-                <label class="form-label">Cuerpo</label>
-                <asp:TextBox ID="txtCuerpo2" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-            </div>
-                 
-            </asp:Panel>
-
-              <asp:Panel ID="panelSeccion3" runat="server" Visible="true">
-                <div class="mb-3" style="border-top:dotted;">        
-                   <div>
-                    <label class="form-label" style="margin-top:10px; text-align:center">Seccion 3 (NO obligatorio)</label>
-                   </div>
-                 <label class="form-label" style="margin-top:10px">Titulo</label>
-                 <asp:TextBox ID="txtTitulo3" runat="server" CssClass="form-control"></asp:TextBox>
-                 <label class="form-label">Cuerpo</label>
-                 <asp:TextBox ID="txtCuerpo3" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                </div>
-                 
-              </asp:Panel>
 
               
 
