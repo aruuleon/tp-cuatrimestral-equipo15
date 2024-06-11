@@ -16,7 +16,7 @@ namespace Negocio
             try
             {
                 accesoDatos.setearConsulta(
-                    "SELECT ID, IdMoodle, Nombre, ImagenPortada, Descripcion, Programa, Precio, Visible FROM Cursos"
+                    "SELECT ID, IdMoodle, Nombre, ImagenPortada, Descripcion, Programa, Precio, Visible, ConocimientosRequeridos FROM Cursos"
                 );
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
@@ -27,6 +27,7 @@ namespace Negocio
                     curso.IdMoodle = (int)accesoDatos.Lector["IdMoodle"]; ;
                     curso.Nombre = (string)accesoDatos.Lector["Nombre"];
                     curso.Descripcion = (string)accesoDatos.Lector["Descripcion"];
+                    curso.ConocimientosRequeridos = (string)accesoDatos.Lector["Descripcion"];
                     curso.Precio = (decimal)accesoDatos.Lector["Precio"];
                     curso.Visible = (bool)accesoDatos.Lector["Visible"];
                     curso.UrlPrograma = (string)accesoDatos.Lector["ImagenPortada"];
@@ -51,13 +52,14 @@ namespace Negocio
             try
             {
                 accesoDatos.setearConsulta(
-                   "INSERT INTO Cursos(IdMoodle, Nombre, ImagenPortada, Descripcion, Programa, Precio, Visible)" +
+                   "INSERT INTO Cursos(IdMoodle, Nombre, ImagenPortada, Descripcion, Programa, Precio, Visible, ConocimientosRequeridos)" +
                     " OUTPUT INSERTED.ID" +
-                    " VALUES(@IdMoodle, @Nombre, @Descripcion, @ImagenPortada, @Programa, @Precio, @Visible)"
+                    " VALUES(@IdMoodle, @Nombre, @Descripcion, @ImagenPortada, @Programa, @Precio, @Visible, @ConocimientosRequeridos)"
                 );
                 accesoDatos.setearParametros("@IdMoodle", curso.IdMoodle);
                 accesoDatos.setearParametros("@Nombre", curso.Nombre);
                 accesoDatos.setearParametros("@Descripcion", curso.Descripcion);
+                accesoDatos.setearParametros("@ConocimientosRequeridos", curso.ConocimientosRequeridos);
                 accesoDatos.setearParametros("@ImagenPortada", curso.UrlPortada);
                 accesoDatos.setearParametros("@Programa", curso.UrlPrograma);
                 accesoDatos.setearParametros("@Precio", curso.Precio);
@@ -79,10 +81,11 @@ namespace Negocio
         {
             try
             {
-                accesoDatos.setearConsulta("UPDATE Cursos SET IdMoodle = @IdMoodle , Nombre = @Nombre, ImagenPortada = @ImagenPortada, Descripcion = @Descripcion, Programa = @Programa, Precio = @Precio, Visible = @Visible WHERE Id = " + curso.ID);
+                accesoDatos.setearConsulta("UPDATE Cursos SET IdMoodle = @IdMoodle , Nombre = @Nombre, ImagenPortada = @ImagenPortada, Descripcion = @Descripcion, Programa = @Programa, Precio = @Precio, Visible = @Visible, ConocimientosRequeridos = @ConocimientosRequeridos WHERE Id = " + curso.ID);
                 accesoDatos.setearParametros("@IdMoodle", curso.IdMoodle);
                 accesoDatos.setearParametros("@Nombre", curso.Nombre);
                 accesoDatos.setearParametros("@Descripcion", curso.Descripcion);
+                accesoDatos.setearParametros("@ConocimientosRequeridos", curso.ConocimientosRequeridos);
                 accesoDatos.setearParametros("@ImagenPortada", curso.UrlPortada);
                 accesoDatos.setearParametros("@Programa", curso.UrlPrograma);
                 accesoDatos.setearParametros("@Precio", curso.Precio);

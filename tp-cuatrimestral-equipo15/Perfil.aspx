@@ -4,8 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 
     
-            <div class="container">
-    
+<div class="container"> 
     <div class="row justify-content-center" style="margin-top:20px;">
         <h2 style="text-align:center; margin-bottom:20px;">Mi perfil</h2>
         <div class="col-md-4">

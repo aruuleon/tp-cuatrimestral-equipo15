@@ -60,6 +60,15 @@ namespace tp_cuatrimestral_equipo15
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
 
         /// <summary>
+        /// txtConocimientos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConocimientos;
+
+        /// <summary>
         /// btnGuardar control.
         /// </summary>
         /// <remarks>

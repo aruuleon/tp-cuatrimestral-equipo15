@@ -17,7 +17,7 @@
             <div class="card-body">
                 <h5 class="card-title">C# Nivel 1</h5>
                 <p class="card-text text-success">$ 30.000</p>
-                <p class="card-text">Este curso es el comienzo del código. Ideal para arrancar desde cero, complementar con el curso gratis u ordenar los conocimientos que tengas si ya venís intentando aprender. No requiere conocimientos previos.</p>
+                <%--<p class="card-text">Este curso es el comienzo del código. Ideal para arrancar desde cero, complementar con el curso gratis u ordenar los conocimientos que tengas si ya venís intentando aprender. No requiere conocimientos previos.</p>--%>
             </div>
             <button type="button" class="btn btn-success w-50 mx-auto mb-3">
                 <a href="" class="w-100 btn btn-success">Obtener</a>
@@ -32,7 +32,7 @@
             <div class="card-body">
                 <h5 class="card-title">C# Nivel 2</h5>
                 <p class="card-text text-success">$ 30.000</p>
-                <p class="card-text">Este curso es la continuación directa del Nivel 1, aunque también podés sumarte si ya contás con los fundamentos de programación en cualquier otro lenguaje. Acá comenzamos a construir apps vendibles.</p>
+<%--                <p class="card-text">Este curso es la continuación directa del Nivel 1, aunque también podés sumarte si ya contás con los fundamentos de programación en cualquier otro lenguaje. Acá comenzamos a construir apps vendibles.</p>--%>
             </div>
             <button type="button" class="btn btn-success w-50 mx-auto mb-3">
                 <a href="Detalles.aspx?id=<%#Eval("Id")%>" class="w-100 btn btn-success">Obtener</a>
@@ -47,7 +47,7 @@
             <div class="card-body">
                 <h5 class="card-title">C# Nivel 3</h5>
                 <p class="card-text text-success">$ 30.000</p>
-                <p class="card-text">Arrancamos con la etapa Web. En este curso tomamos todo el conocimiento que venimos trabajando y lo ponemos al servicio del desarrollo web sumando herramientas como HTML, CSS, JS y Bootstrap.</p>
+<%--                <p class="card-text">Arrancamos con la etapa Web. En este curso tomamos todo el conocimiento que venimos trabajando y lo ponemos al servicio del desarrollo web sumando herramientas como HTML, CSS, JS y Bootstrap.</p>--%>
             </div>
             <button type="button" class="btn btn-success w-50 mx-auto mb-3">
                 <a href="Detalles.aspx?id=<%#Eval("Id")%>" class="w-100 btn btn-success">Obtener</a>

@@ -30,11 +30,12 @@
                  <label class="form-label">Descripcion</label>
                  <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
              </div>
+              <div class="mb-3">
+                 <label class="form-label">Conocimientos Requeridos</label>
+                 <asp:TextBox ID="txtConocimientos" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+             </div>
 
-
-              
-
-             <div class="justify-content-center" style="text-align:center; align-content:center; margin-top:100px" >
+             <div class="justify-content-center" style="text-align:center; align-content:center; margin:50px" >
                 <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary btn-lg px-4 gap-3" Text="Guardar" />
                 <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger btn-lg px-4 gap-3" Text="Cancelar"/>
             </div>

@@ -23,5 +23,7 @@ namespace Dominio
         public decimal Precio { get; set; }
 
         public bool Visible { get; set; }
+
+        public string ConocimientosRequeridos { get; set; }
     }
 }
