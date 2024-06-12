@@ -4,21 +4,21 @@ go
 Use Plataforma_Cursos_TPC
 Go
 Create Table Cursos(
-    ID bigint not null primary key identity (1, 1),
-    IdMoodle bigint not null,
+    ID int not null primary key identity (1, 1),
+    IdMoodle int not null,
     Nombre varchar(100) not null,
-    ImagenPortada varchar(200) not null,
-    Descripcion varchar(500) not null,
-    ConocimientosRequeridos varchar(500) not null,
-    Programa varchar(200) not null,
-    Precio money not null,
-    Visible bit not null,
+    ImagenPortada varchar(200)  null,
+    Descripcion varchar(500)  null,
+    ConocimientosRequeridos varchar(500)  null,
+    Programa varchar(200)  null,
+    Precio money null,
+    Visible bit  null,
 )
 Go
 
 Go
 Create Table Usuarios(
-    ID bigint not null primary key identity (1, 1),
+    ID int not null primary key identity (1, 1),
     NombreUsuario varchar(50) not null unique,
     Nombre varchar(50) not null unique,
     Apellido varchar(50) not null unique,

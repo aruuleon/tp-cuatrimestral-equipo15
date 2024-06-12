@@ -10,7 +10,7 @@ namespace Negocio
     public class CursoNegocio
     {
         private AccesoDatos accesoDatos = new AccesoDatos();
-        public List<Curso> listar()
+        public List<Curso> Listar()
         {
             List<Curso> listaCursos = new List<Curso>();
             try
@@ -26,12 +26,20 @@ namespace Negocio
                     curso.ID = (int)accesoDatos.Lector["ID"];
                     curso.IdMoodle = (int)accesoDatos.Lector["IdMoodle"]; ;
                     curso.Nombre = (string)accesoDatos.Lector["Nombre"];
-                    curso.Descripcion = (string)accesoDatos.Lector["Descripcion"];
-                    curso.ConocimientosRequeridos = (string)accesoDatos.Lector["Descripcion"];
-                    curso.Precio = (decimal)accesoDatos.Lector["Precio"];
-                    curso.Visible = (bool)accesoDatos.Lector["Visible"];
-                    curso.UrlPrograma = (string)accesoDatos.Lector["ImagenPortada"];
-                    curso.UrlPortada = (string)accesoDatos.Lector["Programa"];
+
+                    if (!(accesoDatos.Lector["Descripcion"] is DBNull))
+                        curso.Descripcion = (string)accesoDatos.Lector["Descripcion"];
+                    if (!(accesoDatos.Lector["ConocimientosRequeridos"] is DBNull))
+                        curso.ConocimientosRequeridos = (string)accesoDatos.Lector["ConocimientosRequeridos"];
+                    if (!(accesoDatos.Lector["Precio"] is DBNull))
+                        curso.Precio = (decimal)accesoDatos.Lector["Precio"];
+                    if (!(accesoDatos.Lector["Visible"] is DBNull))
+                        curso.Visible = (bool)accesoDatos.Lector["Visible"];
+                    else curso.Visible = false;
+                    if (!(accesoDatos.Lector["ImagenPortada"] is DBNull))
+                        curso.UrlPortada = (string)accesoDatos.Lector["ImagenPortada"];
+                    if (!(accesoDatos.Lector["Programa"] is DBNull))
+                        curso.UrlPrograma = (string)accesoDatos.Lector["Programa"];
 
                     listaCursos.Add(curso);
                 }
@@ -46,14 +54,60 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        public int agregar(Curso curso)
+
+        public Curso ListarByIdMoodle(int IdMoodle)
+        {
+            Curso curso = new Curso();
+            try
+            {
+                accesoDatos.setearConsulta(
+                    "SELECT C.ID, C.IdMoodle, C.Nombre, C.ImagenPortada, C.Descripcion, C.Programa, C.Precio, C.Visible, C.ConocimientosRequeridos FROM Cursos C WHERE IdMoodle = " + IdMoodle
+                );
+                accesoDatos.ejecutarLectura();
+                
+
+                while (accesoDatos.Lector.Read())
+                {
+                    
+
+                    curso.ID = (int)accesoDatos.Lector["ID"];
+                    curso.IdMoodle = (int)accesoDatos.Lector["IdMoodle"]; 
+                    curso.Nombre = (string)accesoDatos.Lector["Nombre"];
+
+                    if(!(accesoDatos.Lector["Descripcion"] is DBNull))
+                        curso.Descripcion = (string)accesoDatos.Lector["Descripcion"]; 
+                    if (!(accesoDatos.Lector["ConocimientosRequeridos"] is DBNull))
+                        curso.ConocimientosRequeridos = (string)accesoDatos.Lector["ConocimientosRequeridos"];
+                    if (!(accesoDatos.Lector["Precio"] is DBNull))
+                        curso.Precio = (decimal)accesoDatos.Lector["Precio"];
+                    if (!(accesoDatos.Lector["Visible"] is DBNull))
+                        curso.Visible = (bool)accesoDatos.Lector["Visible"];
+                    if (!(accesoDatos.Lector["ImagenPortada"] is DBNull))
+                        curso.UrlPortada = (string)accesoDatos.Lector["ImagenPortada"];
+                    if (!(accesoDatos.Lector["Programa"] is DBNull))
+                        curso.UrlPrograma = (string)accesoDatos.Lector["Programa"];
+
+                    
+                }
+                return curso;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public int Agregar(Curso curso)
         {
             int idCurso;
             try
             {
                 accesoDatos.setearConsulta(
                    "INSERT INTO Cursos(IdMoodle, Nombre, ImagenPortada, Descripcion, Programa, Precio, Visible, ConocimientosRequeridos)" +
-                    " OUTPUT INSERTED.ID" +
                     " VALUES(@IdMoodle, @Nombre, @Descripcion, @ImagenPortada, @Programa, @Precio, @Visible, @ConocimientosRequeridos)"
                 );
                 accesoDatos.setearParametros("@IdMoodle", curso.IdMoodle);
@@ -101,11 +155,11 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        public void eliminar(Curso curso)
+        public void Eliminar(Curso curso)
         {
             try
             {
-                accesoDatos.setearConsulta("DELETE FROM Cursos WHERE ID = @Codigo");
+                accesoDatos.setearConsulta("DELETE FROM Cursos WHERE ID = @ID");
                 accesoDatos.setearParametros("@ID", curso.ID);
                 accesoDatos.ejecutarAccion();
             }
