@@ -26,5 +26,9 @@ Create Table Cursos(
     Visible bit  null,
 )
 Go
-
+Create Table Usuarios_X_Cursos(
+    IdCurso int not null foreign key references Cursos(ID),
+    IdUsuario int not null foreign key references Usuarios(ID),
+    primary key (IdCurso, IdUsuario),
+)
 
