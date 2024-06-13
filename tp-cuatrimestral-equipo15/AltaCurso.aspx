@@ -1,5 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AltaCurso.aspx.cs" Inherits="tp_cuatrimestral_equipo15.AltaCurso" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style>
+        .validacion{
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 
@@ -12,6 +19,7 @@
               <div class="mb-3">
                  <label class="form-label">Foto Portada</label>
                  <input type="file" id="txtImagen" runat="server" class="form-control" accept=".jpg"/>
+                 <asp:RequiredFieldValidator ID="validatorTxtImagen" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtImagen"></asp:RequiredFieldValidator>
              </div>
            
              <div class="mb-3" style="text-align:center">
@@ -21,18 +29,23 @@
               <div class="mb-3">
                  <label class="form-label">Programa</label>
                  <input type="file" id="txtPrograma" runat="server" class="form-control" accept=".pdf" />
+                 <asp:RequiredFieldValidator ID="validatorTxtPrograma" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtPrograma"></asp:RequiredFieldValidator>
              </div>
              <div class="mb-3">
                 <label class="form-label">Precio</label>
-                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" TextMode="Number" min="0" ></asp:TextBox>
-            </div>
+                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" Type="number"  min ="0"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="validatorRequeridoTxtPrecio" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtPrecio"></asp:RequiredFieldValidator>
+             <asp:RegularExpressionValidator ID="validatorPositivoTxtPrecio" CssClass="validacion" runat="server" ErrorMessage="* Solo valores positivos" ControlToValidate="txtPrecio" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+             </div>
              <div class="mb-3">
                  <label class="form-label">Descripcion</label>
-                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                 <asp:RequiredFieldValidator ID="validatorTxtDescripcion" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtDescripcion"></asp:RequiredFieldValidator>
              </div>
               <div class="mb-3">
                  <label class="form-label">Conocimientos Requeridos</label>
                  <asp:TextBox ID="txtConocimientos" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                  <asp:RequiredFieldValidator ID="validatorTxtConocimientos" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtConocimientos"></asp:RequiredFieldValidator>
              </div>
 
              <div class="justify-content-center" style="text-align:center; align-content:center; margin:50px" >

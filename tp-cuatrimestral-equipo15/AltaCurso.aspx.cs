@@ -20,18 +20,23 @@ namespace tp_cuatrimestral_equipo15
         {
             try
             {
+
+
                 if (!IsPostBack)
                 {
-                    Session["Mod"] = true; //Temporal Cambiar
+                    Session["Mod"] = false; //Temporal Cambiar
+                    Session["todVal"] = true;
                 }
                 modificar = (bool)Session["Mod"];
+
 
                 CursoNegocio cursoNegocio = new CursoNegocio();
                 curso = cursoNegocio.ListarByIdMoodle(2);
 
                 if(modificar == true)
                 {
-                   
+                    Session["todVal"] = false;
+
                     txtConocimientos.Text = curso.ConocimientosRequeridos;
                     txtDescripcion.Text =curso.Descripcion;
                     txtPrecio.Text = ((float)curso.Precio).ToString();
@@ -60,6 +65,19 @@ namespace tp_cuatrimestral_equipo15
         {
             try
             {
+    
+                Page.Validate();
+                if ((bool)Session["todVal"] == false)
+                {
+                    validatorTxtImagen.IsValid = true;
+                    validatorTxtPrograma.IsValid = true;
+                }
+                if (!Page.IsValid)
+                {
+                     return;
+                    
+                }
+
                 curso.Precio = decimal.Parse(txtPrecio.Text);
                 curso.Descripcion = txtDescripcion.Text;
                 curso.ConocimientosRequeridos = txtConocimientos.Text;
@@ -88,7 +106,7 @@ namespace tp_cuatrimestral_equipo15
             catch (Exception)
             {
 
-                throw;
+                //Response.Redirect("Error.aspx?", false);
             }
             
         }
