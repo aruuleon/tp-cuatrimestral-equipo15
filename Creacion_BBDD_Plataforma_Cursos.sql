@@ -3,6 +3,17 @@ Create Database Plataforma_Cursos_TPC
 go
 Use Plataforma_Cursos_TPC
 Go
+Create Table Usuarios(
+    ID int not null primary key identity (1, 1),
+    IdMoodle int not null,
+    Nombre varchar(50) not null,
+    Apellido varchar(50) not null ,
+    Email varchar(140) not null unique,
+    Contrasenia varchar(50) not null,
+    Avatar varchar(200)  null,
+    Tipo BIT not null,
+)
+Go
 Create Table Cursos(
     ID int not null primary key identity (1, 1),
     IdMoodle int not null,
@@ -16,14 +27,4 @@ Create Table Cursos(
 )
 Go
 
-Go
-Create Table Usuarios(
-    ID int not null primary key identity (1, 1),
-    NombreUsuario varchar(50) not null unique,
-    Nombre varchar(50) not null unique,
-    Apellido varchar(50) not null unique,
-    Email varchar(140) not null unique,
-    Contrasenia varchar(50) not null,
-    Tipo BIT not null
-)
 
