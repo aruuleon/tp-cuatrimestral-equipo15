@@ -16,8 +16,12 @@ namespace tp_cuatrimestral_equipo15 {
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
-           
-                if (Validacion.ValidacionCampoVacio(textNombre) /*|| Validacion.ValidacionCampoVacio(textApellido.Text) 
+
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
+
+            if (Validacion.ValidacionCampoVacio(textNombre) /*|| Validacion.ValidacionCampoVacio(textApellido.Text) 
                || Validacion.ValidacionCampoVacio(textContraseña.Text) || Validacion.ValidacionCampoVacio(textEmail.Text)*/)
                 {
                     Session.Add("error", "Campos de texto vacios");
