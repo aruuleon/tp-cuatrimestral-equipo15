@@ -23,7 +23,7 @@ namespace tp_cuatrimestral_equipo15 {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 EmailService emailService = new EmailService();
                 if(usuarioNegocio.Register(usuario)) {
-                    emailService.SendEmail(txtEmail.Text, "Plataforma de Cursos", "Bienvenido a la Plataforma de Cursos");
+                    emailService.SendEmail(usuario);
                     Response.Redirect("Login.aspx", false);
                 } else {
                     Response.Redirect("Register.aspx", false);
@@ -32,23 +32,21 @@ namespace tp_cuatrimestral_equipo15 {
                 Session.Add("error", exception.ToString());
             }
 
-            Page.Validate();
-            if (!Page.IsValid)
-                return;
+            //Page.Validate();
+            //if (!Page.IsValid)
+            //    return;
 
-            if (Validacion.ValidacionCampoVacio(txtNombre) /*|| Validacion.ValidacionCampoVacio(textApellido.Text) 
-               || Validacion.ValidacionCampoVacio(textContraseña.Text) || Validacion.ValidacionCampoVacio(textEmail.Text)*/)
-                {
-                    Session.Add("error", "Campos de texto vacios");
-                    Response.Redirect("Error.aspx");
-                }
-                else if (Validacion.ValidacionCampoNumero(txtNombre) /*|| Validacion.ValidacionCampoNumero(textApellido.Text)*/)
-                {
-                    Session.Add("error", "Campos de texto vacios");
-                    Response.Redirect("Error.aspx");
-                }
-
-            
+            //if (Validacion.ValidacionCampoVacio(txtNombre) /*|| Validacion.ValidacionCampoVacio(textApellido.Text) 
+            //   || Validacion.ValidacionCampoVacio(textContraseña.Text) || Validacion.ValidacionCampoVacio(textEmail.Text)*/)
+            //    {
+            //        Session.Add("error", "Campos de texto vacios");
+            //        Response.Redirect("Error.aspx");
+            //    }
+            //    else if (Validacion.ValidacionCampoNumero(txtNombre) /*|| Validacion.ValidacionCampoNumero(textApellido.Text)*/)
+            //    {
+            //        Session.Add("error", "Campos de texto vacios");
+            //        Response.Redirect("Error.aspx");
+            //    }
         }
     }
 }

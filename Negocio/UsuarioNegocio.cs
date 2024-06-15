@@ -23,10 +23,8 @@ namespace Negocio
                 accesoDatos.setearParametros("@Email", usuario.Email);
                 accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
                 accesoDatos.setearParametros("@Tipo", TipoUsuario.STUDENT);
-                accesoDatos.ejecutarLectura();
-                return true;
+                return accesoDatos.ejecutarAccion();
             } catch (Exception exception) {
-                return false;
                 throw exception;
             } finally {
                 accesoDatos.cerrarConexion();

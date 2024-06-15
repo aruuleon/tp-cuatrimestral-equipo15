@@ -39,13 +39,14 @@ namespace Negocio
                 throw ex;
             }
         }
-        public void ejecutarAccion()
+        public bool ejecutarAccion()
         {
             comando.Connection = conexion;
             try
             {
                 conexion.Open();
-                comando.ExecuteNonQuery();
+                int rowsAffected = comando.ExecuteNonQuery();
+                return rowsAffected > 0;
             }
             catch (Exception ex)
             {
