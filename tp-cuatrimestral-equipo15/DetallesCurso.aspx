@@ -30,8 +30,9 @@
                     <h5 class="card-title">C# Nivel 3 (Web ASP)</h5>
                     <p class="card-text text-success">$ 30.000</p>
                 </div>
-                <asp:HyperLink ID="HyperLinkBuy" runat="server" NavigateUrl="#" CssClass="btn btn-success w-50 mx-auto mb-3">Obtener</asp:HyperLink>
+                <asp:HyperLink ID="HyperLinkBuy" runat="server" NavigateUrl="#" CssClass="btn btn-success w-50 mx-auto mb-3">Obtener Curso</asp:HyperLink>
             </div>
+            <asp:HyperLink ID="HyperLinkProgram" runat="server" NavigateUrl="https://drive.google.com/file/d/16sTkD0qaHWPNmcjN9LqRN0fUG2PsitXz/view" Target="_blank" CssClass="btn w-100 mt-5" style="color: #fff; background-color: #7b1fa2;">Ver Programa Completo</asp:HyperLink>
         </div>
     </div>
     <div class="p-3" style="width: 50%; margin-left: 10%">
