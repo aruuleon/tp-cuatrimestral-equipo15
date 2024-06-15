@@ -21,7 +21,9 @@ namespace tp_cuatrimestral_equipo15 {
             try {
                 Usuario usuario = new Usuario(txtNombre.Text, txtApellido.Text, txtEmail.Text, txtContrasenia.Text);
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                EmailService emailService = new EmailService();
                 if(usuarioNegocio.Register(usuario)) {
+                    emailService.SendEmail(txtEmail.Text, "Plataforma de Cursos", "Bienvenido a la Plataforma de Cursos");
                     Response.Redirect("Login.aspx", false);
                 } else {
                     Response.Redirect("Register.aspx", false);

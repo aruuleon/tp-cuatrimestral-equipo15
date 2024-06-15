@@ -13,18 +13,18 @@ namespace Negocio {
         
         public EmailService() {
             smtpClient = new SmtpClient();
-            smtpClient.Credentials = new NetworkCredential("", "");
+            smtpClient.Credentials = new NetworkCredential("97bf6405c1113a", "3466f597685572");
             smtpClient.EnableSsl = true;
-            smtpClient.Port = 587;
-            smtpClient.Host = "smtp.gmail.com";
+            smtpClient.Port = 2525;
+            smtpClient.Host = "sandbox.smtp.mailtrap.io";
         }
-        public void SendEmail(string toEmail, string subject, string body) {
+        public void SendEmail(string emailDestino, string subject, string body) {
             mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("");
-            mailMessage.To.Add(toEmail);
+            mailMessage.From = new MailAddress("noresponder@plataformacursos.com");
+            mailMessage.To.Add(emailDestino);
             mailMessage.Subject = subject;
             mailMessage.IsBodyHtml = true;
-            mailMessage.Body = "";
+            mailMessage.Body = body;
 
             try {
                 smtpClient.Send(mailMessage);
