@@ -55,15 +55,14 @@ namespace Negocio
         public int ejecutarScalar()
         {
 
-            int idart;
+            int ID;
             comando.Connection = conexion;
             try
             {
                 conexion.Open();
-                idart = (int)comando.ExecuteScalar();
+                ID = (int)comando.ExecuteScalar();
                 cerrarConexion();
-
-                return idart;
+                return ID;
             }
             catch (Exception ex)
             {

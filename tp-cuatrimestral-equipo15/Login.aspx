@@ -6,14 +6,14 @@
         <div style="width: 20%">
             <h2 style="text-align: center; margin-bottom: 50px"> Iniciar Sesión </h2>
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="Correo Electrónico">
+              <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="Correo Electrónico"></asp:TextBox>
               <label for="floatingInput">Correo Electrónico</label>
             </div>
             <div class="form-floating">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+              <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" placeholder="Contraseña"></asp:TextBox>
               <label for="floatingPassword">Contraseña</label>
             </div>
-            <button type="submit" class="btn btn-success w-50 mx-auto mb-3 d-block" style="margin-top: 30px"> Ingresar </button>
+            <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-success w-50 mx-auto mb-3 d-block" style="margin-top: 30px" Text="Ingresar" OnClick="LoginButton_Click" />
             <div style="margin-top: 40px">
                 <p style="text-align: center"> Todavía no te registraste? <a href="Register.aspx"> Registrarme </a> </p>
                 <p style="text-align: center"> Olvidaste tu contraseña? <a href="#"> Recuperar </a> </p>
