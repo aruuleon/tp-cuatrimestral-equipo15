@@ -7,29 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace tp_cuatrimestral_equipo15
-{
+namespace tp_cuatrimestral_equipo15 {
 
 
-    public partial class DetallesCurso
-    {
+    public partial class DetallesCurso {
 
         /// <summary>
-        /// btnComprarFinal control.
+        /// HyperLinkBuy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnComprarFinal;
-
-        /// <summary>
-        /// btnPrograma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPrograma;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkBuy;
     }
 }

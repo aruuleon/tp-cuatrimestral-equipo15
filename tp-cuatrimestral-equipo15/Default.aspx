@@ -9,7 +9,7 @@
     <asp:TextBox runat="server" ID="filter" CssClass="form-control" Style="color: rgba(0, 0, 0, 0.175)" AutoPostBack="true" placeholder="Buscar Cursos">  </asp:TextBox>
 </div>
 <div class="row row-cols-1 row-cols-md-4 g-4 m-5 mx-auto w-75">
-            <div class="col" style="max-width: 75%">
+    <div class="col" style="max-width: 75%">
         <div class="card h-100">
             <picture style="min-height: 220px; border-bottom: 1px solid rgba(0, 0, 0, 0.175)">
                 <img src="https://maxiprograma.com/assets/images/nivel-1.jpg" style="max-width: 100%; height:100%" />
