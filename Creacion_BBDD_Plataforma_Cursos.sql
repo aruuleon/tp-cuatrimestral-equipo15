@@ -57,3 +57,6 @@ INSERT INTO Usuarios_X_Cursos (IdCurso, IdUsuario) VALUES
 (3, 3);
 GO
 
+SELECT * from Usuarios
+SELECT ID, Tipo FROM Usuarios 
+WHERE Email = 'admin@gmail.com' AND Contrasenia = 'password123'

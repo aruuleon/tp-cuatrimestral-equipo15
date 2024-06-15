@@ -18,15 +18,33 @@ namespace tp_cuatrimestral_equipo15 {
         protected void LoginButton_Click(object sender, EventArgs e) {
             Usuario usuario;
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            try {
-                usuario = new Usuario(txtEmail.Text, txtPassword.Text, true);
-                if(usuarioNegocio.Login(usuario)) {
+            try
+            {
+                Page.Validate();
+                if (!Page.IsValid)
+                {
+                    return;
+                }
+                usuario = new Usuario();
+                usuario.Contrasenia = txtPassword.Text;
+                usuario.Email = txtEmail.Text;
+
+                if (usuarioNegocio.Login(usuario))
+                {
+
                     Session.Add("usuario", usuario);
                     Response.Redirect("Default.aspx", false);
-                } else {
-                    Response.Redirect("Login.aspx", false);
                 }
-            } catch(Exception exception) {
+                else
+                {
+                    lblIncorrecto.Visible = true;
+                    return;
+                }
+            }
+
+
+            catch (Exception exception)
+            {
                 Session.Add("error", exception.ToString());
             }
         }

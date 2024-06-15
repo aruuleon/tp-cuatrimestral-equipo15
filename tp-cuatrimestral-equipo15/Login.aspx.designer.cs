@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace tp_cuatrimestral_equipo15 {
+namespace tp_cuatrimestral_equipo15
+{
 
 
-    public partial class Login {
+    public partial class Login
+    {
 
         /// <summary>
         /// txtEmail control.
@@ -22,6 +24,15 @@ namespace tp_cuatrimestral_equipo15 {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// validatorTxtEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorTxtEmail;
+
+        /// <summary>
         /// txtPassword control.
         /// </summary>
         /// <remarks>
@@ -29,6 +40,24 @@ namespace tp_cuatrimestral_equipo15 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
+
+        /// <summary>
+        /// validatorTxtPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorTxtPassword;
+
+        /// <summary>
+        /// lblIncorrecto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIncorrecto;
 
         /// <summary>
         /// LoginButton control.

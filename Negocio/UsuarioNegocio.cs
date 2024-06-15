@@ -31,22 +31,33 @@ namespace Negocio
             }
         }
         public bool Login(Usuario usuario) {
-            try {
-                accesoDatos.setearConsulta("SELECT ID, Tipo FROM Usuarios " +
-                                           "WHERE Email = @Email AND Contrasenia = @Contrasenia");
-                accesoDatos.setearParametros("@Email", usuario.Email);
-                accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
-                accesoDatos.ejecutarAccion();
+            try
+            {
 
-                while(accesoDatos.Lector.Read()) {
+                accesoDatos.setearConsulta(
+                   "SELECT ID, Tipo FROM Usuarios WHERE Email = '" + usuario.Email + "' AND Contrasenia = '" + usuario.Contrasenia + "'"
+                );
+                accesoDatos.ejecutarLectura();
+
+
+                while (accesoDatos.Lector.Read())
+                {
                     usuario.ID = (int)accesoDatos.Lector["ID"];
                     usuario.TipoUsuario = (bool)(accesoDatos.Lector["Tipo"]) ? TipoUsuario.ADMIN : TipoUsuario.STUDENT;
                     return true;
                 }
                 return false;
-            } catch(Exception exception) {
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+            catch (Exception exception)
+            {
                 throw exception;
-            } finally {
+            }
+            finally
+            {
                 accesoDatos.cerrarConexion();
             }
         }
