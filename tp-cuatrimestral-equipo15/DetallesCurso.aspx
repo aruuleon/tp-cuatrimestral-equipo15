@@ -17,7 +17,7 @@
                 </picture>
                 <div class="card-body mb-4">
                     <h5 class="card-title"><%= curso.Nombre.ToString() %></h5>
-                    <p class="card-text text-success"><%= curso.Precio.ToString() %></p>
+                    <p class="card-text text-success"><%= curso.Precio.ToString("C0", new System.Globalization.CultureInfo("es-AR")) %></p>
                 </div>
                 <asp:HyperLink ID="HyperLinkBuy" runat="server" NavigateUrl="#" CssClass="btn btn-success w-50 mx-auto mb-3">Obtener Curso</asp:HyperLink>
             </div>
