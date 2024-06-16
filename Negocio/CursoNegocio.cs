@@ -16,7 +16,7 @@ namespace Negocio
             try
             {
                 accesoDatos.setearConsulta(
-                    "SELECT ID, IdMoodle, Nombre, ImagenPortada, Descripcion, Programa, Precio, Visible, ConocimientosRequeridos FROM Cursos"
+                    "SELECT ID, IdMoodle, Nombre, ImagenPortada, Descripcion, ConocimientosRequeridos, Programa, Precio, Visible, Resumen FROM Cursos"
                 );
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
@@ -27,19 +27,21 @@ namespace Negocio
                     curso.IdMoodle = (int)accesoDatos.Lector["IdMoodle"]; ;
                     curso.Nombre = (string)accesoDatos.Lector["Nombre"];
 
+                    if (!(accesoDatos.Lector["ImagenPortada"] is DBNull))
+                        curso.ImagenPortada = (string)accesoDatos.Lector["ImagenPortada"];
                     if (!(accesoDatos.Lector["Descripcion"] is DBNull))
                         curso.Descripcion = (string)accesoDatos.Lector["Descripcion"];
                     if (!(accesoDatos.Lector["ConocimientosRequeridos"] is DBNull))
                         curso.ConocimientosRequeridos = (string)accesoDatos.Lector["ConocimientosRequeridos"];
+                    if (!(accesoDatos.Lector["Programa"] is DBNull))
+                        curso.Programa = (string)accesoDatos.Lector["Programa"];
                     if (!(accesoDatos.Lector["Precio"] is DBNull))
                         curso.Precio = (decimal)accesoDatos.Lector["Precio"];
                     if (!(accesoDatos.Lector["Visible"] is DBNull))
                         curso.Visible = (bool)accesoDatos.Lector["Visible"];
                     else curso.Visible = false;
-                    if (!(accesoDatos.Lector["ImagenPortada"] is DBNull))
-                        curso.UrlPortada = (string)accesoDatos.Lector["ImagenPortada"];
-                    if (!(accesoDatos.Lector["Programa"] is DBNull))
-                        curso.UrlPrograma = (string)accesoDatos.Lector["Programa"];
+                    if (!(accesoDatos.Lector["Resumen"] is DBNull))
+                        curso.Resumen = (string)accesoDatos.Lector["Resumen"];
 
                     listaCursos.Add(curso);
                 }
@@ -83,9 +85,9 @@ namespace Negocio
                     if (!(accesoDatos.Lector["Visible"] is DBNull))
                         curso.Visible = (bool)accesoDatos.Lector["Visible"];
                     if (!(accesoDatos.Lector["ImagenPortada"] is DBNull))
-                        curso.UrlPortada = (string)accesoDatos.Lector["ImagenPortada"];
+                        curso.ImagenPortada = (string)accesoDatos.Lector["ImagenPortada"];
                     if (!(accesoDatos.Lector["Programa"] is DBNull))
-                        curso.UrlPrograma = (string)accesoDatos.Lector["Programa"];
+                        curso.Programa = (string)accesoDatos.Lector["Programa"];
 
                     
                 }
@@ -114,8 +116,8 @@ namespace Negocio
                 accesoDatos.setearParametros("@Nombre", curso.Nombre);
                 accesoDatos.setearParametros("@Descripcion", curso.Descripcion);
                 accesoDatos.setearParametros("@ConocimientosRequeridos", curso.ConocimientosRequeridos);
-                accesoDatos.setearParametros("@ImagenPortada", curso.UrlPortada);
-                accesoDatos.setearParametros("@Programa", curso.UrlPrograma);
+                accesoDatos.setearParametros("@ImagenPortada", curso.ImagenPortada);
+                accesoDatos.setearParametros("@Programa", curso.Programa);
                 accesoDatos.setearParametros("@Precio", curso.Precio);
                 accesoDatos.setearParametros("@Visible", curso.Visible);
 
@@ -140,8 +142,8 @@ namespace Negocio
                 accesoDatos.setearParametros("@Nombre", curso.Nombre);
                 accesoDatos.setearParametros("@Descripcion", curso.Descripcion);
                 accesoDatos.setearParametros("@ConocimientosRequeridos", curso.ConocimientosRequeridos);
-                accesoDatos.setearParametros("@ImagenPortada", curso.UrlPortada);
-                accesoDatos.setearParametros("@Programa", curso.UrlPrograma);
+                accesoDatos.setearParametros("@ImagenPortada", curso.ImagenPortada);
+                accesoDatos.setearParametros("@Programa", curso.Programa);
                 accesoDatos.setearParametros("@Precio", curso.Precio);
                 accesoDatos.setearParametros("@Visible", curso.Visible);
                 accesoDatos.ejecutarAccion();

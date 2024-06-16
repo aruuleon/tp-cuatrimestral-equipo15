@@ -9,9 +9,8 @@ namespace tp_cuatrimestral_equipo15
 {
     public partial class DetallesCurso : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
+        protected void Page_Load(object sender, EventArgs e) {
+            
         }
     }
 }

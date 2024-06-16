@@ -3,22 +3,21 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <div style="height: 600px; background-image: url('https://maxiprograma.com/assets/images/nivel-3.jpg'); background-size: cover; background-position: center;"></div>
-    <div class="d-flex p-3 ml-4" style="width: 100%; margin-left: 10%; margin-top: 30px">
+    <div class="d-flex p-3 ml-4" style="width: 100%; margin-left: 10%; margin-top: 30px; margin-bottom: 10px">
         <div style="width: 50%">
             <div class="p-2 mb-4" style="border-left: 2px solid #7b1fa2">
                 <h1>C# Nivel 3 (Web ASP)</h1>
             </div>
             <p>
-                La programación es una de las disciplinas con la demanda de mayor crecimiento en los
-                últimos años. Se encuentra presente en cada vez más aspectos tanto laborales, como
-                en la enseñanza, y hasta en la vida cotidiana (internet of things). 
-            </p>
-            <p>
-                En este curso
-                aprenderemos a programar completamente desde cero; desde qué es un programa o
-                qué es programar en realidad, hasta crear simples y complejos algoritmos con distintas
-                herramientas propias de la programación. Que qué es un algoritmo? También lo
-                veremos.
+                En este curso nos embarcamos en el desarrollo de aplicaciones Web y claro, lo haremos
+                con C# y el Framework .NET.
+                Pero antes de ello, necesitamos conocer los fundamentos de la Web, su arquitectura y
+                veremos una introducción a los lenguajes que la representan: HTML, CSS y JS.
+                .NET propone varios caminos para la construcción de aplicaciones Web. En este curso
+                veremos la primera de ellas que es WebForms: una continuación directa, si se quiere,
+                del esquema de WinForms que vemos en el Nivel 2, lo que nos permitirá adaptarnos
+                rápidamente a las formas; aunque tienen sus particularidades, de las que ya
+                charlaremos.
             </p>
         </div>
         <div class="col" style="max-width: 20%; position:absolute; right: 10%">
@@ -35,22 +34,22 @@
             <asp:HyperLink ID="HyperLinkProgram" runat="server" NavigateUrl="https://drive.google.com/file/d/16sTkD0qaHWPNmcjN9LqRN0fUG2PsitXz/view" Target="_blank" CssClass="btn w-100 mt-5" style="color: #fff; background-color: #7b1fa2;">Ver Programa Completo</asp:HyperLink>
         </div>
     </div>
-    <div class="p-3" style="width: 50%; margin-left: 10%">
+    <div class="p-3" style="width: 50%; margin-left: 10%; margin-bottom: 10px">
         <div class="p-2 mb-4" style="border-left: 2px solid #7b1fa2">
             <h1> Conocimientos requeridos </h1>
         </div>
         <span>Conocimientos básicos de manejo de PC.</span><br />
         <span>Contar con equipo de PC con acceso a Internet.</span><br />
-        <span>No se requiere ningún conocimiento previo de programación.</span>
+        <span>No se requiere ningún conocimiento previo de programación.</span><br />
     </div>
-    <div class="p-3" style="width: 50%; margin-left: 10%">
+    <div class="p-3" style="width: 50%; margin-left: 10%; margin-bottom: 10px">
         <div class="p-2 mb-4" style="border-left: 2px solid #7b1fa2">
             <h1> Certificación </h1>
         </div>
         <span>Certificado [maxiprograma.com] de aprobación del curso.</span><br />
-        <span>El certificado de aprobación del curso estará atado a la entrega y aprobación de las actividades correspondientes.</span>
+        <span>El certificado de aprobación del curso estará atado a la entrega y aprobación de las actividades correspondientes.</span><br />
     </div>
-    <div class="p-3" style="width: 50%; margin-left: 10%">
+    <div class="p-3" style="width: 50%; margin-left: 10%; margin-bottom: 10px">
         <div class="p-2 mb-4" style="border-left: 2px solid #7b1fa2">
             <h1> Docente </h1>
         </div>

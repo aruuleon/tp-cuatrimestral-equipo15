@@ -40,7 +40,7 @@ namespace tp_cuatrimestral_equipo15
                     txtConocimientos.Text = curso.ConocimientosRequeridos;
                     txtDescripcion.Text =curso.Descripcion;
                     txtPrecio.Text = ((float)curso.Precio).ToString();
-                    imgPortada.ImageUrl = "~/Archivos/Imagenes/Curso/" + curso.UrlPortada;
+                    imgPortada.ImageUrl = "~/Archivos/Imagenes/Curso/" + curso.ImagenPortada;
                     
 
 
@@ -88,13 +88,13 @@ namespace tp_cuatrimestral_equipo15
                 {
                     string rutaImagen = Server.MapPath("./Archivos/Imagenes/Curso/");
                     txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + curso.IdMoodle + ".jpg");
-                    curso.UrlPortada = "curso-img-" + curso.IdMoodle + ".jpg";
+                    curso.ImagenPortada = "curso-img-" + curso.IdMoodle + ".jpg";
                 }
                 if (txtPrograma.PostedFile.FileName != "")
                 {
                     string rutaPrograma = Server.MapPath("./Archivos/ProgramasPDF/");
                     txtPrograma.PostedFile.SaveAs(rutaPrograma + "curso-prog-" + curso.IdMoodle + ".pdf");
-                    curso.UrlPrograma = "curso-prog-" + curso.ID + ".pdf";
+                    curso.Programa = "curso-prog-" + curso.ID + ".pdf";
                 }
                 CursoNegocio cursoNegocio = new CursoNegocio();
                 cursoNegocio.Modificar(curso);
