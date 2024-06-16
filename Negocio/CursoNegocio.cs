@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Dominio;
 
@@ -15,9 +16,7 @@ namespace Negocio
             List<Curso> listaCursos = new List<Curso>();
             try
             {
-                accesoDatos.setearConsulta(
-                    "SELECT ID, IdMoodle, Nombre, ImagenPortada, Descripcion, ConocimientosRequeridos, Programa, Precio, Visible, Resumen FROM Cursos"
-                );
+                accesoDatos.setearConsulta("SELECT ID, IdMoodle, Nombre, ImagenPortada, Descripcion, ConocimientosRequeridos, Programa, Precio, Visible, Resumen FROM Cursos");
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
                 {
@@ -56,7 +55,31 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-
+        public Curso BuscarPorId(int id) {
+            Curso curso = new Curso();
+            try {
+                accesoDatos.setearConsulta("SELECT ID, IdMoodle, Nombre, ImagenPortada, Descripcion, ConocimientosRequeridos, Programa, Precio, Visible, Resumen FROM Cursos " +
+                                           "WHERE Id = " + id);
+                accesoDatos.ejecutarLectura();
+                while (accesoDatos.Lector.Read()) {
+                    curso.ID = (int)accesoDatos.Lector["ID"];
+                    curso.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
+                    curso.Nombre = (string)accesoDatos.Lector["Nombre"];
+                    curso.ImagenPortada = (string)accesoDatos.Lector["ImagenPortada"];
+                    curso.Resumen = (string)accesoDatos.Lector["Resumen"];
+                    curso.Descripcion = (string)accesoDatos.Lector["Descripcion"];
+                    curso.ConocimientosRequeridos = (string)accesoDatos.Lector["ConocimientosRequeridos"];
+                    curso.Programa = (string)accesoDatos.Lector["Programa"];
+                    curso.Precio = accesoDatos.Lector.GetDecimal(accesoDatos.Lector.GetOrdinal("Precio"));
+                    curso.Visible = (bool)accesoDatos.Lector["Visible"];
+                }
+                return curso;
+            } catch (Exception exception) {
+                throw exception;
+            } finally {
+                accesoDatos.cerrarConexion();
+            }
+        }
         public Curso ListarByIdMoodle(int IdMoodle)
         {
             Curso curso = new Curso();
