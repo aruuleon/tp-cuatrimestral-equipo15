@@ -17,14 +17,15 @@
          <h2 style="text-align:center; margin-bottom:20px;"><%= curso.Nombre %></h2>
          <div class="col-md-8">
             
-             
-             
-             <div class="mb-3" >
-                  <asp:Label ID="lblMensajeError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
-                 <label class="form-label">Foto Portada</label>
-                 <input type="file" id="txtImagen" runat="server" class="form-control" accept=".jpg"/>
-<%--                 <asp:RequiredFieldValidator ID="validatorTxtImagen" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtImagen"></asp:RequiredFieldValidator>--%>
-             </div>
+              <div class="mb-3" >
+                 <asp:Label ID="lblMensajeError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
+                 </div>
+  
+  
+              <div class="mb-3" >
+                  <label class="form-label">Foto Portada</label>
+                  <input type="file" id="txtImagen" runat="server" class="form-control" accept=".jpg"/>
+              </div>
            
              <div class="mb-3" style="text-align:center">
                 <asp:Image ID="imgPortada"  ImageUrl="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" runat="server" CssClass="img-fluid mb-8" Style="height:300px; width:500px; object-fit: contain;" />
