@@ -18,7 +18,7 @@
                         </picture>
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Nombre")%></h5>
-                            <p class="card-text text-success">$ <%#Eval("Precio")%></p>
+                            <p class="card-text text-success">$ <%# String.Format(new System.Globalization.CultureInfo("es-AR"), "{0:N0}", Eval("Precio")) %></p>
                             <p class="card-text" style="font-size: 14px"><%#Eval("Resumen")%></p>
                         </div>
                         <asp:LinkButton ID="LinkButtonCourseDetail" runat="server" PostBackUrl='<%# "DetallesCurso.aspx?id=" + Eval("ID") %>' CssClass="btn btn-success w-50 mx-auto mb-3 w-75">Ver Detalle</asp:LinkButton>
