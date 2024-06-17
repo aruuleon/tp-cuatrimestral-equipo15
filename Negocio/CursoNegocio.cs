@@ -197,5 +197,20 @@ namespace Negocio
                 throw exception;
             }
         }
+        public List<int> getCoursesByUser(int userId) {
+            List<int> listOfCourseIndentifiers = new List<int>();
+            try {
+                accesoDatos.setearConsulta("SELECT IdCurso FROM Usuarios_X_Cursos WHERE IdUsuario = " + userId);
+                accesoDatos.ejecutarLectura();
+                while(accesoDatos.Lector.Read()) {
+                    listOfCourseIndentifiers.Add(accesoDatos.Lector.GetInt32(0));
+                }
+                return listOfCourseIndentifiers;
+            } catch(Exception exception) {
+                throw exception;
+            } finally {
+                accesoDatos.cerrarConexion();
+            }
+        }
     }
 }
