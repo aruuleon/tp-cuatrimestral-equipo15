@@ -43,9 +43,9 @@ namespace tp_cuatrimestral_equipo15
         protected void LinkButtonGetOrView_Click(object sender, EventArgs e) {
             LinkButton linkButton = sender as LinkButton;
             if(linkButton != null && linkButton.Text == "Obtener Curso") {
-                CursoNegocio cursoNegocio = new CursoNegocio();
+                UsuariosXCursosNegocio usuariosXCursosNegocio = new UsuariosXCursosNegocio();
                 Usuario usuario = (Usuario)Session["usuario"];
-                cursoNegocio.RegisterUserInTheCourse(curso.ID, usuario.ID);
+                usuariosXCursosNegocio.RegisterUserInTheCourse(curso.ID, usuario.ID);
                 Response.Redirect("MyCourses.aspx", false);
             }
         }
@@ -61,8 +61,8 @@ namespace tp_cuatrimestral_equipo15
             LiteralConocimientosRequeridos.Text = stringBuilder.ToString();
         }
         protected bool CheckIfUserHasCourse(int courseId, int userId) {
-            CursoNegocio cursoNegocio = new CursoNegocio();
-            return cursoNegocio.CheckIfUserHasCourse(courseId, userId);
+            UsuariosXCursosNegocio usuariosXCursosNegocio = new UsuariosXCursosNegocio();
+            return usuariosXCursosNegocio.CheckIfUserHasCourse(courseId, userId);
         }
     }
 }

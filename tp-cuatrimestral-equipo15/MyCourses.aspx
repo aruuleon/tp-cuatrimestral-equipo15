@@ -2,8 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div class="p-2 mb-4" style="border-left: 2px solid #7b1fa2">
-        <h1>Tu lista de Cursos</h1>
+    <div class="p-3" style="width: 50%; margin-left: 10%; margin-bottom: 10px">
+        <div class="p-2 mb-4" style="border-left: 2px solid #7b1fa2">
+            <h1>Tu lista de cursos</h1>
+        </div>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4 m-5 mx-auto w-75">
         <asp:Repeater runat="server" id="listaCursos">
