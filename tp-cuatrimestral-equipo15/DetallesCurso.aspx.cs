@@ -34,10 +34,19 @@ namespace tp_cuatrimestral_equipo15
             CargarConocimientosRequeridos(curso);
             LabelPrice.Text = curso.Precio.ToString("C0", new System.Globalization.CultureInfo("es-AR"));
             if(CheckIfUserHasCourse(curso.ID, usuario.ID)) {
-                HyperLinkGetOrView.Text = "Ver Curso";
+                LinkButtonGetOrView.Text = "Ver Curso";
                 LabelPrice.Visible = false;
             } else {
-                HyperLinkGetOrView.Text = "Obtener Curso";
+                LinkButtonGetOrView.Text = "Obtener Curso";
+            }
+        }
+        protected void LinkButtonGetOrView_Click(object sender, EventArgs e) {
+            LinkButton linkButton = sender as LinkButton;
+            if(linkButton != null && linkButton.Text == "Obtener Curso") {
+                CursoNegocio cursoNegocio = new CursoNegocio();
+                Usuario usuario = (Usuario)Session["usuario"];
+                cursoNegocio.RegisterUserInTheCourse(curso.ID, usuario.ID);
+                Response.Redirect("MyCourses.aspx", false);
             }
         }
         protected void CargarConocimientosRequeridos(Curso curso) {

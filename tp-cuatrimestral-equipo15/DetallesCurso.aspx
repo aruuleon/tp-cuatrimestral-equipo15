@@ -19,7 +19,7 @@
                     <h5 class="card-title"><%= curso.Nombre.ToString() %></h5>
                     <asp:Label ID="LabelPrice" runat="server" CssClass="card-text text-success"></asp:Label>
                 </div>
-                <asp:HyperLink ID="HyperLinkGetOrView" runat="server" NavigateUrl="#" CssClass="btn btn-success w-50 mx-auto mb-3"></asp:HyperLink>
+                <asp:LinkButton ID="LinkButtonGetOrView" runat="server" CssClass="btn btn-success w-50 mx-auto mb-3" OnClick="LinkButtonGetOrView_Click"></asp:LinkButton>
             </div>
             <asp:HyperLink ID="HyperLinkProgram" runat="server" Target="_blank" CssClass="btn w-100 mt-5" style="color: #fff; background-color: #7b1fa2;">Ver Programa Completo</asp:HyperLink>
         </div>

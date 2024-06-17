@@ -22,13 +22,13 @@ namespace tp_cuatrimestral_equipo15 {
         protected global::System.Web.UI.WebControls.Label LabelPrice;
 
         /// <summary>
-        /// HyperLinkGetOrView control.
+        /// LinkButtonGetOrView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLinkGetOrView;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonGetOrView;
 
         /// <summary>
         /// HyperLinkProgram control.

@@ -226,5 +226,17 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
+        public bool RegisterUserInTheCourse(int courseId, int userId) {
+            try {
+                accesoDatos.setearConsulta("INSERT INTO Usuarios_X_Cursos(IdCurso, IdUsuario) VALUES(@IdCurso, @IdUsuario)");
+                accesoDatos.setearParametros("@IdCurso", courseId);
+                accesoDatos.setearParametros("@IdUsuario", userId);
+                return accesoDatos.ejecutarAccion();
+            } catch (Exception exception) {
+                throw exception;
+            } finally {
+                accesoDatos.cerrarConexion();
+            }
+        }
     }
 }
