@@ -17,6 +17,7 @@ namespace tp_cuatrimestral_equipo15
     public partial class DetallesCurso : System.Web.UI.Page {
         public Curso curso;
         protected void Page_Load(object sender, EventArgs e) {
+
             List<string> listaInformacionDocente = new List<string> {
                 "Maximiliano Sar Fernández.Licenciado en Tecnología Educativa, Universidad Tecnológica Nacional Facultad Regional Buenos Aires, UTN FRBA. Técnico Superior en Programación y Técnico Superior en Sistemas Informáticos, Tecnológica Nacional Facultad Regional General Pacheco, UTN FRGP.",
                 "Cuenta con más de diez años de experiencia en docencia universitaria, donde dicta materias relacionadas a la programación tanto para iniciantes con el paradigma estructurado como para avanzados bajo el paradigma orientado a objetos y diferentes frameworks, tecnologías y arquitecturas.",

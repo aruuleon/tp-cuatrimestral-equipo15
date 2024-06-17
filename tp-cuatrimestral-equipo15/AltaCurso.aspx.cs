@@ -69,8 +69,8 @@ namespace tp_cuatrimestral_equipo15
                 Page.Validate();
                 if ((bool)Session["todVal"] == false)
                 {
-                    validatorTxtImagen.IsValid = true;
-                    validatorTxtPrograma.IsValid = true;
+                    //validatorTxtImagen.IsValid = true;
+                    //validatorTxtPrograma.IsValid = true;
                 }
                 if (!Page.IsValid)
                 {
@@ -91,6 +91,17 @@ namespace tp_cuatrimestral_equipo15
                     txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + curso.IdMoodle + ".jpg");
                     curso.ImagenPortada = "curso-img-" + curso.IdMoodle + ".jpg";
                 }
+                else if(!string.IsNullOrEmpty(txtImagenUrl.Text))
+                {
+                    curso.ImagenPortada = txtImagenUrl.Text;
+                }
+                else
+                {
+
+                    lblMensajeError.Text = "Alguno de los dos campos de imagen debe ser cargado... ";
+                    lblMensajeError.Visible = true;
+                }
+
                 if (txtPrograma.PostedFile.FileName != "")
                 {
                     string rutaPrograma = Server.MapPath("./Archivos/ProgramasPDF/");
@@ -98,6 +109,7 @@ namespace tp_cuatrimestral_equipo15
                     curso.Programa = "curso-prog-" + curso.ID + ".pdf";
                 }
                 CursoNegocio cursoNegocio = new CursoNegocio();
+
                 cursoNegocio.Modificar(curso);
 
 

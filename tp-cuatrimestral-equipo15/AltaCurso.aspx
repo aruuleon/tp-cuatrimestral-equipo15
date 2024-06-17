@@ -19,10 +19,11 @@
             
              
              
-             <div class="mb-3">
+             <div class="mb-3" >
+                  <asp:Label ID="lblMensajeError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
                  <label class="form-label">Foto Portada</label>
                  <input type="file" id="txtImagen" runat="server" class="form-control" accept=".jpg"/>
-                 <asp:RequiredFieldValidator ID="validatorTxtImagen" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtImagen"></asp:RequiredFieldValidator>
+<%--                 <asp:RequiredFieldValidator ID="validatorTxtImagen" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtImagen"></asp:RequiredFieldValidator>--%>
              </div>
            
              <div class="mb-3" style="text-align:center">

@@ -163,7 +163,7 @@ namespace Negocio
         {
             try
             {
-                accesoDatos.setearConsulta("UPDATE Cursos SET IdMoodle = @IdMoodle, Nombre = @Nombre, ImagenPortada = @ImagenPortada, Descripcion = @Descripcion, Programa = @Programa, Precio = @Precio, Visible =@Visible , ConocimientosRequeridos =@ConocimientosRequeridos, Resumen=@Resumen WHERE Id =" + curso.ID);
+                accesoDatos.setearConsulta("UPDATE Cursos SET IdMoodle = @IdMoodle, Nombre = @Nombre, ImagenPortada = @ImagenPortada, Descripcion = @Descripcion, Programa = @Programa, Precio = @Precio, Visible =@Visible , ConocimientosRequeridos =@ConocimientosRequeridos, Resumen=@Resumen WHERE Id =" + 3);
                 accesoDatos.setearParametros("@IdMoodle", curso.IdMoodle);
                 accesoDatos.setearParametros("@Nombre", curso.Nombre);
                 accesoDatos.setearParametros("@Descripcion", curso.Descripcion);
