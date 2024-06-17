@@ -197,7 +197,7 @@ namespace Negocio
                 throw exception;
             }
         }
-        public List<int> getCoursesByUser(int userId) {
+        public List<int> GetCoursesByUser(int userId) {
             List<int> listOfCourseIndentifiers = new List<int>();
             try {
                 accesoDatos.setearConsulta("SELECT IdCurso FROM Usuarios_X_Cursos WHERE IdUsuario = " + userId);
@@ -206,6 +206,20 @@ namespace Negocio
                     listOfCourseIndentifiers.Add(accesoDatos.Lector.GetInt32(0));
                 }
                 return listOfCourseIndentifiers;
+            } catch(Exception exception) {
+                throw exception;
+            } finally {
+                accesoDatos.cerrarConexion();
+            }
+        }
+        public bool CheckIfUserHasCourse(int courseId, int userId) {
+            try {
+                accesoDatos.setearConsulta("SELECT COUNT(*) FROM Usuarios_X_Cursos WHERE IdCurso = " + courseId + " AND  IdUsuario = " + userId);
+                accesoDatos.ejecutarLectura();
+                while (accesoDatos.Lector.Read()) {
+                    return accesoDatos.Lector.GetInt32(0) > 0;
+                }
+                return false;
             } catch(Exception exception) {
                 throw exception;
             } finally {

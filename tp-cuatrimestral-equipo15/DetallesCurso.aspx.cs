@@ -26,12 +26,20 @@ namespace tp_cuatrimestral_equipo15
             CursoNegocio cursoNegocio = new CursoNegocio();
             int id = !string.IsNullOrEmpty(Request.QueryString["id"]) ? int.Parse(Request.QueryString["id"]) : 1;
             curso = cursoNegocio.BuscarPorId(id);
+            Usuario usuario = (Usuario)Session["usuario"];
             HyperLinkProgram.NavigateUrl = curso.Programa.ToString();
             informacionDocente.DataSource = listaInformacionDocente;
             informacionDocente.DataBind();
-            cargarConocimientosRequeridos(curso);
+            CargarConocimientosRequeridos(curso);
+            LabelPrice.Text = curso.Precio.ToString("C0", new System.Globalization.CultureInfo("es-AR"));
+            if(CheckIfUserHasCourse(curso.ID, usuario.ID)) {
+                HyperLinkGetOrView.Text = "Ver Curso";
+                LabelPrice.Visible = false;
+            } else {
+                HyperLinkGetOrView.Text = "Obtener Curso";
+            }
         }
-        protected void cargarConocimientosRequeridos(Curso curso) {
+        protected void CargarConocimientosRequeridos(Curso curso) {
             string[] conocimientosRequeridos = curso.ConocimientosRequeridos.Replace(".NET", "DOTNET").Split('.');
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -41,6 +49,10 @@ namespace tp_cuatrimestral_equipo15
                 }
             }
             LiteralConocimientosRequeridos.Text = stringBuilder.ToString();
+        }
+        protected bool CheckIfUserHasCourse(int courseId, int userId) {
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            return cursoNegocio.CheckIfUserHasCourse(courseId, userId);
         }
     }
 }

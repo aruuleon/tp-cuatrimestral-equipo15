@@ -13,13 +13,22 @@ namespace tp_cuatrimestral_equipo15 {
     public partial class DetallesCurso {
 
         /// <summary>
-        /// HyperLinkBuy control.
+        /// LabelPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLinkBuy;
+        protected global::System.Web.UI.WebControls.Label LabelPrice;
+
+        /// <summary>
+        /// HyperLinkGetOrView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkGetOrView;
 
         /// <summary>
         /// HyperLinkProgram control.

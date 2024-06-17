@@ -17,7 +17,6 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%#Eval("Nombre")%></h5>
                                 <p class="card-text" style="font-size: 14px"><%#Eval("Resumen")%></p>
-                                <p class="card-text text-success fw-bold">$ <%# String.Format(new System.Globalization.CultureInfo("es-AR"), "{0:N0}", Eval("Precio")) %></p>
                             </div>
                         </div>
                     </asp:HyperLink>
