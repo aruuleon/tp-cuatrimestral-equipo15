@@ -12,7 +12,26 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:Panel ID="PanelMenu" runat="server">
+        <asp:Panel ID="LoginOrRegisterMenuPanel" runat="server" Visible="false">
+            <header class="header-container">
+                <nav class="navbar navbar-expand-lg d-flex justify-content-center align-items-center" style="background-color: #7b1fa2">
+                    <div class="m-2">
+                        <a href="Default.aspx" style="font-size: 30px; text-decoration:none" class="text-white"> Maxi Programa </a>
+                    </div>
+                </nav>
+            </header>
+        </asp:Panel>
+        <asp:Panel ID="AdministratorMenuPanel" runat="server" Visible="false">
+            <header class="header-container">
+                <nav class="navbar navbar-expand-lg d-flex justify-content-center align-items-center" style="background-color: #7b1fa2">
+                    <div class="m-2">
+                        <a href="Default.aspx" style="font-size: 30px; text-decoration:none" class="text-white"> Maxi Programa </a>
+                    </div>
+                    <a href="Login.aspx" class="btn btn-success" style="position:absolute; right: 1%"> Ingresar </a>
+                </nav>
+            </header>
+        </asp:Panel>
+        <asp:Panel ID="UserMenuPanel" runat="server">
             <header class="header-container">
                 <nav class="navbar navbar-expand-lg" style="background-color: #7b1fa2">
                     <div class="m-2" style="width:200px">
@@ -33,15 +52,6 @@
                             </ul>
                             <a href="Login.aspx" class="btn btn-success"> Ingresar </a>
                         </div>
-                    </div>
-                </nav>
-            </header>
-        </asp:Panel>
-        <asp:Panel ID="PanelMenuLogin" runat="server" Visible="false">
-            <header class="header-container">
-                <nav class="navbar navbar-expand-lg d-flex justify-content-center align-items-center" style="background-color: #7b1fa2">
-                    <div class="m-2">
-                        <a href="Default.aspx" style="font-size: 30px; text-decoration:none" class="text-white"> Maxi Programa </a>
                     </div>
                 </nav>
             </header>

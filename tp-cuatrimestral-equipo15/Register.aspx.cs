@@ -10,11 +10,7 @@ using Negocio;
 namespace tp_cuatrimestral_equipo15 {
     public partial class Register : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            var master = this.Master as Master;
-            if (master != null) {
-                master.MostrarMenuLogin();
-            }
-          
+            
         }
 
         protected void RegisterButton_Click(object sender, EventArgs e)
