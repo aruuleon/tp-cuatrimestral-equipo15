@@ -12,11 +12,11 @@ namespace tp_cuatrimestral_equipo15 {
             if(!IsPostBack) {
                 Usuario usuario = (Usuario)Session["usuario"];
                 if(isLoginOrRegister()) {
-                    ShowOnlyPanel(LoginOrRegisterMenuPanel);
+                    ShowOnlyPanel(LoginOrRegisterHeaderPanel);
                 } else if(usuario != null && usuario.TipoUsuario == TipoUsuario.ADMIN) {
-                    ShowOnlyPanel(AdministratorMenuPanel);
+                    ShowOnlyPanel(AdministratorHeaderPanel);
                 } else {
-                    ShowOnlyPanel(UserMenuPanel);
+                    ShowOnlyPanel(UserHeaderPanel);
                 }
             }
         }
@@ -25,7 +25,7 @@ namespace tp_cuatrimestral_equipo15 {
             return (currentPage == "Login.aspx" || currentPage == "Register.aspx");
         }
         public void ShowOnlyPanel(Panel panelToShow) {
-            Panel[] allPanels = { LoginOrRegisterMenuPanel, AdministratorMenuPanel, UserMenuPanel };
+            Panel[] allPanels = { LoginOrRegisterHeaderPanel, AdministratorHeaderPanel, UserHeaderPanel };
             foreach (Panel panel in allPanels) {
                 panel.Visible = false;
             }

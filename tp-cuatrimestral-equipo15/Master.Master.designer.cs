@@ -31,31 +31,31 @@ namespace tp_cuatrimestral_equipo15 {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// LoginOrRegisterMenuPanel control.
+        /// LoginOrRegisterHeaderPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel LoginOrRegisterMenuPanel;
+        protected global::System.Web.UI.WebControls.Panel LoginOrRegisterHeaderPanel;
 
         /// <summary>
-        /// AdministratorMenuPanel control.
+        /// AdministratorHeaderPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AdministratorMenuPanel;
+        protected global::System.Web.UI.WebControls.Panel AdministratorHeaderPanel;
 
         /// <summary>
-        /// UserMenuPanel control.
+        /// UserHeaderPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel UserMenuPanel;
+        protected global::System.Web.UI.WebControls.Panel UserHeaderPanel;
 
         /// <summary>
         /// ContentPlaceHolder2 control.
