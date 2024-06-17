@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
-
+using Negocio;
+using Dominio;
 namespace tp_cuatrimestral_equipo15
 {
     public class Validacion
@@ -45,6 +46,27 @@ namespace tp_cuatrimestral_equipo15
             }
 
             return false;
+        }
+        public static bool ValidarEmailRepetido(Usuario usuario)
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+         
+            try
+            {
+                accesoDatos.setearConsulta("select ID from Usuarios where Email = @Email");
+                accesoDatos.setearParametros("@Email", usuario.Email);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.Read())
+                {
+                    return true; // Si encuentra un registro, el email está repetido.
+                }
+                return false; // Si no encuentra registros, el email no está repetido.
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

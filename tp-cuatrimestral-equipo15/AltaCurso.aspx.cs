@@ -77,10 +77,11 @@ namespace tp_cuatrimestral_equipo15
                      return;
                     
                 }
-
+                curso.Nombre = "Marta";
                 curso.Precio = decimal.Parse(txtPrecio.Text);
                 curso.Descripcion = txtDescripcion.Text;
                 curso.ConocimientosRequeridos = txtConocimientos.Text;
+                curso.Resumen=txtResumen.Text;
                 curso.Visible = true;
 
 

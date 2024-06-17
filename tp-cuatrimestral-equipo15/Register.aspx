@@ -8,21 +8,22 @@
             <h2 style="text-align: center; margin-bottom: 50px"> Registrarse </h2>
             <div class="form-floating mb-3">
                 <asp:TextBox ID="txtNombre" Cssclass="form-control" runat="server" placeholder="Nombre"></asp:TextBox>
-                <asp:RegularExpressionValidator ErrorMessage="Solo letras" ControlToValidate="txtNombre" validationExpression="^ [A-Za-z#&]+$"  runat="server" />
-                 <asp:RequiredFieldValidator  ErrorMessage="El campo es requerido" ControlToValidate="txtEmail" runat="server" />
+                <asp:RegularExpressionValidator ErrorMessage="Solo letras" ControlToValidate="txtNombre" validationExpression="^[A-Za-z#&]+$"  runat="server" />
+                 <asp:RequiredFieldValidator  ErrorMessage="El campo es requerido" ControlToValidate="txtNombre" runat="server" />
                 <label for="floatingInput">Nombre</label>
             </div>
             <div class="form-floating mb-3">
                 <asp:TextBox ID="txtApellido" Cssclass="form-control" runat="server" placeholder="Apellido"></asp:TextBox>
-                 <asp:RegularExpressionValidator ErrorMessage="Solo letras" ControlToValidate="txtApellido" validationExpression="^ [A-Za-z#&]+$" runat="server" />
+                 <asp:RegularExpressionValidator ErrorMessage="Solo letras" ControlToValidate="txtApellido" validationExpression="^[A-Za-z#&]+$" runat="server" />
                  <asp:RequiredFieldValidator  ErrorMessage="El campo es requerido" ControlToValidate="txtApellido" runat="server" />
                 <label for="floatingInput">Apellido</label>
             </div>
             <div class="form-floating mb-3">
                 <asp:TextBox ID="txtEmail" Cssclass="form-control" runat="server" TextMode="Email" placeholder="Correo Electrónico"></asp:TextBox>
-                 <asp:RegularExpressionValidator ErrorMessage="FormatoIncorrecto" ControlToValidate="txtEmail" ValidationExpression="^([\w-\.]+)@(([0−9]1,3\.[0−9]1,3\.[0−9]1,3\.)|(([\w−]+\.)+))([a−zA−Z]2,4|[0−9]1,3)(
-?)$" runat="server" />
+                 <asp:RegularExpressionValidator ErrorMessage="FormatoIncorrecto" ControlToValidate="txtEmail" ValidationExpression="^[\w.-]+@[\w-]+\.[a-zA-Z]{2,}$" runat="server" />
                 <asp:RequiredFieldValidator  ErrorMessage="El campo es requerido" ControlToValidate="txtEmail" runat="server" />
+                <asp:Label ID="lblMensajeError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
+
                 <label for="floatingInput">Correo Electrónico</label>
             </div>
             <div class="form-floating">

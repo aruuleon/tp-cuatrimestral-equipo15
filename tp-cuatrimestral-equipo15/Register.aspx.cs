@@ -14,6 +14,7 @@ namespace tp_cuatrimestral_equipo15 {
             if (master != null) {
                 master.MostrarMenuLogin();
             }
+          
         }
 
         protected void RegisterButton_Click(object sender, EventArgs e)
@@ -32,15 +33,28 @@ namespace tp_cuatrimestral_equipo15 {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 EmailService emailService = new EmailService();
 
-           
 
 
-                if(usuarioNegocio.Register(usuario)) {
-                    emailService.SendEmail(usuario);
-                    Response.Redirect("Login.aspx", false);
-                } else {
-                    Response.Redirect("Register.aspx", false);
+                if (!(Validacion.ValidarEmailRepetido(usuario)))
+                {
+                    if (usuarioNegocio.Register(usuario))
+                    {
+                        //emailService.SendEmail(usuario);
+                        Response.Redirect("Login.aspx", true);
+                    }
+                    else
+                    {
+                        Response.Redirect("Register.aspx", false);
+                    }
                 }
+                else
+                {
+                    
+                    lblMensajeError.Text = "El email ya está registrado.";
+                    lblMensajeError.Visible = true;
+                }
+
+
             } catch(Exception exception) {
                 Session.Add("error", exception.ToString());
             }

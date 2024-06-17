@@ -16,7 +16,10 @@
      <div class="row justify-content-center" style="margin-top:20px;">
          <h2 style="text-align:center; margin-bottom:20px;"><%= curso.Nombre %></h2>
          <div class="col-md-8">
-              <div class="mb-3">
+            
+             
+             
+             <div class="mb-3">
                  <label class="form-label">Foto Portada</label>
                  <input type="file" id="txtImagen" runat="server" class="form-control" accept=".jpg"/>
                  <asp:RequiredFieldValidator ID="validatorTxtImagen" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtImagen"></asp:RequiredFieldValidator>
@@ -25,7 +28,10 @@
              <div class="mb-3" style="text-align:center">
                 <asp:Image ID="imgPortada"  ImageUrl="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" runat="server" CssClass="img-fluid mb-8" Style="height:300px; width:500px; object-fit: contain;" />
             </div>
-
+                   <div class="mb-3">
+    <label class="form-label">URL Imagen</label>
+    <asp:TextBox ID="txtImagenUrl" runat="server" CssClass="form-control" placeholder="URL de la imagen"></asp:TextBox>
+</div>
               <div class="mb-3">
                  <label class="form-label">Programa</label>
                  <input type="file" id="txtPrograma" runat="server" class="form-control" accept=".pdf" />
@@ -47,6 +53,11 @@
                  <asp:TextBox ID="txtConocimientos" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                   <asp:RequiredFieldValidator ID="validatorTxtConocimientos" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtConocimientos"></asp:RequiredFieldValidator>
              </div>
+              <div class="mb-3">
+    <label class="form-label">Resumen</label>
+    <asp:TextBox ID="txtResumen" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtResumen"></asp:RequiredFieldValidator>
+</div>
 
              <div class="justify-content-center" style="text-align:center; align-content:center; margin:50px" >
                 <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary btn-lg px-4 gap-3" Text="Guardar" OnClick="btnGuardar_Click"/>
