@@ -19,8 +19,9 @@ Create Table Cursos(
     IdMoodle int not null,
     Nombre varchar(100) not null,
     ImagenPortada varchar(200)  null,
-    Descripcion varchar(500)  null,
-    ConocimientosRequeridos varchar(500)  null,
+    Descripcion varchar(1000)  null,
+    Resumen varchar(1000)  null,
+    ConocimientosRequeridos varchar(1000)  null,
     Programa varchar(200)  null,
     Precio money null,
     Visible bit  null,
@@ -32,6 +33,7 @@ Create Table Usuarios_X_Cursos(
     primary key (IdCurso, IdUsuario),
 )
 
+SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios
 
 ---DATOS DE PRUEBA
 
@@ -60,3 +62,12 @@ GO
 SELECT * from Usuarios
 SELECT ID, Tipo FROM Usuarios 
 WHERE Email = 'admin@gmail.com' AND Contrasenia = 'password123'
+SELECT * from Cursos
+
+
+Update Usuarios SET Nombre='aa', Apellido='aaa', Email='aa', Contrasenia='aa', Tipo=1, Avatar='aa' WHERE IdMoodle = 101
+
+
+INSERT INTO Usuarios (IdMoodle, Nombre, Apellido, Email, Contrasenia, Avatar, Tipo) VALUES
+(11, 'Admin2', 'Admi2n', 'admin2@gmail.com', 'password123', 'https://www.filepicker.io/api/file/Km01a73PSDr2Q74TCYoe', 1),
+GO

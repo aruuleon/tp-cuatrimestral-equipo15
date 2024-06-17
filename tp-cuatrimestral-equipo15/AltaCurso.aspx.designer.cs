@@ -33,15 +33,6 @@ namespace tp_cuatrimestral_equipo15
         protected global::System.Web.UI.HtmlControls.HtmlInputFile txtImagen;
 
         /// <summary>
-        /// imgPortada control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPortada;
-
-        /// <summary>
         /// txtImagenUrl control.
         /// </summary>
         /// <remarks>
@@ -49,6 +40,15 @@ namespace tp_cuatrimestral_equipo15
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtImagenUrl;
+
+        /// <summary>
+        /// imgPortada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPortada;
 
         /// <summary>
         /// txtPrograma control.

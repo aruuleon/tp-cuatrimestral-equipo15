@@ -16,24 +16,26 @@
      <div class="row justify-content-center" style="margin-top:20px;">
          <h2 style="text-align:center; margin-bottom:20px;"><%= curso.Nombre %></h2>
          <div class="col-md-8">
-            
-              <div class="mb-3" >
-                 <asp:Label ID="lblMensajeError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
-                 </div>
-  
-  
-              <div class="mb-3" >
-                  <label class="form-label">Foto Portada</label>
-                  <input type="file" id="txtImagen" runat="server" class="form-control" accept=".jpg"/>
-              </div>
+            <div class="mb-3" >
+                  <asp:Label ID="lblMensajeError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
+                 
+             </div>
+             
+             
+             <div class="mb-3" >
+                 <label class="form-label">Subir portada desde mi PC</label>
+                 <input type="file" id="txtImagen" runat="server" class="form-control" accept=".jpg"/>
+             </div>
            
+                <div class="mb-3">
+                    <label class="form-label">Subir portada desde URL</label>
+                    <asp:TextBox ID="txtImagenUrl" runat="server" CssClass="form-control" placeholder="URL de la imagen"></asp:TextBox>
+                </div>
+
              <div class="mb-3" style="text-align:center">
                 <asp:Image ID="imgPortada"  ImageUrl="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" runat="server" CssClass="img-fluid mb-8" Style="height:300px; width:500px; object-fit: contain;" />
             </div>
-                   <div class="mb-3">
-    <label class="form-label">URL Imagen</label>
-    <asp:TextBox ID="txtImagenUrl" runat="server" CssClass="form-control" placeholder="URL de la imagen"></asp:TextBox>
-</div>
+
               <div class="mb-3">
                  <label class="form-label">Programa</label>
                  <input type="file" id="txtPrograma" runat="server" class="form-control" accept=".pdf" />

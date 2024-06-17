@@ -33,12 +33,12 @@ namespace tp_cuatrimestral_equipo15
                 CursoNegocio cursoNegocio = new CursoNegocio();
                 curso = cursoNegocio.ListarByIdMoodle(IdCursoMoodle); //Busca el curso a modificar
 
-                if (modificar == true)
+                if(modificar == true)
                 {
                     Session["todVal"] = false;
 
                     txtConocimientos.Text = curso.ConocimientosRequeridos;
-                    txtDescripcion.Text = curso.Descripcion;
+                    txtDescripcion.Text =curso.Descripcion;
                     txtResumen.Text = curso.Resumen;
                     txtPrecio.Text = ((float)curso.Precio).ToString();
                     if (curso.ImagenPortada.StartsWith("curso-img-"))
@@ -51,15 +51,15 @@ namespace tp_cuatrimestral_equipo15
                     }
 
                     Session["Mod"] = false;
-                }
+                } 
             }
             catch (Exception)
             {
 
                 throw;
             }
-
-
+           
+   
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace tp_cuatrimestral_equipo15
         {
             try
             {
-
+    
                 Page.Validate();
                 if ((bool)Session["todVal"] == false)
                 {
@@ -79,15 +79,15 @@ namespace tp_cuatrimestral_equipo15
                 }
                 if (!Page.IsValid)
                 {
-                    return;
-
+                     return;
+                    
                 }
                 curso.Nombre = "Marta"; //temporal cambiar
 
                 curso.Precio = decimal.Parse(txtPrecio.Text);
                 curso.Descripcion = txtDescripcion.Text;
                 curso.ConocimientosRequeridos = txtConocimientos.Text;
-                curso.Resumen = txtResumen.Text;
+                curso.Resumen=txtResumen.Text;
                 curso.Visible = true;
 
 
@@ -103,7 +103,7 @@ namespace tp_cuatrimestral_equipo15
                     txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + curso.IdMoodle + ".jpg");
                     curso.ImagenPortada = "curso-img-" + curso.IdMoodle + ".jpg";
                 }
-                else if (!string.IsNullOrEmpty(txtImagenUrl.Text))
+                else if(!string.IsNullOrEmpty(txtImagenUrl.Text))
                 {
                     curso.ImagenPortada = txtImagenUrl.Text;
                 }
@@ -126,7 +126,7 @@ namespace tp_cuatrimestral_equipo15
                 cursoNegocio.Modificar(curso);
 
 
-                Response.Redirect("Default.aspx", false);//CAmbiar
+                Response.Redirect("Detalles.aspx", false);//CAmbiar(Enviar parametros)
 
             }
             catch (Exception)
@@ -134,7 +134,7 @@ namespace tp_cuatrimestral_equipo15
 
                 //Response.Redirect("Error.aspx?", false);
             }
-
+            
         }
     }
 }

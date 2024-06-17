@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,8 @@ namespace Negocio
         public bool Register(Usuario usuario) {
             try {
                 accesoDatos.setearConsulta(
-                    "INSERT into Usuarios(IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo) " +
-                    "VALUES(@IdMoodle, @Nombre, @Apellido, @Email, @Contrasenia, @Tipo)"
+                    "INSERT into Usuarios(IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar) " +
+                    "VALUES(@IdMoodle, @Nombre, @Apellido, @Email, @Contrasenia, @Tipo, @Avatar)"
                 );
                 accesoDatos.setearParametros("@IdMoodle", 104);
                 accesoDatos.setearParametros("@Nombre", usuario.Nombre);
@@ -23,6 +24,7 @@ namespace Negocio
                 accesoDatos.setearParametros("@Email", usuario.Email);
                 accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
                 accesoDatos.setearParametros("@Tipo", TipoUsuario.STUDENT);
+                accesoDatos.setearParametros("@Avatar", "https://www.filepicker.io/api/file/Km01a73PSDr2Q74TCYoe");
                 return accesoDatos.ejecutarAccion();
             } catch (Exception exception) {
                 throw exception;
@@ -61,39 +63,77 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        //public List<Usuario> listar()
-        //{
-        //    List<Usuario> listaUsuarios = new List<Usuario>();
-        //    try
-        //    {
-        //        accesoDatos.setearConsulta("SELECT Id,NombreUsuario, Nombre, Apellido, Email, Contrasenia, Tipo from Usuarios "
-        //        );
-        //        accesoDatos.ejecutarLectura();
-        //        while (accesoDatos.Lector.Read())
-        //        {
-        //            Usuario usuario = new Usuario();
 
-        //            usuario.ID = (int)accesoDatos.Lector["Id"];
-        //            usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
-        //            usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
-        //            usuario.Email = (string)accesoDatos.Lector["Email"];
-        //            usuario.TipoUsuario = (bool)accesoDatos.Lector["Tipo"];
-        //            usuario.Apellido = (string)accesoDatos.Lector["Apellido"];
-        //            usuario.Email = (string)accesoDatos.Lector["NombreUsuario"];
+        public List<Usuario> Listar()
+        {
+            List<Usuario> listaUsuarios = new List<Usuario>();
+            try
+            {
+                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios"
+                );
+                accesoDatos.ejecutarLectura();
+                while (accesoDatos.Lector.Read())
+                {
+                    Usuario usuario = new Usuario();
 
-        //            listaUsuarios.Add(usuario);
-        //        }
-        //        return listaUsuarios;
-        //    }
-        //    catch (Exception excepción)
-        //    {
-        //        throw excepción;
-        //    }
-        //    finally
-        //    {
-        //        accesoDatos.cerrarConexion();
-        //    }
-        //}
+                    usuario.ID = (int)accesoDatos.Lector["Id"];
+                    usuario.IdMoodle= (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
+                    usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
+                    usuario.Email = (string)accesoDatos.Lector["Email"];
+                    if (!(bool)accesoDatos.Lector["Tipo"]) usuario.TipoUsuario = TipoUsuario.STUDENT;
+                    else { usuario.TipoUsuario = TipoUsuario.ADMIN; }
+                    usuario.Apellido = (string)accesoDatos.Lector["Apellido"];
+                    usuario.Avatar = (string)accesoDatos.Lector["Avatar"];
+
+                    listaUsuarios.Add(usuario);
+                }
+                return listaUsuarios;
+            }
+            catch (Exception excepción)
+            {
+                throw excepción;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public Usuario ListarByIdMoodle(int IdMoodle)
+        {
+            try
+            {
+                Usuario usuario = new Usuario();
+                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios WHERE IdMoodle = " + IdMoodle
+                );
+                accesoDatos.ejecutarLectura();
+                while (accesoDatos.Lector.Read())
+                {
+                    
+
+                    usuario.ID = (int)accesoDatos.Lector["Id"];
+                    usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
+                    usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
+                    usuario.Email = (string)accesoDatos.Lector["Email"];
+                    if (!(bool)accesoDatos.Lector["Tipo"]) usuario.TipoUsuario = TipoUsuario.STUDENT;
+                    else { usuario.TipoUsuario = TipoUsuario.ADMIN; }
+
+                    usuario.Apellido = (string)accesoDatos.Lector["Apellido"];
+                    usuario.Avatar = (string)accesoDatos.Lector["Avatar"];
+                }
+                return usuario;
+            }
+            catch (Exception excepción)
+            {
+                throw excepción;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
 
         //public void Agregar(Usuario usuario)
         //{
@@ -105,7 +145,7 @@ namespace Negocio
         //            "VALUES(@NombreUsuario, @Nombre, @Apellido, @Email, @Contrasenia, @Tipo)"
         //        );
 
-    
+
         //        accesoDatos.setearParametros("@NombreUsuario", usuario.NombreUsuario);
         //        accesoDatos.setearParametros("@Nombre", usuario.Nombre);
         //        accesoDatos.setearParametros("@Apellido", usuario.Apellido);
@@ -113,7 +153,7 @@ namespace Negocio
         //        accesoDatos.setearParametros("@Contrasenia", usuario.Contraseña);
         //        accesoDatos.setearParametros("@Tipo", usuario.TipoUsuario);
 
-     
+
         //        accesoDatos.ejecutarAccion();
         //    }
         //    catch (Exception excepción)
@@ -125,48 +165,49 @@ namespace Negocio
         //        accesoDatos.cerrarConexion();
         //    }
         //}
-        //public void Modificar(Usuario usuario)
-        //{
-        //    try
-        //    {
-        //        accesoDatos.setearConsulta("Update Usuarios SET NombreUsuario=@NombreUsuario, Nombre=@Nombre, Apellido=@Apellido, Email=@Email, Contrasenia=@Contrasenia, Tipo=@Tipo WHERE ID = @ID");
+
+        public void ModificarByIdMoodle(Usuario usuario)
+        {
+            try
+            {
+                accesoDatos.setearConsulta("Update Usuarios SET Nombre=@Nombre, Apellido=@Apellido, Email=@Email, Contrasenia=@Contrasenia, Tipo=@Tipo, Avatar=@Avatar WHERE IdMoodle = @IdMoodle");
+
+                accesoDatos.setearParametros("@Nombre", usuario.Nombre);
+                accesoDatos.setearParametros("@Apellido", usuario.Apellido);
+                accesoDatos.setearParametros("@Email", usuario.Email);
+                accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
+                accesoDatos.setearParametros("@Tipo", usuario.TipoUsuario);
+                accesoDatos.setearParametros("@IdMoodle", usuario.IdMoodle);
+                accesoDatos.setearParametros("@Avatar", usuario.Avatar);
 
 
-        //        accesoDatos.setearParametros("@NombreUsuario", usuario.NombreUsuario);
-        //        accesoDatos.setearParametros("@Nombre", usuario.Nombre);
-        //        accesoDatos.setearParametros("@Apellido", usuario.Apellido);
-        //        accesoDatos.setearParametros("@Email", usuario.Email);
-        //        accesoDatos.setearParametros("@Contrasenia", usuario.Contraseña);
-        //        accesoDatos.setearParametros("@Tipo", usuario.TipoUsuario);
-        //        accesoDatos.setearParametros("@ID", usuario.ID);
 
-        
-        //        accesoDatos.ejecutarAccion();
+                accesoDatos.ejecutarAccion();
 
-        //    }
-        //    catch (Exception excepción)
-        //    {
-        //        throw excepción;
-        //    }
-        //    finally
-        //    {
-        //        accesoDatos.cerrarConexion();
-        //    }
-        //}
+            }
+            catch (Exception excepción)
+            {
+                throw excepción;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
 
-        //public void Eliminar(Usuario usuario)
-        //{
-        //    try
-        //    {
-        //        accesoDatos.setearConsulta("DELETE FROM Usuarios WHERE ID = @ID");
-        //        accesoDatos.setearParametros("@ID", usuario.ID);
-        //        accesoDatos.ejecutarAccion();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw exception;
-        //    }
-        //}
+        public void EliminarByIdMoodle(Usuario usuario)
+        {
+            try
+            {
+                accesoDatos.setearConsulta("DELETE FROM Usuarios WHERE IdMoodle = @IdMoodle");
+                accesoDatos.setearParametros("@IdMoodle", usuario.IdMoodle);
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
 
     }
 }
