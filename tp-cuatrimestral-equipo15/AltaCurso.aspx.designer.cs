@@ -57,7 +57,7 @@ namespace tp_cuatrimestral_equipo15
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputFile txtPrograma;
+        protected global::System.Web.UI.WebControls.TextBox txtPrograma;
 
         /// <summary>
         /// validatorTxtPrograma control.

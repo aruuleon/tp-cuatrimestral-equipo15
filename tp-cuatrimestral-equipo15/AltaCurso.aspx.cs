@@ -64,7 +64,7 @@ namespace tp_cuatrimestral_equipo15
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("DetallesCurso.aspx?", false);
+            Response.Redirect("Default.aspx?", false);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -88,6 +88,7 @@ namespace tp_cuatrimestral_equipo15
                 curso.Descripcion = txtDescripcion.Text;
                 curso.ConocimientosRequeridos = txtConocimientos.Text;
                 curso.Resumen=txtResumen.Text;
+                curso.Programa=txtPrograma.Text;
                 curso.Visible = true;
 
 
@@ -115,24 +116,24 @@ namespace tp_cuatrimestral_equipo15
                     return;
                 }
 
-                if (txtPrograma.PostedFile.FileName != "")
-                {
-                    string rutaPrograma = Server.MapPath("./Archivos/ProgramasPDF/");
-                    txtPrograma.PostedFile.SaveAs(rutaPrograma + "curso-prog-" + curso.IdMoodle + ".pdf");
-                    curso.Programa = "curso-prog-" + curso.ID + ".pdf";
-                }
+                //if (txtPrograma.PostedFile.FileName != "")
+                //{
+                //    string rutaPrograma = Server.MapPath("./Archivos/ProgramasPDF/");
+                //    txtPrograma.PostedFile.SaveAs(rutaPrograma + "curso-prog-" + curso.IdMoodle + ".pdf");
+                //    curso.Programa = "curso-prog-" + curso.ID + ".pdf";
+                //}
                 CursoNegocio cursoNegocio = new CursoNegocio();
 
                 cursoNegocio.Modificar(curso);
 
 
-                Response.Redirect("Detalles.aspx", false);//CAmbiar(Enviar parametros)
+                Response.Redirect("Default.aspx", false);//CAmbiar(Enviar parametros)
 
             }
             catch (Exception)
             {
 
-                //Response.Redirect("Error.aspx?", false);
+                Response.Redirect("Error.aspx?", false);
             }
             
         }

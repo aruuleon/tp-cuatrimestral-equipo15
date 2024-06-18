@@ -71,6 +71,7 @@
     <Content Include="AltaCurso.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DetallesCurso.aspx" />
+    <Content Include="DetallesPerfil.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
@@ -107,6 +108,13 @@
     </Compile>
     <Compile Include="DetallesCurso.aspx.designer.cs">
       <DependentUpon>DetallesCurso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetallesPerfil.aspx.cs">
+      <DependentUpon>DetallesPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetallesPerfil.aspx.designer.cs">
+      <DependentUpon>DetallesPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

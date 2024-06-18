@@ -63,12 +63,12 @@ namespace tp_cuatrimestral_equipo15
 
             UsuarioNegocio.ModificarByIdMoodle(usuario);
 
-            Response.Redirect("Default.aspx?", false);//CAmbiar
+            Response.Redirect("DetallesPerfil.aspx?", false);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Default.aspx?", false);//CAmbiar
+            Response.Redirect("DetallesPerfil.aspx?", false);
         }
     }
 }

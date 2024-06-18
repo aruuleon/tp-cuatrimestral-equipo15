@@ -38,7 +38,8 @@
 
               <div class="mb-3">
                  <label class="form-label">Programa</label>
-                 <input type="file" id="txtPrograma" runat="server" class="form-control" accept=".pdf" />
+                 <%--<input type="file" id="txtPrograma" runat="server" class="form-control" accept=".pdf" />--%>
+                 <asp:TextBox ID="txtPrograma" runat="server" CssClass="form-control" placeholder="URL del Programa"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="validatorTxtPrograma" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtPrograma"></asp:RequiredFieldValidator>
              </div>
              <div class="mb-3">
