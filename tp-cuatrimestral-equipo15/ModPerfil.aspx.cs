@@ -11,8 +11,8 @@ namespace tp_cuatrimestral_equipo15
 {
     public partial class Perfil : System.Web.UI.Page
     {
-        public Usuario usuario;
-    
+        public Usuario usuario; 
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -38,7 +38,7 @@ namespace tp_cuatrimestral_equipo15
                     }
                 }
 
-
+               
 
             }
             catch (Exception)
@@ -50,7 +50,7 @@ namespace tp_cuatrimestral_equipo15
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            usuario.Apellido = txtApellido.Text;
+            usuario.Apellido= txtApellido.Text;
             usuario.Nombre = txtNombre.Text;
 
             if (txtImagen.PostedFile.FileName != "")

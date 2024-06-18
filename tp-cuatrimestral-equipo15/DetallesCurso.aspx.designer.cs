@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace tp_cuatrimestral_equipo15 {
+namespace tp_cuatrimestral_equipo15
+{
 
 
-    public partial class DetallesCurso {
+    public partial class DetallesCurso
+    {
 
         /// <summary>
         /// LabelPrice control.

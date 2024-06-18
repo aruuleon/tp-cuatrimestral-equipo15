@@ -16,6 +16,7 @@ namespace tp_cuatrimestral_equipo15
 {
     public partial class DetallesCurso : System.Web.UI.Page {
         public Curso curso;
+        public string ImagenPortada;
         protected void Page_Load(object sender, EventArgs e) {
 
             List<string> listaInformacionDocente = new List<string> {
@@ -27,6 +28,16 @@ namespace tp_cuatrimestral_equipo15
             CursoNegocio cursoNegocio = new CursoNegocio();
             int id = !string.IsNullOrEmpty(Request.QueryString["id"]) ? int.Parse(Request.QueryString["id"]) : 1;
             curso = cursoNegocio.BuscarPorId(id);
+
+            if (curso.ImagenPortada.StartsWith("curso-img-"))
+            {
+                ImagenPortada = "~/Archivos/Imagenes/Curso/" + curso.ImagenPortada;
+            }
+            else
+            {
+                ImagenPortada = curso.ImagenPortada;
+            }
+
             Usuario usuario = (Usuario)Session["usuario"];
             HyperLinkProgram.NavigateUrl = curso.Programa.ToString();
             informacionDocente.DataSource = listaInformacionDocente;

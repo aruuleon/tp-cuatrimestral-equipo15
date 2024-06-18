@@ -77,7 +77,7 @@ namespace Negocio
                     Usuario usuario = new Usuario();
 
                     usuario.ID = (int)accesoDatos.Lector["Id"];
-                    usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.IdMoodle= (int)accesoDatos.Lector["IdMoodle"];
                     usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
                     usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
                     usuario.Email = (string)accesoDatos.Lector["Email"];
@@ -110,7 +110,7 @@ namespace Negocio
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
                 {
-
+                    
 
                     usuario.ID = (int)accesoDatos.Lector["Id"];
                     usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
@@ -170,14 +170,13 @@ namespace Negocio
         {
             try
             {
-                accesoDatos.setearConsulta("Update Usuarios SET Nombre=@Nombre, Apellido=@Apellido, Email=@Email, Contrasenia=@Contrasenia, Tipo=@Tipo, Avatar=@Avatar WHERE IdMoodle = @IdMoodle");
+                accesoDatos.setearConsulta("Update Usuarios SET Nombre=@Nombre, Apellido=@Apellido, Email=@Email, Contrasenia=@Contrasenia, Tipo=@Tipo, Avatar=@Avatar WHERE IdMoodle = "  + usuario.IdMoodle);
 
                 accesoDatos.setearParametros("@Nombre", usuario.Nombre);
                 accesoDatos.setearParametros("@Apellido", usuario.Apellido);
                 accesoDatos.setearParametros("@Email", usuario.Email);
                 accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
                 accesoDatos.setearParametros("@Tipo", usuario.TipoUsuario);
-                accesoDatos.setearParametros("@IdMoodle", usuario.IdMoodle);
                 accesoDatos.setearParametros("@Avatar", usuario.Avatar);
 
 

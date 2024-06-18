@@ -2,7 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div style="height: 600px; background-image: url('<%= curso.ImagenPortada.ToString() %>'); background-size: cover; background-position: center;"></div>
+    <div style="height: 600px; background-image: url('<%=ResolveUrl(ImagenPortada).ToString()%>'); background-size: cover; background-position: center;"></div>
+    
     <div class="d-flex p-3 ml-4" style="width: 100%; margin-left: 10%; margin-top: 30px; margin-bottom: 10px">
         <div style="width: 50%">
             <div class="p-2 mb-4" style="border-left: 2px solid #7b1fa2">
@@ -13,7 +14,7 @@
         <div class="col" style="max-width: 20%; position:absolute; right: 10%">
             <div class="card h-100">
                 <picture style="min-height: 200px; border-bottom: 1px solid rgba(0, 0, 0, 0.175)">
-                    <img src="<%= curso.ImagenPortada.ToString() %>" style="max-width: 100%; height:200px" />
+                    <img src="<%= ResolveUrl(ImagenPortada).ToString() %>" style="max-width: 100%; height:200px" />
                 </picture>
                 <div class="card-body mb-4">
                     <h5 class="card-title"><%= curso.Nombre.ToString() %></h5>

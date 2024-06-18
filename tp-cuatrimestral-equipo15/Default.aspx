@@ -15,7 +15,10 @@
                     <asp:HyperLink ID="HyperLinkCourseDetail" runat="server" NavigateUrl='<%# "DetallesCurso.aspx?id=" + Eval("ID") %>' CssClass="text-decoration-none color-inherit">
                         <div class="card h-100">
                             <picture style="min-height: 220px; border-bottom: 1px solid rgba(0, 0, 0, 0.175)">
-                                <asp:Image runat="server" ImageUrl='<%#Eval("ImagenPortada")%>' Style="max-width: 100%; height:100%" />
+                              
+                                
+                                <asp:Image runat="server" ID="imgPortada" ImageUrl='<%# ImagenUrl(Eval("ImagenPortada").ToString()) %>' Style="max-width: 100%; height: 100%;" />
+                            
                             </picture>
                             <div class="card-body">
                                 <h5 class="card-title"><%#Eval("Nombre")%></h5>
