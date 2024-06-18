@@ -80,13 +80,13 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        public Curso ListarByIdMoodle(int IdMoodle)
+        public Curso ListarById(int Id)
         {
             Curso curso = new Curso();
             try
             {
                 accesoDatos.setearConsulta(
-                    "SELECT C.ID, C.IdMoodle, C.Nombre, C.ImagenPortada, C.Descripcion, C.Programa, C.Precio, C.Visible, C.ConocimientosRequeridos,C.Resumen FROM Cursos C WHERE IdMoodle = " + IdMoodle
+                    "SELECT C.ID, C.IdMoodle, C.Nombre, C.ImagenPortada, C.Descripcion, C.Programa, C.Precio, C.Visible, C.ConocimientosRequeridos,C.Resumen FROM Cursos C WHERE ID = " + Id
                 );
                 accesoDatos.ejecutarLectura();
                 

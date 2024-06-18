@@ -28,6 +28,7 @@ namespace tp_cuatrimestral_equipo15
                     txtNombre.Text = usuario.Nombre;
                     txtEmail.Text = usuario.Email;
 
+
                     if (usuario.Avatar.StartsWith("perfil-img-"))
                     {
                         imgPerfil.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
@@ -50,6 +51,10 @@ namespace tp_cuatrimestral_equipo15
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if(!Page.IsValid) return;
+
+
             usuario.Apellido= txtApellido.Text;
             usuario.Nombre = txtNombre.Text;
 

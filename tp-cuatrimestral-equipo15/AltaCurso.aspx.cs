@@ -12,7 +12,7 @@ namespace tp_cuatrimestral_equipo15
 {
     public partial class AltaCurso : System.Web.UI.Page
     {
-        int IdCursoMoodle = 302;//Id de Moodle del curso a trabajar
+        int Id = 3;//Id de Moodle del curso a trabajar //ESTO NO VA DEBERIA RECIBIR EL ID POR SESSION O POR URL
         bool modificar;
         public Curso curso = new Curso();
 
@@ -24,14 +24,14 @@ namespace tp_cuatrimestral_equipo15
 
                 if (!IsPostBack)
                 {
-                    Session["Mod"] = true; //Temporal Cambiar(Cambia modo modificar o dar alta)
+                    Session["Mod"] = true; //Temporal Cambiar(Cambia modo modificar o dar alta) // ESTO NO VA 
                     Session["todVal"] = true;
                 }
-                modificar = (bool)Session["Mod"];
+                modificar = (bool)Session["Mod"]; //LE LLEGA TRUE O FALSE DEPENDE SI SE QUIERE MODIFICAR O NO
 
 
                 CursoNegocio cursoNegocio = new CursoNegocio();
-                curso = cursoNegocio.ListarByIdMoodle(IdCursoMoodle); //Busca el curso a modificar
+                curso = cursoNegocio.ListarById(Id); //Busca el curso a modificar
 
                 if(modificar == true)
                 {

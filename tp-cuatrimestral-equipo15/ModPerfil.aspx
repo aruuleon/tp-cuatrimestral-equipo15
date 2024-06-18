@@ -17,12 +17,12 @@
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
-<%--                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtNombre"></asp:RequiredFieldValidator>--%>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtNombre"></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
                 <label class="form-label">Apellido</label>
                 <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
-<%--                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtApellido"></asp:RequiredFieldValidator>--%>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtApellido"></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
                 <label class="form-label">Email</label>

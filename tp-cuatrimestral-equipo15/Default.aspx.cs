@@ -12,7 +12,6 @@ namespace tp_cuatrimestral_equipo15 {
 
         public string ImageUrl;
         protected void Page_Load(object sender, EventArgs e) {
-
             CursoNegocio cursoNegocio = new CursoNegocio();
             Session.Add("listaCursos", cursoNegocio.Listar());
             listaCursos.DataSource = Session["listaCursos"];
@@ -21,6 +20,8 @@ namespace tp_cuatrimestral_equipo15 {
 
         protected string ImagenUrl(string imageUrl)
         {
+            
+
 
             if (imageUrl.StartsWith("curso-img-"))
             {

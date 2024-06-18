@@ -22,16 +22,18 @@ namespace tp_cuatrimestral_equipo15
                 lblApellido.Text = usuario.Apellido;
                 lblNombre.Text = usuario.Nombre;
                 lblEmail.Text = usuario.Email;
-
-                if (usuario.Avatar.StartsWith("perfil-img-"))
-                {
-                    imgPerfil.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
-                }
-                else
-                {
-                    imgPerfil.ImageUrl = usuario.Avatar;
-                }
+               
             }
+
+            if (usuario.Avatar.StartsWith("perfil-img-"))
+            {
+                imgPerfil.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
+            }
+            else
+            {
+                imgPerfil.ImageUrl = usuario.Avatar;
+            }
+            
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
