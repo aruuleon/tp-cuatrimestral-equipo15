@@ -11,27 +11,34 @@ namespace tp_cuatrimestral_equipo15
 {
     public partial class Perfil : System.Web.UI.Page
     {
-        int IdUsuarioMoodle = 101;//Id de Moodle del curso a trabajar
-        public Usuario usuario = new Usuario();
+        public Usuario usuario;
+    
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
             try
             {
+                usuario = (Usuario)Session["usuario"];
                 UsuarioNegocio UsuarioNegocio = new UsuarioNegocio();
-                usuario = UsuarioNegocio.ListarByIdMoodle(IdUsuarioMoodle); //Busca el curso a modificar
-
-                txtApellido.Text = usuario.Apellido;
-                txtNombre.Text = usuario.Nombre;
-                txtEmail.Text = usuario.Email;
-
-                if (usuario.Avatar.StartsWith("perfil-img-"))
+                usuario = UsuarioNegocio.ListarById(usuario.ID);
+                if (!IsPostBack)
                 {
-                    imgPerfil.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
+                    txtApellido.Text = usuario.Apellido;
+                    txtNombre.Text = usuario.Nombre;
+                    txtEmail.Text = usuario.Email;
+
+                    if (usuario.Avatar.StartsWith("perfil-img-"))
+                    {
+                        imgPerfil.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
+                    }
+                    else
+                    {
+                        imgPerfil.ImageUrl = usuario.Avatar;
+                    }
                 }
-                else
-                {
-                    imgPerfil.ImageUrl = usuario.Avatar;
-                }
+
+
 
             }
             catch (Exception)
@@ -43,20 +50,25 @@ namespace tp_cuatrimestral_equipo15
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            usuario.Apellido= txtApellido.Text;
+            usuario.Apellido = txtApellido.Text;
             usuario.Nombre = txtNombre.Text;
 
             if (txtImagen.PostedFile.FileName != "")
             {
                 string rutaImagen = Server.MapPath("./Archivos/Imagenes/Perfil/");
-                txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + usuario.IdMoodle + ".jpg");
+                txtImagen.PostedFile.SaveAs(rutaImagen + "perfil-img-" + usuario.IdMoodle + ".jpg");
                 usuario.Avatar = "perfil-img-" + usuario.IdMoodle + ".jpg";
             }
             UsuarioNegocio UsuarioNegocio = new UsuarioNegocio();
 
             UsuarioNegocio.ModificarByIdMoodle(usuario);
 
-            Response.Redirect("Detalles.aspx", false);//CAmbiar
+            Response.Redirect("Default.aspx?", false);//CAmbiar
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx?", false);//CAmbiar
         }
     }
 }

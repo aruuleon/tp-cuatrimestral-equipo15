@@ -77,7 +77,7 @@ namespace Negocio
                     Usuario usuario = new Usuario();
 
                     usuario.ID = (int)accesoDatos.Lector["Id"];
-                    usuario.IdMoodle= (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
                     usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
                     usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
                     usuario.Email = (string)accesoDatos.Lector["Email"];
@@ -100,17 +100,17 @@ namespace Negocio
             }
         }
 
-        public Usuario ListarByIdMoodle(int IdMoodle)
+        public Usuario ListarById(int Id)
         {
             try
             {
                 Usuario usuario = new Usuario();
-                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios WHERE IdMoodle = " + IdMoodle
+                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios WHERE ID = " + Id
                 );
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
                 {
-                    
+
 
                     usuario.ID = (int)accesoDatos.Lector["Id"];
                     usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
