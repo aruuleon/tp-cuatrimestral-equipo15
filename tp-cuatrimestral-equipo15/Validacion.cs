@@ -68,5 +68,15 @@ namespace tp_cuatrimestral_equipo15
                 throw ex;
             }
         }
+
+        public static bool SesionActiva(Object usuario)
+        {
+            Usuario usuarioAux = usuario != null ? (Usuario)usuario : null;
+            if (usuarioAux != null && usuarioAux.ID != 0)
+            {
+                return true;
+            }
+            else return false;
+        }
     }
 }

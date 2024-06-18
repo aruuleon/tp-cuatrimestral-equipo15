@@ -9,8 +9,19 @@ using Dominio;
 namespace tp_cuatrimestral_equipo15 {
     public partial class Master : System.Web.UI.MasterPage {
         protected void Page_Load(object sender, EventArgs e) {
-            if(!IsPostBack) {
-                Usuario usuario = (Usuario)Session["usuario"];
+
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (!(Page is Login) && !(Page is Register) && !(Page is Default))
+            {
+                if (!Validacion.SesionActiva(usuario))
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+            }
+
+
+            if (!IsPostBack) {
+               
                 if(isLoginOrRegister()) {
                     ShowOnlyPanel(LoginOrRegisterHeaderPanel);
                 } else if(usuario != null && usuario.TipoUsuario == TipoUsuario.ADMIN) {
