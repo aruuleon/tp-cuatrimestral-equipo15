@@ -61,12 +61,12 @@ namespace tp_cuatrimestral_equipo15
             if (txtImagen.PostedFile.FileName != "")
             {
                 string rutaImagen = Server.MapPath("./Archivos/Imagenes/Perfil/");
-                txtImagen.PostedFile.SaveAs(rutaImagen + "perfil-img-" + usuario.IdMoodle + ".jpg");
-                usuario.Avatar = "perfil-img-" + usuario.IdMoodle + ".jpg";
+                txtImagen.PostedFile.SaveAs(rutaImagen + "perfil-img-" + usuario.ID + ".jpg");
+                usuario.Avatar = "perfil-img-" + usuario.ID + ".jpg";
             }
             UsuarioNegocio UsuarioNegocio = new UsuarioNegocio();
 
-            UsuarioNegocio.ModificarByIdMoodle(usuario);
+            UsuarioNegocio.ModificarById(usuario);
 
             Response.Redirect("DetallesPerfil.aspx?", false);
         }

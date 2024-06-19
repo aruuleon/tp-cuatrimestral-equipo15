@@ -104,8 +104,8 @@ namespace tp_cuatrimestral_equipo15
                 else if (txtImagen.PostedFile.FileName != "")
                 {
                     string rutaImagen = Server.MapPath("./Archivos/Imagenes/Curso/");
-                    txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + curso.IdMoodle + ".jpg");
-                    curso.ImagenPortada = "curso-img-" + curso.IdMoodle + ".jpg";
+                    txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + curso.ID + ".jpg");
+                    curso.ImagenPortada = "curso-img-" + curso.ID + ".jpg";
                 }
                 else if(!string.IsNullOrEmpty(txtImagenUrl.Text))
                 {
