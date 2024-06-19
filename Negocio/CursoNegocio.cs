@@ -62,16 +62,27 @@ namespace Negocio
                                            "WHERE Id = " + id);
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read()) {
-                    curso.ID = (int)accesoDatos.Lector["ID"];
-                    curso.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
-                    curso.Nombre = (string)accesoDatos.Lector["Nombre"];
-                    curso.ImagenPortada = (string)accesoDatos.Lector["ImagenPortada"];
-                    curso.Resumen = (string)accesoDatos.Lector["Resumen"];
-                    curso.Descripcion = (string)accesoDatos.Lector["Descripcion"];
-                    curso.ConocimientosRequeridos = (string)accesoDatos.Lector["ConocimientosRequeridos"];
-                    curso.Programa = (string)accesoDatos.Lector["Programa"];
-                    curso.Precio = accesoDatos.Lector.GetDecimal(accesoDatos.Lector.GetOrdinal("Precio"));
-                    curso.Visible = (bool)accesoDatos.Lector["Visible"];
+                    if (!(accesoDatos.Lector["ID"] is DBNull))
+                        curso.ID = (int)accesoDatos.Lector["ID"];
+                    if (!(accesoDatos.Lector["IdMoodle"] is DBNull))
+                        curso.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
+                    if (!(accesoDatos.Lector["Nombre"] is DBNull))
+                        curso.Nombre = (string)accesoDatos.Lector["Nombre"];
+                    if (!(accesoDatos.Lector["ImagenPortada"] is DBNull))
+                        curso.ImagenPortada = (string)accesoDatos.Lector["ImagenPortada"];
+                    if (!(accesoDatos.Lector["Resumen"] is DBNull))
+                        curso.Resumen = (string)accesoDatos.Lector["Resumen"];
+                    if (!(accesoDatos.Lector["Descripcion"] is DBNull))
+                        curso.Descripcion = (string)accesoDatos.Lector["Descripcion"];
+                    if (!(accesoDatos.Lector["ConocimientosRequeridos"] is DBNull))
+                        curso.ConocimientosRequeridos = (string)accesoDatos.Lector["ConocimientosRequeridos"];
+                    if (!(accesoDatos.Lector["Programa"] is DBNull))
+                        curso.Programa = (string)accesoDatos.Lector["Programa"];
+                    if (!(accesoDatos.Lector["Precio"] is DBNull))
+                        curso.Precio = accesoDatos.Lector.GetDecimal(accesoDatos.Lector.GetOrdinal("Precio"));
+                    if (!(accesoDatos.Lector["Visible"] is DBNull))
+                        curso.Visible = (bool)accesoDatos.Lector["Visible"];
+
                 }
                 return curso;
             } catch (Exception exception) {

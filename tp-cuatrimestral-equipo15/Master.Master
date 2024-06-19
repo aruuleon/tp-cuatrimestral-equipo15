@@ -13,6 +13,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
         <asp:Panel ID="LoginOrRegisterHeaderPanel" runat="server" Visible="false">
             <header class="header-container">
                 <nav class="navbar navbar-expand-lg d-flex justify-content-center align-items-center" style="background-color: #7b1fa2">
@@ -22,16 +23,36 @@
                 </nav>
             </header>
         </asp:Panel>
-        <asp:Panel ID="AdministratorHeaderPanel" runat="server" Visible="false">
-            <header class="header-container">
-                <nav class="navbar navbar-expand-lg d-flex justify-content-center align-items-center" style="background-color: #7b1fa2">
-                    <div class="m-2">
-                        <a href="Default.aspx" style="font-size: 30px; text-decoration:none" class="text-white"> Maxi Programa </a>
-                    </div>
-                    <a href="Login.aspx" class="btn btn-success" style="position:absolute; right: 1%"> Ingresar </a>
-                </nav>
-            </header>
-        </asp:Panel>
+
+  <asp:Panel ID="AdministratorHeaderPanel" runat="server" Visible="false">
+    <header class="header-container">
+        <nav class="navbar navbar-expand-lg d-flex justify-content-between align-items-center position-relative" style="background-color: #7b1fa2">
+            <div class="position-absolute start-50 translate-middle-x">
+                <a href="AdministratorHome.aspx" style="font-size: 30px; text-decoration:none;" class="text-white">Maxi Programa</a>
+            </div>
+            <div class="d-flex align-items-center ms-auto">
+                <div class="collapse navbar-collapse">
+                    <asp:Panel ID="panelPerfilAdmin" runat="server" Visible="true">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <button class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#7b1fa2; border-color:#7b1fa2">
+                                    <asp:Image ID="imgAvatarAdmin" ImageUrl="https://www.filepicker.io/api/file/Km01a73PSDr2Q74TCYoe" runat="server" style="height:40px; width:40px; border-radius:20px" />
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" style="background-color:#7b1fa2;">
+                                    <li><a class="dropdown-item text-white" href="DetallesPerfil.aspx" style="background-color: #7b1fa2;">Mi Perfil</a></li>
+                                    <li><a class="dropdown-item text-white" href="#" style="background-color: #7b1fa2;">Configuracion</a></li>
+                                    <li><asp:Button Text="Cerrar Sesión" CssClass="dropdown-item text-white" ID="Button1" Style="background-color: #7b1fa2;" runat="server" OnClick="btnCerrarSesion_Click"/></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </asp:Panel>
+                    <asp:HyperLink ID="btnIngresarAdmin" href="Login.aspx" runat="server" CssClass="btn btn-success ms-2" Visible="true" Style="margin-right:10px">Ingresar</asp:HyperLink>
+                </div>
+            </div>
+        </nav>
+    </header>
+</asp:Panel>
+
         <asp:Panel ID="UserHeaderPanel" runat="server">
             <header class="header-container">
                 <nav class="navbar navbar-expand-lg" style="background-color: #7b1fa2">
@@ -51,12 +72,27 @@
                                     <a class="nav-link text-white" href="MyCourses.aspx">Mis Cursos</a>
                                 </li>
                             </ul>
-                            <a href="Login.aspx" class="btn btn-success"> Ingresar </a>
+                            <asp:Panel ID="panelPerfilAlumno" runat="server" Visible="false">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown" style="object-position:right">
+                                      <button class="btn" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#7b1fa2; border-color:#7b1fa2">
+                                          <asp:Image ID="imgAvatarAlumno" ImageUrl="https://www.filepicker.io/api/file/Km01a73PSDr2Q74TCYoe" runat="server" style="height:40px; width:40px; border-radius:20px" />
+                                      </button>
+                                      <ul class="dropdown-menu dropdown-menu-end" style="background-color:#7b1fa2;">
+                                        <li><a class="dropdown-item text-white" href="DetallesPerfil.aspx" style="background-color: #7b1fa2;">Mi Perfil</a></li>
+                                        <li><a class="dropdown-item text-white" href="#" style="background-color: #7b1fa2;">Configuracion</a></li>
+                                        <li><asp:Button Text="Cerrar Sesión" CssClass="dropdown-item text-white" ID="btnCerrarSesion" Style="background-color: #7b1fa2;" runat="server" OnClick="btnCerrarSesion_Click"/></li>
+                                      </ul>
+                                    </li>
+                                </ul>
+                          </asp:Panel>
+                            <asp:HyperLink ID="btnIngresarAlumno" href="Login.aspx" runat="server" CssClass="btn btn-success" Visible="true">Ingresar</asp:HyperLink>
                         </div>
                     </div>
                 </nav>
             </header>
         </asp:Panel>
+
         <div class="main-container" style="min-height: 800px">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
             </asp:ContentPlaceHolder>
