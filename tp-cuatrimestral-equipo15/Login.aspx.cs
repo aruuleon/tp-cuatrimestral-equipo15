@@ -26,11 +26,13 @@ namespace tp_cuatrimestral_equipo15 {
                 usuario.Contrasenia = txtPassword.Text;
                 usuario.Email = txtEmail.Text;
 
-                if (usuarioNegocio.Login(usuario))
-                {
-
+                if (usuarioNegocio.Login(usuario)) {
                     Session.Add("usuario", usuario);
-                    Response.Redirect("Default.aspx", false);
+                    if(usuario.TipoUsuario == TipoUsuario.ADMIN) {
+                        Response.Redirect("AdministratorHome.aspx", false);
+                    } else {
+                        Response.Redirect("Default.aspx", false);
+                    }
                 }
                 else
                 {
