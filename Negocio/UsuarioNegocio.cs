@@ -15,13 +15,13 @@ namespace Negocio
             try {
                 accesoDatos.setearConsulta(
                     "INSERT into Usuarios(IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar) " +
-                    "VALUES(@IdMoodle, @Nombre, @Apellido, @Email, @Contrasenia, @Tipo, @Avatar)"
+                    "VALUES(@IdMoodle, @Nombre, @Apellido, @Emal, @Contrasena, @Tipo, @Avatar)"
                 );
                 accesoDatos.setearParametros("@IdMoodle", 104);
                 accesoDatos.setearParametros("@Nombre", usuario.Nombre);
                 accesoDatos.setearParametros("@Apellido", usuario.Apellido);
-                accesoDatos.setearParametros("@Email", usuario.Email);
-                accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
+                accesoDatos.setearParametros("@Emal", usuario.Email);
+                accesoDatos.setearParametros("@Contrasena", usuario.Contrasenia);
                 accesoDatos.setearParametros("@Tipo", TipoUsuario.STUDENT);
                 accesoDatos.setearParametros("@Avatar", "https://www.filepicker.io/api/file/Km01a73PSDr2Q74TCYoe");
                 return accesoDatos.ejecutarAccion();

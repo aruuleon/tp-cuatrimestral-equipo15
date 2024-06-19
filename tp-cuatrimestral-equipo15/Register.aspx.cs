@@ -24,7 +24,7 @@ namespace tp_cuatrimestral_equipo15 {
                 Usuario usuario = new Usuario(txtNombre.Text, txtApellido.Text, txtEmail.Text, txtContrasenia.Text);
                 if(usuarioNegocio.UserInDb(usuario.Email)) {
                     lblUserInDb.Visible = true;
-                    Response.Redirect("Register.aspx", false);
+                    return;
                 } else {
                     if (usuarioNegocio.Register(usuario)) {
                         EmailService emailService = new EmailService();

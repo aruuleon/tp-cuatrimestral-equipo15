@@ -4,13 +4,19 @@
          .validacion{
             color: red;
             font-size: 12px;
-        }
+            }
+          .validacion_2{
+            color: red;
+            font-size: 15px;
+            text-align:justify;
+            margin:5px
+          }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div style="display: flex; justify-content: center; align-items: center; height: 83vh;">
-        <div style="width: 20%">
-            <h2 style="text-align: center; margin-bottom: 50px"> Registrarse </h2>
+    <div style="display: flex; justify-content: center; align-items: center; height: 83vh; margin-top:20px">
+        <div style="width: 20%; margin-top:20px">
+            <h2 style="text-align: center; margin-bottom: 30px;"> Registrarse </h2>
             <div class="form-floating mb-4">
                 <asp:TextBox ID="txtNombre" Cssclass="form-control" runat="server" placeholder="Nombre"></asp:TextBox>
                 <div style="position: relative;">
@@ -42,7 +48,10 @@
                 </div>
                 <label for="floatingPassword">Contraseña</label>
             </div>
-            <asp:Label Text="Este correo electrónico ya se encuentra registrado" runat="server" CssClass="validacion" Visible="false" ID="lblUserInDb" />
+             <div class="form-floating mb-6" style="text-align:center; align-items:center">
+            <asp:Label Text="Este correo electrónico ya se encuentra registrado" runat="server" CssClass="validacion_2" Visible="false" ID="lblUserInDb" />
+            </div>
+
             <asp:Button ID="RegisterButton" Text="Registrarse" type="submit" Cssclass="btn btn-success w-50 mx-auto mb-3 d-block" style="margin-top: 30px" runat ="server" Onclick="RegisterButton_Click" /> 
             <div style="margin-top: 40px">
                 <p style="text-align: center"> Ya tenés una cuenta? <a href="Login.aspx"> Ingresar </a> </p>
