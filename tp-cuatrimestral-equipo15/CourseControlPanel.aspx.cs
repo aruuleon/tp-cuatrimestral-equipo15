@@ -18,5 +18,16 @@ namespace tp_cuatrimestral_equipo15 {
             columnList.DataSource = ColumnList;
             columnList.DataBind();
         }
+
+        protected string ImagenUrl(string imageUrl)
+        {
+
+            if (imageUrl.StartsWith("curso-img-"))
+            {
+                imageUrl = "~/Archivos/Imagenes/Curso/" + imageUrl;
+            }
+
+            return ResolveUrl(imageUrl);
+        }
     }
 }

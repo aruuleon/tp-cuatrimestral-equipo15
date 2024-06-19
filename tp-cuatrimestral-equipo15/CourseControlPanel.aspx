@@ -25,7 +25,7 @@
                             <td class="text-center"><%#Eval("ID")%></td>
                             <td><%#Eval("Nombre")%></td>
                             <td class="text-center"><%# String.Format(new System.Globalization.CultureInfo("es-AR"), "{0:C0}", Convert.ToInt32(Eval("Precio"))) %></td>
-                            <td><img src='<%#Eval("ImagenPortada")%>' class="mx-auto d-block" alt="Avatar" style="width: 100px; height: 50px;"></td>
+                            <td><img src='<%#ImagenUrl(Eval("ImagenPortada").ToString())%>' class="mx-auto d-block" alt="Avatar" style="width: 100px; height: 50px;"></td>
                             <td class="text-center">
                                 <asp:HyperLink ID="HyperLinkPrograma" NavigateUrl='<%#Eval("Programa")%>' runat="server" CssClass="fa fa-file text-primary" Target="_blank"></asp:HyperLink>
                             </td>
