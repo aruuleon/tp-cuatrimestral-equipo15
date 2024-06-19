@@ -26,7 +26,7 @@
                             <td><%#Eval("Nombre")%></td>
                             <td><%#Eval("Apellido")%></td>
                             <td><%#Eval("Email")%></td>
-                            <td><img src='<%#Eval("Avatar")%>' class="mx-auto d-block" alt="Avatar" style="width: 50px; height: 50px;"></td>
+                            <td><img src='<%#ImagenUrl(Eval("Avatar").ToString())%>' class="mx-auto d-block" alt="Avatar" style="width: 50px; height: 50px;"></td>
                             <td class="text-center">
                                 <asp:LinkButton ID="LinkButtonEditUser" runat="server" CssClass="fa fa-edit text-success"></asp:LinkButton>
                             </td>

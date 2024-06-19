@@ -20,8 +20,6 @@ namespace tp_cuatrimestral_equipo15 {
 
         protected string ImagenUrl(string imageUrl)
         {
-            
-
 
             if (imageUrl.StartsWith("curso-img-"))
             {

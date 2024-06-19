@@ -24,5 +24,15 @@ namespace tp_cuatrimestral_equipo15 {
             usuarioNegocio.Remove(int.Parse(commandEventArgs.CommandArgument.ToString()));
             Response.Redirect(Request.RawUrl);
         }
+        protected string ImagenUrl(string imageUrl)
+        {
+
+            if (imageUrl.StartsWith("perfil-img-"))
+            {
+                imageUrl = "~/Archivos/Imagenes/Perfil/" + imageUrl;
+            }
+
+            return ResolveUrl(imageUrl);
+        }
     }
 }
