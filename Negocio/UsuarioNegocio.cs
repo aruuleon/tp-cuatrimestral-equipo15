@@ -11,7 +11,6 @@ namespace Negocio
     public class UsuarioNegocio
     {
         private AccesoDatos accesoDatos = new AccesoDatos();
-
         public bool Register(Usuario usuario) {
             try {
                 accesoDatos.setearConsulta(
@@ -63,7 +62,21 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-
+        public bool UserInDb(string email) {
+            try {
+                accesoDatos.setearConsulta("SELECT COUNT(*) FROM Usuarios WHERE Email = @Email");
+                accesoDatos.setearParametros("@Email", email);
+                accesoDatos.ejecutarLectura();
+                while (accesoDatos.Lector.Read()) {
+                    return accesoDatos.Lector.GetInt32(0) > 0;
+                }
+                return false;
+            } catch (Exception exception) {
+                throw exception;
+            } finally {
+                accesoDatos.cerrarConexion();
+            }
+        }
         public List<Usuario> Listar()
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
@@ -110,8 +123,6 @@ namespace Negocio
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
                 {
-                    
-
                     usuario.ID = (int)accesoDatos.Lector["Id"];
                     usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
                     usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
@@ -165,7 +176,6 @@ namespace Negocio
         //        accesoDatos.cerrarConexion();
         //    }
         //}
-
         public void ModificarByIdMoodle(Usuario usuario)
         {
             try
@@ -193,7 +203,6 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-
         public void EliminarByIdMoodle(Usuario usuario)
         {
             try

@@ -7,12 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace tp_cuatrimestral_equipo15
-{
+namespace tp_cuatrimestral_equipo15 {
 
 
-    public partial class Login
-    {
+    public partial class Login {
 
         /// <summary>
         /// txtEmail control.

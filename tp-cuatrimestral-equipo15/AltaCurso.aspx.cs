@@ -23,9 +23,7 @@ namespace tp_cuatrimestral_equipo15
                 if (!(Validacion.EsAdmin(Session["usuario"])))
                 {
                     Session.Add("error", "No tenes Permisos para acceder a esta pagina");
-                    Response.Redirect("Error.aspx");
-
-
+                    Response.Redirect("Default.aspx");
                 }
 
                 if (!IsPostBack)

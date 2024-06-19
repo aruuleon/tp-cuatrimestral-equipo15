@@ -13,49 +13,30 @@ namespace tp_cuatrimestral_equipo15 {
             
         }
 
-        protected void RegisterButton_Click(object sender, EventArgs e)
-        {
-
-
+        protected void RegisterButton_Click(object sender, EventArgs e) {
             try {
-
                 Page.Validate();
                 if (!Page.IsValid)
                 {
                     return;
                 }
-
-                Usuario usuario = new Usuario(txtNombre.Text, txtApellido.Text, txtEmail.Text, txtContrasenia.Text);
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                EmailService emailService = new EmailService();
-
-
-
-                if (!(Validacion.ValidarEmailRepetido(usuario)))
-                {
-                    if (usuarioNegocio.Register(usuario))
-                    {
+                Usuario usuario = new Usuario(txtNombre.Text, txtApellido.Text, txtEmail.Text, txtContrasenia.Text);
+                if(usuarioNegocio.UserInDb(usuario.Email)) {
+                    lblUserInDb.Visible = true;
+                    Response.Redirect("Register.aspx", false);
+                } else {
+                    if (usuarioNegocio.Register(usuario)) {
+                        EmailService emailService = new EmailService();
                         //emailService.SendEmail(usuario);
-                        Response.Redirect("Login.aspx", true);
-                    }
-                    else
-                    {
+                        Response.Redirect("Login.aspx", false);
+                    } else {
                         Response.Redirect("Register.aspx", false);
                     }
                 }
-                else
-                {
-                    
-                    lblMensajeError.Text = "El email ya está registrado.";
-                    lblMensajeError.Visible = true;
-                }
-
-
             } catch(Exception exception) {
                 Session.Add("error", exception.ToString());
             }
-
-       
         }
     }
 }
