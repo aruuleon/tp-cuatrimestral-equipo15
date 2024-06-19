@@ -12,7 +12,6 @@ namespace tp_cuatrimestral_equipo15
 {
     public partial class AltaCurso : System.Web.UI.Page
     {
-        int Id = 3;//Id de Moodle del curso a trabajar //ESTO NO VA DEBERIA RECIBIR EL ID POR SESSION O POR URL
         bool modificar;
         public Curso curso = new Curso();
 
@@ -39,7 +38,7 @@ namespace tp_cuatrimestral_equipo15
                 if(modificar == true)
                 {
                     Session["todVal"] = false;
-
+                    txtPrograma.Text = curso.Programa;
                     txtConocimientos.Text = curso.ConocimientosRequeridos;
                     txtDescripcion.Text =curso.Descripcion;
                     txtResumen.Text = curso.Resumen;
@@ -85,8 +84,6 @@ namespace tp_cuatrimestral_equipo15
                      return;
                     
                 }
-                curso.Nombre = "Marta"; //temporal cambiar
-
                 curso.Precio = decimal.Parse(txtPrecio.Text);
                 curso.Descripcion = txtDescripcion.Text;
                 curso.ConocimientosRequeridos = txtConocimientos.Text;

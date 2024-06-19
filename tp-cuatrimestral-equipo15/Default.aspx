@@ -5,9 +5,6 @@
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="width: 100%; height:500px">
         <img src="https://maxiprograma.com/assets/images/maxi-programa-banner.jpg" style="width: 100%; height:500px" />
     </div>
-    <div class="w-25 mt-5 mx-auto">
-        <asp:TextBox runat="server" ID="filter" CssClass="form-control" Style="color: rgba(0, 0, 0, 0.175)" AutoPostBack="true" placeholder="Buscar Cursos">  </asp:TextBox>
-    </div>
     <div class="row row-cols-1 row-cols-md-4 g-4 m-5 mx-auto w-75">
         <asp:Repeater runat="server" id="listaCursos">
             <ItemTemplate>

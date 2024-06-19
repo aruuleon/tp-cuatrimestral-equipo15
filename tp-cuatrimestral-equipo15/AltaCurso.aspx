@@ -18,10 +18,7 @@
          <div class="col-md-8">
             <div class="mb-3" >
                   <asp:Label ID="lblMensajeError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
-                 
              </div>
-             
-             
              <div class="mb-3" >
                  <label class="form-label">Subir portada desde mi PC</label>
                  <input type="file" id="txtImagen" runat="server" class="form-control" accept=".jpg"/>

@@ -48,7 +48,7 @@
                 </div>
                 <label for="floatingPassword">Contraseña</label>
             </div>
-             <div class="form-floating mb-6" style="text-align:center; align-items:center">
+             <div class="form-floating mb-6" style="align-items:center">
             <asp:Label Text="Este correo electrónico ya se encuentra registrado" runat="server" CssClass="validacion_2" Visible="false" ID="lblUserInDb" />
             </div>
 
