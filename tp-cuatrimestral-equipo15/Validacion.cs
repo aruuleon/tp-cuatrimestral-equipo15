@@ -78,5 +78,17 @@ namespace tp_cuatrimestral_equipo15
             }
             else return false;
         }
+
+        public static bool EsAdmin(object usuario)
+        {
+            Usuario usuarioAux = usuario != null ? (Usuario)usuario : null;
+            if (usuarioAux != null)
+            {
+                return usuarioAux.TipoUsuario == TipoUsuario.ADMIN ? true : false;
+            }
+            return false;
+
+
+        }
     }
 }
