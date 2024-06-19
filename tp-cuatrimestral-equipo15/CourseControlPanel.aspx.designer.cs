@@ -10,15 +10,24 @@
 namespace tp_cuatrimestral_equipo15 {
 
 
-    public partial class AdministratorHome {
+    public partial class CourseControlPanel {
 
         /// <summary>
-        /// sectionControlPanelList control.
+        /// columnList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater sectionControlPanelList;
+        protected global::System.Web.UI.WebControls.Repeater columnList;
+
+        /// <summary>
+        /// courseList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater courseList;
     }
 }

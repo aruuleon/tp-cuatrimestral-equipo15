@@ -44,8 +44,9 @@ namespace tp_cuatrimestral_equipo15
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Default.aspx?", false);
-
+            Usuario userLoggedIn = (Usuario)Session["usuario"];
+            string redirectUrl = userLoggedIn.TipoUsuario == TipoUsuario.ADMIN ? "AdministratorHome.aspx" : "Default.aspx";
+            Response.Redirect(redirectUrl, false);
         }
     }
 }

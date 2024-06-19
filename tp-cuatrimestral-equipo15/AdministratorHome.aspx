@@ -11,16 +11,16 @@
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4 m-5 mx-auto w-75 d-flex justify-content-center">
-        <asp:Repeater runat="server" id="sectionList">
+        <asp:Repeater runat="server" id="sectionControlPanelList">
             <ItemTemplate>
                 <div class="col" style="max-width: 75%">
-                    <asp:HyperLink ID="HyperLinkCourseDetail" runat="server" NavigateUrl='#' CssClass="text-decoration-none color-inherit">
+                    <asp:HyperLink ID="HyperLinkSection" runat="server" NavigateUrl='<%#Eval("WebForm")%>' CssClass="text-decoration-none color-inherit">
                         <div class="card h-100">
                             <div style="min-height: 220px; border-bottom: 1px solid rgba(0, 0, 0, 0.175); display: flex; align-items: center; justify-content: center;">
-                                <i class="<%#Eval("Value")%>" style="font-size: 8em;"></i>
+                                <i class="<%#Eval("Icon")%>" style="font-size: 8em;"></i>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title text-center"><%#Eval("Key")%></h5>
+                                <h5 class="card-title text-center"><%#Eval("Name")%></h5>
                             </div>
                         </div>
                     </asp:HyperLink>

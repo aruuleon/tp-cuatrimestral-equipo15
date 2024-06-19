@@ -13,7 +13,7 @@ namespace tp_cuatrimestral_equipo15 {
         public string ImageUrl;
         protected void Page_Load(object sender, EventArgs e) {
             CursoNegocio cursoNegocio = new CursoNegocio();
-            Session.Add("listaCursos", cursoNegocio.Listar());
+            Session.Add("listaCursos", cursoNegocio.GetList());
             listaCursos.DataSource = Session["listaCursos"];
             listaCursos.DataBind();
         }

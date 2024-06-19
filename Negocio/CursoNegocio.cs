@@ -11,8 +11,7 @@ namespace Negocio
     public class CursoNegocio
     {
         private AccesoDatos accesoDatos = new AccesoDatos();
-        public List<Curso> Listar()
-        {
+        public List<Curso> GetList() {
             List<Curso> listaCursos = new List<Curso>();
             try
             {
@@ -25,7 +24,6 @@ namespace Negocio
                     curso.ID = (int)accesoDatos.Lector["ID"];
                     curso.IdMoodle = (int)accesoDatos.Lector["IdMoodle"]; ;
                     curso.Nombre = (string)accesoDatos.Lector["Nombre"];
-
                     if (!(accesoDatos.Lector["ImagenPortada"] is DBNull))
                         curso.ImagenPortada = (string)accesoDatos.Lector["ImagenPortada"];
                     if (!(accesoDatos.Lector["Descripcion"] is DBNull))

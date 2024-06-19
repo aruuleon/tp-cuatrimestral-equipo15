@@ -32,10 +32,9 @@ namespace tp_cuatrimestral_equipo15
                     Session["todVal"] = true;
                 }
                 modificar = (bool)Session["Mod"]; //LE LLEGA TRUE O FALSE DEPENDE SI SE QUIERE MODIFICAR O NO
-
-
+                int id = !string.IsNullOrEmpty(Request.QueryString["id"]) ? int.Parse(Request.QueryString["id"]) : 1;
                 CursoNegocio cursoNegocio = new CursoNegocio();
-                curso = cursoNegocio.ListarById(Id); //Busca el curso a modificar
+                curso = cursoNegocio.ListarById(id); //Busca el curso a modificar
 
                 if(modificar == true)
                 {
@@ -68,7 +67,7 @@ namespace tp_cuatrimestral_equipo15
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Default.aspx?", false);
+            Response.Redirect("CourseControlPanel.aspx?", false);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -131,7 +130,7 @@ namespace tp_cuatrimestral_equipo15
                 cursoNegocio.Modificar(curso);
 
 
-                Response.Redirect("Default.aspx", false);//CAmbiar(Enviar parametros)
+                Response.Redirect("CourseControlPanel.aspx", false);//CAmbiar(Enviar parametros)
 
             }
             catch (Exception)

@@ -69,13 +69,11 @@ namespace tp_cuatrimestral_equipo15 {
                 }
             }
         }
-        public bool isLoginOrRegister()
-        {
+        public bool isLoginOrRegister() {
             string currentPage = System.IO.Path.GetFileName(Request.Url.AbsolutePath);
             return (currentPage == "Login.aspx" || currentPage == "Register.aspx");
         }
-        public void ShowOnlyPanel(Panel panelToShow)
-        {
+        public void ShowOnlyPanel(Panel panelToShow) {
             Panel[] allPanels = { LoginOrRegisterHeaderPanel, AdministratorHeaderPanel, UserHeaderPanel };
             foreach (Panel panel in allPanels)
             {
@@ -83,10 +81,7 @@ namespace tp_cuatrimestral_equipo15 {
             }
             panelToShow.Visible = true;
         }
-
-
-        protected void btnCerrarSesion_Click(object sender, EventArgs e)
-        {
+        protected void btnCerrarSesion_Click(object sender, EventArgs e) {
             Session["usuario"] = null;
             Response.Redirect("Login.aspx", false);
         }

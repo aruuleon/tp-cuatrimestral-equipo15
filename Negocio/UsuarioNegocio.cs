@@ -77,42 +77,45 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        public List<Usuario> Listar()
-        {
-            List<Usuario> listaUsuarios = new List<Usuario>();
+        public List<Usuario> GetList() {
+            List<Usuario> userList = new List<Usuario>();
             try
             {
-                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios"
-                );
+                accesoDatos.setearConsulta("SELECT Id, Nombre, Apellido, Email, Avatar from Usuarios WHERE Tipo = 0");
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
                 {
                     Usuario usuario = new Usuario();
-
                     usuario.ID = (int)accesoDatos.Lector["Id"];
-                    usuario.IdMoodle= (int)accesoDatos.Lector["IdMoodle"];
                     usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
-                    usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
-                    usuario.Email = (string)accesoDatos.Lector["Email"];
-                    if (!(bool)accesoDatos.Lector["Tipo"]) usuario.TipoUsuario = TipoUsuario.STUDENT;
-                    else { usuario.TipoUsuario = TipoUsuario.ADMIN; }
                     usuario.Apellido = (string)accesoDatos.Lector["Apellido"];
+                    usuario.Email = (string)accesoDatos.Lector["Email"];
                     usuario.Avatar = (string)accesoDatos.Lector["Avatar"];
-
-                    listaUsuarios.Add(usuario);
+                    //usuario.IdMoodle= (int)accesoDatos.Lector["IdMoodle"];
+                    userList.Add(usuario);
                 }
-                return listaUsuarios;
+                return userList;
             }
-            catch (Exception excepción)
+            catch (Exception excepcion)
             {
-                throw excepción;
+                throw excepcion;
             }
             finally
             {
                 accesoDatos.cerrarConexion();
             }
         }
-
+        public bool Remove(int id) {
+            try {
+                accesoDatos.setearConsulta("DELETE FROM Usuarios WHERE ID = @ID");
+                accesoDatos.setearParametros("@ID", id);
+                return accesoDatos.ejecutarAccion();
+            } catch (Exception exception) {
+                throw exception;
+            } finally {
+                accesoDatos.cerrarConexion();
+            }
+        }
         public Usuario ListarById(int Id)
         {
             try
