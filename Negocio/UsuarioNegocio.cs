@@ -183,7 +183,7 @@ namespace Negocio
         {
             try
             {
-                accesoDatos.setearConsulta("Update Usuarios SET Nombre=@Nombre, Apellido=@Apellido, Email=@Email, Contrasenia=@Contrasenia, Tipo=@Tipo, Avatar=@Avatar WHERE IdMoodle = "  + usuario.ID);
+                accesoDatos.setearConsulta("Update Usuarios SET Nombre=@Nombre, Apellido=@Apellido, Email=@Email, Contrasenia=@Contrasenia, Tipo=@Tipo, Avatar=@Avatar WHERE ID = "  + usuario.ID);
 
                 accesoDatos.setearParametros("@Nombre", usuario.Nombre);
                 accesoDatos.setearParametros("@Apellido", usuario.Apellido);
