@@ -15,7 +15,8 @@ using Negocio;
 namespace tp_cuatrimestral_equipo15
 {
     public partial class DetallesCurso : System.Web.UI.Page {
-        public Curso curso;
+        private BusinessEnrollment businessEnrollment = new BusinessEnrollment();
+        public Curso course;
         public string ImagenPortada;
         protected void Page_Load(object sender, EventArgs e) {
 
@@ -27,40 +28,26 @@ namespace tp_cuatrimestral_equipo15
             };
             CursoNegocio cursoNegocio = new CursoNegocio();
             int id = !string.IsNullOrEmpty(Request.QueryString["id"]) ? int.Parse(Request.QueryString["id"]) : 1;
-            curso = cursoNegocio.BuscarPorId(id);
+            course = cursoNegocio.BuscarPorId(id);
+            ImagenPortada = course.ImagenPortada.StartsWith("curso-img-") ? "~/Archivos/Imagenes/Curso/" + course.ImagenPortada : ImagenPortada = course.ImagenPortada;
 
-            if (curso.ImagenPortada.StartsWith("curso-img-"))
-            {
-                ImagenPortada = "~/Archivos/Imagenes/Curso/" + curso.ImagenPortada;
-            }
-            else
-            {
-                ImagenPortada = curso.ImagenPortada;
-            }
-
-            Usuario usuario = (Usuario)Session["usuario"];
-            HyperLinkProgram.NavigateUrl = curso.Programa.ToString();
+            Usuario user = (Usuario)Session["usuario"];
+            HyperLinkProgram.NavigateUrl = course.Programa.ToString();
             informacionDocente.DataSource = listaInformacionDocente;
             informacionDocente.DataBind();
-            CargarConocimientosRequeridos(curso);
-            LabelPrice.Text = curso.Precio.ToString("C0", new System.Globalization.CultureInfo("es-AR"));
-            if(CheckIfUserHasCourse(curso.ID, usuario.ID)) {
-                LinkButtonGetOrView.Text = "Ver Curso";
-                LabelPrice.Visible = false;
-            } else {
-                LinkButtonGetOrView.Text = "Obtener Curso";
-            }
+            LabelPrice.Text = course.Precio.ToString("C0", new System.Globalization.CultureInfo("es-AR"));
+            UploadRequiredKnowledge(course);
+            CheckEnrollmentStatus(user.ID, course.ID);
         }
         protected void LinkButtonGetOrView_Click(object sender, EventArgs e) {
             LinkButton linkButton = sender as LinkButton;
             if(linkButton != null && linkButton.Text == "Obtener Curso") {
-                UsuariosXCursosNegocio usuariosXCursosNegocio = new UsuariosXCursosNegocio();
-                Usuario usuario = (Usuario)Session["usuario"];
-                usuariosXCursosNegocio.RegisterUserInTheCourse(curso.ID, usuario.ID);
-                Response.Redirect("MyCourses.aspx", false);
+                Usuario user = (Usuario)Session["usuario"];
+                businessEnrollment.Generate(new Enrollment(user.ID, course.ID, course.Precio));
+                CheckEnrollmentStatus(user.ID, course.ID);
             }
         }
-        protected void CargarConocimientosRequeridos(Curso curso) {
+        protected void UploadRequiredKnowledge(Curso curso) {
             string[] conocimientosRequeridos = curso.ConocimientosRequeridos.Replace(".NET", "DOTNET").Split('.');
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -74,6 +61,23 @@ namespace tp_cuatrimestral_equipo15
         protected bool CheckIfUserHasCourse(int courseId, int userId) {
             UsuariosXCursosNegocio usuariosXCursosNegocio = new UsuariosXCursosNegocio();
             return usuariosXCursosNegocio.CheckIfUserHasCourse(courseId, userId);
+        }
+        protected void CheckEnrollmentStatus(int userId, int courseId) {
+            switch (businessEnrollment.GetStatus(userId, courseId)) {
+                case StateType.PENDING:
+                    LinkButtonGetOrView.Text = "Solicitud en Proceso";
+                    LinkButtonGetOrView.CssClass += " btn btn-warning";
+                    break;
+                case StateType.APPROVED:
+                    LinkButtonGetOrView.Text = "Ver Curso";
+                    LinkButtonGetOrView.CssClass += " btn btn-success";
+                    LabelPrice.Visible = false;
+                    break;
+                default:
+                    LinkButtonGetOrView.Text = "Obtener Curso";
+                    LinkButtonGetOrView.CssClass += " btn btn-primary";
+                    break;
+            }
         }
     }
 }

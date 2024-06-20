@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace Negocio {
     public class BusinessEnrollment {
         private AccesoDatos dataAccess = new AccesoDatos();
-        private Enrollment FindById(int idEnrollment) {
+        private Enrollment FindById(int enrollmentId) {
             try {
                 Enrollment enrollment = new Enrollment();
                 dataAccess.setearConsulta("SELECT IDInscripcion, IDUsuario, IDCurso, FechaSolicitud, Costo, Estado FROM Inscripciones" +
-                                          "WHERE IDInscripcion = " + idEnrollment);
+                                          "WHERE IDInscripcion = " + enrollmentId);
                 dataAccess.ejecutarLectura();
                 if(dataAccess.Lector.Read()) {
                     enrollment.ID = (int)dataAccess.Lector["IDInscripcion"];
@@ -52,7 +52,7 @@ namespace Negocio {
                 dataAccess.cerrarConexion();
             }
         }
-        private bool Generate(Enrollment enrollment) {
+        public bool Generate(Enrollment enrollment) {
             try {
                 dataAccess.setearConsulta("INSERT INTO Inscripciones(IDUsuario, IDCurso, FechaSolicitud, Costo, Estado) " +
                                           "VALUES(@IDUsuario, @IDCurso, @FechaSolicitud, @Costo, @Estado)");
@@ -68,25 +68,40 @@ namespace Negocio {
                 dataAccess.cerrarConexion();
             }
         }
-        private string GetStatus(int idEnrollment) {
+        public string GetStatus(int userId, int courseId) {
             try {
-                dataAccess.setearConsulta("SELECT Estado FROM Inscripciones WHERE IDInscripcion = " + idEnrollment);
+                dataAccess.setearConsulta("SELECT TOP 1 Estado FROM Inscripciones WHERE IDUsuario = " + userId + " AND IDCurso = " + courseId + " ORDER BY FechaSolicitud DESC");
                 dataAccess.ejecutarLectura();
                 if (dataAccess.Lector.Read()) {
                     return dataAccess.Lector.GetString(0);
                 }
                 return "";
-            } catch(Exception exception) {
+            } catch (Exception exception) {
                 throw exception;
             } finally {
                 dataAccess.cerrarConexion();
             }
         }
-        private bool ApproveOrReject(int action, int idEnrollment) {
+        private bool ApproveOrReject(int action, int enrollmentId) {
             string state = action == 1 ? StateType.APPROVED : StateType.REFUSED; 
             try {
-                dataAccess.setearConsulta("UPDATE Inscripciones SET Estado = " + state + " WHERE IDInscripcion = " + idEnrollment);
+                dataAccess.setearConsulta("UPDATE Inscripciones SET Estado = " + state + " WHERE IDInscripcion = " + enrollmentId);
                 return dataAccess.ejecutarAccion();
+            } catch (Exception exception) {
+                throw exception;
+            } finally {
+                dataAccess.cerrarConexion();
+            }
+        }
+        public List<int> GetCoursesByUser(int userId) {
+            List<int> listOfCourseIndentifiers = new List<int>();
+            try {
+                dataAccess.setearConsulta("SELECT IDCurso FROM Inscripciones WHERE IDUsuario = " + userId + " AND Estado = '" + StateType.APPROVED.ToString() + "'");
+                dataAccess.ejecutarLectura();
+                while (dataAccess.Lector.Read()) {
+                    listOfCourseIndentifiers.Add(dataAccess.Lector.GetInt32(0));
+                }
+                return listOfCourseIndentifiers;
             } catch (Exception exception) {
                 throw exception;
             } finally {

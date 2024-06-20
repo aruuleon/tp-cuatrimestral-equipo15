@@ -18,8 +18,8 @@ namespace tp_cuatrimestral_equipo15 {
             if (!IsPostBack) {
                 Usuario usuario = (Usuario)Session["usuario"];
                 if(usuario != null) {
-                    UsuariosXCursosNegocio usuariosXCursosNegocio = new UsuariosXCursosNegocio();
-                    List<int> listOfCourseIndentifiers = usuariosXCursosNegocio.GetCoursesByUser(usuario.ID);
+                    BusinessEnrollment businessEnrollment = new BusinessEnrollment();
+                    List<int> listOfCourseIndentifiers = businessEnrollment.GetCoursesByUser(usuario.ID);
                     List<Curso> ListOfCourses = (List <Curso>)Session["listaCursos"];
                     listaCursos.DataSource = ListOfCourses.Where(course => listOfCourseIndentifiers.Contains(course.ID)).ToList();
                     listaCursos.DataBind();

@@ -7,9 +7,9 @@
     <div class="d-flex p-3 ml-4" style="width: 100%; margin-left: 10%; margin-top: 30px; margin-bottom: 10px">
         <div style="width: 50%">
             <div class="p-2 mb-4" style="border-left: 2px solid #7b1fa2">
-                <h1><%= curso.Nombre.ToString() %></h1>
+                <h1><%= course.Nombre.ToString() %></h1>
             </div>
-            <p style="font-size: 15px"><%= curso.Descripcion.ToString() %></p>
+            <p style="font-size: 15px"><%= course.Descripcion.ToString() %></p>
         </div>
         <div class="col" style="max-width: 20%; position:absolute; right: 10%">
             <div class="card h-100">
@@ -17,10 +17,15 @@
                     <img src="<%= ResolveUrl(ImagenPortada).ToString() %>" style="max-width: 100%; height:200px" />
                 </picture>
                 <div class="card-body mb-4">
-                    <h5 class="card-title"><%= curso.Nombre.ToString() %></h5>
+                    <h5 class="card-title"><%= course.Nombre.ToString() %></h5>
                     <asp:Label ID="LabelPrice" runat="server" CssClass="card-text text-success"></asp:Label>
                 </div>
-                <asp:LinkButton ID="LinkButtonGetOrView" runat="server" CssClass="btn btn-success w-50 mx-auto mb-3" OnClick="LinkButtonGetOrView_Click"></asp:LinkButton>
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <asp:LinkButton ID="LinkButtonGetOrView" runat="server" CssClass="w-50 mx-auto mb-3" style="display: block; margin-left: auto; margin-right: auto;" OnClick="LinkButtonGetOrView_Click"></asp:LinkButton>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
             <asp:HyperLink ID="HyperLinkProgram" runat="server" Target="_blank" CssClass="btn w-100 mt-5" style="color: #fff; background-color: #7b1fa2;">Ver Programa Completo</asp:HyperLink>
         </div>
