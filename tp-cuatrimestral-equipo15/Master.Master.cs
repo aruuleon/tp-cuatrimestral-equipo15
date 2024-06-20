@@ -22,7 +22,7 @@ namespace tp_cuatrimestral_equipo15 {
             }
 
 
-            if (!(Page is Login) && !(Page is Register) && !(Page is Default))
+            if (!(Page is Login) && !(Page is Register))
             {
                 if (!Validacion.SesionActiva(usuario))
                 {
