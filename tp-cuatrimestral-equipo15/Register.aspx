@@ -20,7 +20,7 @@
             <div class="form-floating mb-4">
                 <asp:TextBox ID="txtNombre" Cssclass="form-control" runat="server" placeholder="Nombre"></asp:TextBox>
                 <div style="position: relative;">
-                    <asp:RegularExpressionValidator Cssclass="validacion" ErrorMessage="* Debes ingresar solo letras" ControlToValidate="txtNombre" validationExpression="^[A-Za-z#&áéíóúÁÉÍÓÚñÑ]+$"  runat="server" style="position: absolute; left: 0;" />
+                    <asp:RegularExpressionValidator Cssclass="validacion" ErrorMessage="* Debes ingresar solo letras" ControlToValidate="txtNombre" validationExpression="^[A-Za-z#&áéíóúÁÉÍÓÚñÑ ]+$"  runat="server" style="position: absolute; left: 0;" />
                     <asp:RequiredFieldValidator Cssclass="validacion"  ErrorMessage="* Este campo es obligatorio" ControlToValidate="txtNombre" runat="server" style="position: absolute; left: 0;" />
                 </div>
                 <label for="floatingInput">Nombre</label>
@@ -28,7 +28,7 @@
             <div class="form-floating mb-4">
                 <asp:TextBox ID="txtApellido" Cssclass="form-control" runat="server" placeholder="Apellido"></asp:TextBox>
                 <div style="position: relative;">
-                    <asp:RegularExpressionValidator Cssclass="validacion" ErrorMessage="* Debes ingresar solo letras" ControlToValidate="txtApellido" validationExpression="^[A-Za-z#&áéíóúÁÉÍÓÚñÑ]+$" runat="server" style="position: absolute; left: 0;" />
+                    <asp:RegularExpressionValidator Cssclass="validacion" ErrorMessage="* Debes ingresar solo letras" ControlToValidate="txtApellido" validationExpression="^[A-Za-z#&áéíóúÁÉÍÓÚñÑ ]+$" runat="server" style="position: absolute; left: 0;" />
                     <asp:RequiredFieldValidator  Cssclass="validacion" ErrorMessage="* Este campo es obligatorio" ControlToValidate="txtApellido" runat="server" style="position: absolute; left: 0;" />
                 </div>
                 <label for="floatingInput">Apellido</label>
