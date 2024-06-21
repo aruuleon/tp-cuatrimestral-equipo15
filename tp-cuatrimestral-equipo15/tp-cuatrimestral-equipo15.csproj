@@ -79,6 +79,7 @@
     <Content Include="MyCourses.aspx" />
     <Content Include="ModPerfil.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="StudentOnCoursePanel.aspx" />
     <Content Include="StudentControlPanel.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -170,6 +171,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentOnCoursePanel.aspx.cs">
+      <DependentUpon>StudentOnCoursePanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentOnCoursePanel.aspx.designer.cs">
+      <DependentUpon>StudentOnCoursePanel.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentControlPanel.aspx.cs">
       <DependentUpon>StudentControlPanel.aspx</DependentUpon>

@@ -27,8 +27,8 @@ namespace tp_cuatrimestral_equipo15 {
                     return;
                 } else {
                     if (usuarioNegocio.Register(usuario)) {
-                        EmailService emailService = new EmailService();
-                        emailService.SendEmail(usuario);
+                        //EmailService emailService = new EmailService();
+                        //emailService.SendEmail(usuario);
                         Response.Redirect("Login.aspx", false);
                     } else {
                         Response.Redirect("Register.aspx", false);

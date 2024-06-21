@@ -18,7 +18,7 @@ namespace tp_cuatrimestral_equipo15 {
             
 
             CursoNegocio cursoNegocio = new CursoNegocio();
-            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar" };
+            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar", "Estudiantes" };
             List<Curso> CourseList = cursoNegocio.GetList();
             courseList.DataSource = CourseList;
             courseList.DataBind();

@@ -35,6 +35,9 @@
                             <td class="text-center">
                                 <asp:LinkButton ID="LinkButtonRemoveCourse" runat="server" CssClass="fa fa-trash text-danger"></asp:LinkButton>
                             </td>
+                            <td class="text-center">
+                                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="bi bi-people-fill" PostBackUrl='<%# String.Format("~/StudentOnCoursePanel.aspx?CourseId={0}", Eval("ID")) %>'></asp:LinkButton>
+                            </td>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>

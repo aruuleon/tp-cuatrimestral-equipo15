@@ -11,7 +11,7 @@ namespace tp_cuatrimestral_equipo15
 {
 
 
-    public partial class UserControlPanel
+    public partial class StudenOnCoursePanel
     {
 
         /// <summary>
@@ -31,5 +31,14 @@ namespace tp_cuatrimestral_equipo15
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater userList;
+
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink btnCancelar;
     }
 }
