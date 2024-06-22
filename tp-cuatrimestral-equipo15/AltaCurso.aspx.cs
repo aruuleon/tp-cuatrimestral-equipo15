@@ -19,15 +19,11 @@ namespace tp_cuatrimestral_equipo15
         {
             try
             {
-                if (!(Validacion.EsAdmin(Session["usuario"])))
-                {
-                    Session.Add("error", "No tenes Permisos para acceder a esta pagina");
-                    Response.Redirect("Default.aspx");
-                }
+                
 
                 if (!IsPostBack)
                 {
-                    Session["Mod"] = true; //Temporal Cambiar(Cambia modo modificar o dar alta) // ESTO NO VA 
+                    Session["Mod"] = false; //Temporal Cambiar(Cambia modo modificar o dar alta) // ESTO NO VA 
                     Session["todVal"] = true;
                 }
                 modificar = (bool)Session["Mod"]; //LE LLEGA TRUE O FALSE DEPENDE SI SE QUIERE MODIFICAR O NO

@@ -13,14 +13,7 @@ namespace tp_cuatrimestral_equipo15 {
 
             Usuario usuario = (Usuario)Session["usuario"];
 
-            if (!Validacion.SesionActiva(usuario))
-            {
-                panelPerfilAlumno.Visible = false;
-                panelPerfilAdmin.Visible = false;
-                btnIngresarAlumno.Visible = true;
-                btnIngresarAdmin.Visible = true;
-            }
-
+           
 
             if (!(Page is Login) && !(Page is Register))
             {
@@ -28,9 +21,36 @@ namespace tp_cuatrimestral_equipo15 {
                 {
                     Response.Redirect("Login.aspx", false);
                 }
-            }
+                else
+                {
+                    if (Validacion.EsAdmin(usuario))
+                    {
+                        if (!(Page is AdministratorControlPanel || Page is AdministratorHome || Page is StudenOnCoursePanel || Page is UserControlPanel || Page is AltaCurso))
+                        {
+                            Session.Add("error", "No tenes Permisos para acceder a esta pagina");
+                            Response.Redirect("AdministratorHome.aspx");
+                        }
+                    }
+                    else
+                    {
+                        if (Page is AdministratorControlPanel || Page is AdministratorHome || Page is StudenOnCoursePanel || Page is UserControlPanel || Page is AltaCurso)
+                        {
+                            Session.Add("error", "No tenes Permisos para acceder a esta pagina");
+                            Response.Redirect("Default.aspx");
+                        }
 
-            if (Validacion.SesionActiva(usuario))
+
+                    }
+
+                }
+            }
+            if (!Validacion.SesionActiva(usuario))
+            {
+                panelPerfilAlumno.Visible = false;
+                panelPerfilAdmin.Visible = false;
+                btnIngresarAlumno.Visible = true;
+                btnIngresarAdmin.Visible = true;
+            }else
             {
                 panelPerfilAlumno.Visible = true;
                 panelPerfilAdmin.Visible = true;

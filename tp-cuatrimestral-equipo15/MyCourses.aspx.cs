@@ -10,11 +10,7 @@ using Negocio;
 namespace tp_cuatrimestral_equipo15 {
     public partial class MyCourses : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            if (Validacion.EsAdmin(Session["usuario"]))
-            {
-                Session.Add("error", "No tenes Permisos para acceder a esta pagina");
-                Response.Redirect("AdministratorHome.aspx");
-            }
+           
             if (!IsPostBack) {
                 Usuario usuario = (Usuario)Session["usuario"];
                 if(usuario != null) {

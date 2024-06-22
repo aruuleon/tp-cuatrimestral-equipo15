@@ -18,13 +18,7 @@ namespace tp_cuatrimestral_equipo15
 
             courseId = !string.IsNullOrEmpty(Request.QueryString["CourseId"]) ? int.Parse(Request.QueryString["CourseId"]) : -1;
 
-            if (!(Validacion.EsAdmin(Session["usuario"])))
-            {
-                Session.Add("error", "No tenes Permisos para acceder a esta pagina");
-                Response.Redirect("Default.aspx");
-            }
-            else
-            {
+            
 
 
                 List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Editar", "Suspender", "Estado" };
@@ -40,7 +34,7 @@ namespace tp_cuatrimestral_equipo15
                 userList.DataBind();
                 columnList.DataSource = ColumnList;
                 columnList.DataBind();
-            }
+            
         }
         protected void DeleteUserButton_Click(object sender, EventArgs e)
         {

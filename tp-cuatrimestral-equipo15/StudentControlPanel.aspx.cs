@@ -10,13 +10,7 @@ using System.Web.UI.WebControls;
 namespace tp_cuatrimestral_equipo15 {
     public partial class UserControlPanel : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            if (!(Validacion.EsAdmin(Session["usuario"])))
-            {
-                Session.Add("error", "No tenes Permisos para acceder a esta pagina");
-                Response.Redirect("Default.aspx");
-            }
-            else
-            {
+         
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Editar", "Eliminar" };
                 List<Usuario> UserList = usuarioNegocio.GetList();
@@ -24,7 +18,7 @@ namespace tp_cuatrimestral_equipo15 {
                 userList.DataBind();
                 columnList.DataSource = ColumnList;
                 columnList.DataBind();
-            }
+            
         }
         protected void DeleteUserButton_Click(object sender, EventArgs e) {
             CommandEventArgs commandEventArgs = e as CommandEventArgs;

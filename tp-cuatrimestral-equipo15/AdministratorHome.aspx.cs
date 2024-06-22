@@ -10,11 +10,7 @@ using static System.Collections.Specialized.BitVector32;
 namespace tp_cuatrimestral_equipo15 {
     public partial class AdministratorHome : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            if (!(Validacion.EsAdmin(Session["usuario"]))) {
-                Session.Add("error", "No tenes Permisos para acceder a esta pagina");
-                Response.Redirect("Default.aspx");
-            }
-
+         
             SectionControlPanel studentControlPanel = new SectionControlPanel("Estudiantes", "StudentControlPanel.aspx", "fas fa-user-graduate");
             SectionControlPanel courseControlPanel = new SectionControlPanel("Cursos", "CourseControlPanel.aspx", "fas fa-book");
             SectionControlPanel administratorControlPanel = new SectionControlPanel("Administradores", "AdministratorControlPanel.aspx", "fas fa-user-shield");
