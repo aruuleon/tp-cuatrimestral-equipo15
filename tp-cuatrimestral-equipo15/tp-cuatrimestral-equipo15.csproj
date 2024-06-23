@@ -74,6 +74,7 @@
     <Content Include="Default.aspx" />
     <Content Include="DetallesCurso.aspx" />
     <Content Include="DetallesPerfil.aspx" />
+    <Content Include="EnrollmentControlPanel.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="MyCourses.aspx" />
@@ -132,6 +133,13 @@
     </Compile>
     <Compile Include="DetallesPerfil.aspx.designer.cs">
       <DependentUpon>DetallesPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EnrollmentControlPanel.aspx.cs">
+      <DependentUpon>EnrollmentControlPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnrollmentControlPanel.aspx.designer.cs">
+      <DependentUpon>EnrollmentControlPanel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Web;
 using System.Web.Security;
@@ -16,6 +17,7 @@ namespace tp_cuatrimestral_equipo15
 {
     public partial class DetallesCurso : System.Web.UI.Page {
         private BusinessEnrollment businessEnrollment = new BusinessEnrollment();
+        private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
         public Curso course;
         public string ImagenPortada;
         protected void Page_Load(object sender, EventArgs e) {
@@ -37,15 +39,22 @@ namespace tp_cuatrimestral_equipo15
             informacionDocente.DataBind();
             LabelPrice.Text = course.Precio.ToString("C0", new System.Globalization.CultureInfo("es-AR"));
             UploadRequiredKnowledge(course);
+            UploadPaymentForm(usuarioNegocio.ListarById(user.ID), course);
             CheckEnrollmentStatus(user.ID, course.ID);
         }
         protected void LinkButtonGetOrView_Click(object sender, EventArgs e) {
             LinkButton linkButton = sender as LinkButton;
             if(linkButton != null && linkButton.Text == "Obtener Curso") {
-                Usuario user = (Usuario)Session["usuario"];
-                businessEnrollment.Generate(new Enrollment(user.ID, course.ID, course.Precio));
-                CheckEnrollmentStatus(user.ID, course.ID);
+                string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormBuy')); myModal.show();";
+                ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
             }
+        }
+        protected void LinkButtonBuy_Click(object sender, EventArgs e) {
+            Usuario user = (Usuario)Session["usuario"];
+            businessEnrollment.Generate(new Enrollment(user.ID, course.ID, course.Precio));
+            CheckEnrollmentStatus(user.ID, course.ID);
+            string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormBuy')); myModal.hide();";
+            ScriptManager.RegisterStartupScript(this, GetType(), "CloseModalScript", script, true);
         }
         protected void UploadRequiredKnowledge(Curso curso) {
             string[] conocimientosRequeridos = curso.ConocimientosRequeridos.Replace(".NET", "DOTNET").Split('.');
@@ -57,6 +66,12 @@ namespace tp_cuatrimestral_equipo15
                 }
             }
             LiteralConocimientosRequeridos.Text = stringBuilder.ToString();
+        }
+        protected void UploadPaymentForm(Usuario user, Curso course) {
+            txtNombreFormBuy.Text = user.Nombre;
+            txtApellidoFormBuy.Text = user.Apellido;
+            txtEmailFormBuy.Text = user.Email;
+            LabelPriceFormBuy.Text = course.Precio.ToString("C0", new System.Globalization.CultureInfo("es-AR"));
         }
         protected bool CheckIfUserHasCourse(int courseId, int userId) {
             UsuariosXCursosNegocio usuariosXCursosNegocio = new UsuariosXCursosNegocio();

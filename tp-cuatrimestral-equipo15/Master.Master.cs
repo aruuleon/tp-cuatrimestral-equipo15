@@ -25,7 +25,7 @@ namespace tp_cuatrimestral_equipo15 {
                 {
                     if (Validacion.EsAdmin(usuario))
                     {
-                        if (!(Page is AdministratorControlPanel || Page is AdministratorHome || Page is StudenOnCoursePanel || Page is UserControlPanel || Page is AltaCurso))
+                        if (!(Page is AdministratorControlPanel || Page is AdministratorHome || Page is StudenOnCoursePanel || Page is UserControlPanel || Page is CourseControlPanel || Page is EnrollmentControlPanel || Page is AltaCurso))
                         {
                             Session.Add("error", "No tenes Permisos para acceder a esta pagina");
                             Response.Redirect("AdministratorHome.aspx");
@@ -33,7 +33,7 @@ namespace tp_cuatrimestral_equipo15 {
                     }
                     else
                     {
-                        if (Page is AdministratorControlPanel || Page is AdministratorHome || Page is StudenOnCoursePanel || Page is UserControlPanel || Page is AltaCurso)
+                        if (Page is AdministratorControlPanel || Page is AdministratorHome || Page is StudenOnCoursePanel || Page is UserControlPanel || Page is CourseControlPanel || Page is EnrollmentControlPanel || Page is AltaCurso)
                         {
                             Session.Add("error", "No tenes Permisos para acceder a esta pagina");
                             Response.Redirect("Default.aspx");

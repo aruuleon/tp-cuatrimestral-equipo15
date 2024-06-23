@@ -49,6 +49,51 @@ namespace tp_cuatrimestral_equipo15 {
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonGetOrView;
 
         /// <summary>
+        /// txtNombreFormBuy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombreFormBuy;
+
+        /// <summary>
+        /// txtApellidoFormBuy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtApellidoFormBuy;
+
+        /// <summary>
+        /// txtEmailFormBuy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmailFormBuy;
+
+        /// <summary>
+        /// LabelPriceFormBuy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPriceFormBuy;
+
+        /// <summary>
+        /// LinkButtonBuy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonBuy;
+
+        /// <summary>
         /// HyperLinkProgram control.
         /// </summary>
         /// <remarks>

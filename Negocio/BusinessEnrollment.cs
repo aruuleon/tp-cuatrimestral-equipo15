@@ -30,19 +30,45 @@ namespace Negocio {
                 dataAccess.cerrarConexion();
             }
         }
-        private List<Enrollment> List() {
-            List<Enrollment> enrollmentList = new List<Enrollment>();
+        public List<object> List() {
+            var enrollmentList = new List<object>();
             try {
-                dataAccess.setearConsulta("SELECT IDInscripcion, IDUsuario, IDCurso, FechaSolicitud, Costo, Estado FROM Inscripciones");
+                dataAccess.setearConsulta("SELECT I.IDInscripcion, CONCAT(U.Nombre, ' ', U.Apellido) AS NombreCompletoUsuario, C.Nombre AS NombreCurso, I.FechaSolicitud, I.Costo, I.Estado FROM Inscripciones " +
+                                          "I INNER JOIN Usuarios U ON I.IDUsuario = U.ID INNER JOIN Cursos C ON I.IDCurso = C.ID");
                 dataAccess.ejecutarLectura();
                 while (dataAccess.Lector.Read()) {
-                    Enrollment enrollment = new Enrollment();
-                    enrollment.ID = (int)dataAccess.Lector["IDInscripcion"];
-                    enrollment.UserID = (int)dataAccess.Lector["IDUsuario"];
-                    enrollment.CourseID = (int)dataAccess.Lector["IDCurso"];
-                    enrollment.EnrollmentDate = (DateTime)dataAccess.Lector["FechaSolicitud"];
-                    enrollment.Price = (decimal)dataAccess.Lector["Costo"];
-                    enrollment.State = (string)dataAccess.Lector["Estado"];
+                    var enrollment = new {
+                        ID = (long)dataAccess.Lector["IDInscripcion"],
+                        User = dataAccess.Lector["NombreCompletoUsuario"].ToString(),
+                        Course = dataAccess.Lector["NombreCurso"].ToString(),
+                        EnrollmentDate = (DateTime)dataAccess.Lector["FechaSolicitud"],
+                        Price = (decimal)dataAccess.Lector["Costo"],
+                        State = (string)dataAccess.Lector["Estado"]
+                    };
+                    enrollmentList.Add(enrollment);
+                }
+                return enrollmentList;
+            } catch (Exception exception) {
+                throw exception;
+            } finally {
+                dataAccess.cerrarConexion();
+            }
+        }
+        public List<object> ListPending() {
+            var enrollmentList = new List<object>();
+            try {
+                dataAccess.setearConsulta("SELECT I.IDInscripcion, CONCAT(U.Nombre, ' ', U.Apellido) AS NombreCompletoUsuario, C.Nombre AS NombreCurso, I.FechaSolicitud, I.Costo, I.Estado FROM Inscripciones " +
+                                          "I INNER JOIN Usuarios U ON I.IDUsuario = U.ID INNER JOIN Cursos C ON I.IDCurso = C.ID WHERE I.Estado = 'PENDING'");
+                dataAccess.ejecutarLectura();
+                while (dataAccess.Lector.Read()) {
+                    var enrollment = new {
+                        ID = (long)dataAccess.Lector["IDInscripcion"],
+                        User = dataAccess.Lector["NombreCompletoUsuario"].ToString(),
+                        Course = dataAccess.Lector["NombreCurso"].ToString(),
+                        EnrollmentDate = (DateTime)dataAccess.Lector["FechaSolicitud"],
+                        Price = (decimal)dataAccess.Lector["Costo"],
+                        State = (string)dataAccess.Lector["Estado"]
+                    };
                     enrollmentList.Add(enrollment);
                 }
                 return enrollmentList;
@@ -70,22 +96,23 @@ namespace Negocio {
         }
         public string GetStatus(int userId, int courseId) {
             try {
-                dataAccess.setearConsulta("SELECT Estado FROM Inscripciones WHERE IdUsuario = " + userId  + " AND IdCurso = " + courseId);
+                //dataAccess.setearConsulta("SELECT Estado FROM Inscripciones WHERE IdUsuario = " + userId + " AND IdCurso = " + courseId);
+                dataAccess.setearConsulta("SELECT TOP 1 Estado FROM Inscripciones WHERE IDUsuario = " + userId + " AND IDCurso = " + courseId + " ORDER BY IDInscripcion DESC");
                 dataAccess.ejecutarLectura();
                 if (dataAccess.Lector.Read()) {
                     return dataAccess.Lector.GetString(0);
-                }else return "";
-
+                }
+                return "";
             } catch (Exception exception) {
                 throw exception;
             } finally {
                 dataAccess.cerrarConexion();
             }
         }
-        private bool ApproveOrReject(int action, int enrollmentId) {
+        public bool ApproveOrReject(int action, int enrollmentId) {
             string state = action == 1 ? StateType.APPROVED : StateType.REFUSED;
             try {
-                dataAccess.setearConsulta("UPDATE Inscripciones SET Estado = " + state + " WHERE IDInscripcion = " + enrollmentId);
+                dataAccess.setearConsulta("UPDATE Inscripciones SET Estado = '" + state + "' WHERE IDInscripcion = " + enrollmentId);
                 return dataAccess.ejecutarAccion();
             } catch (Exception exception) {
                 throw exception;

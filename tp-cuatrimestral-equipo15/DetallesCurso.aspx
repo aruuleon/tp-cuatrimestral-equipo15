@@ -27,6 +27,39 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
+            <div id="ModalFormBuy" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><%= course.Nombre.ToString() %></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                        <picture class="d-flex justify-content-center align-items-center" style="min-height: 150px; margin-bottom: 20px">
+                            <img src="<%= ResolveUrl(ImagenPortada).ToString() %>" style="max-width: 100%; height:150px" />
+                        </picture>
+                        <div class="d-flex justify-content-between">
+                            <div class="form-floating mb-4" style="width: 49%">
+                                <asp:TextBox ID="txtNombreFormBuy" Cssclass="form-control" runat="server" placeholder="Nombre"></asp:TextBox>
+                                <label for="floatingInput">Nombre</label>
+                            </div>
+                            <div class="form-floating mb-4" style="width: 49%">
+                                <asp:TextBox ID="txtApellidoFormBuy" Cssclass="form-control" runat="server" placeholder="Apellido"></asp:TextBox>
+                                <label for="floatingInput">Apellido</label>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtEmailFormBuy" runat="server" CssClass="form-control" TextMode="Email" placeholder="Correo Electrónico"></asp:TextBox>
+                            <label for="floatingInput">Correo Electrónico></label>
+                        </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between align-items-center">
+                            <asp:Label ID="LabelPriceFormBuy" runat="server" CssClass="card-text fw-semibold"></asp:Label>
+                            <asp:LinkButton ID="LinkButtonBuy" runat="server" CssClass="btn btn-success w-25" OnClick="LinkButtonBuy_Click">Pagar</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <asp:HyperLink ID="HyperLinkProgram" runat="server" Target="_blank" CssClass="btn w-100 mt-5" style="color: #fff; background-color: #7b1fa2;">Ver Programa Completo</asp:HyperLink>
         </div>
     </div>

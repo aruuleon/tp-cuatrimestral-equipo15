@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace tp_cuatrimestral_equipo15 {
-    
-    
-    public partial class StudenOnCoursePanel {
-        
+
+
+    public partial class EnrollmentControlPanel {
+
         /// <summary>
         /// columnList control.
         /// </summary>
@@ -20,23 +20,14 @@ namespace tp_cuatrimestral_equipo15 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater columnList;
-        
+
         /// <summary>
-        /// userList control.
+        /// enrollmentList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater userList;
-        
-        /// <summary>
-        /// btnCancelar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink btnCancelar;
+        protected global::System.Web.UI.WebControls.Repeater enrollmentList;
     }
 }

@@ -11,7 +11,7 @@ namespace Dominio {
         public const string REFUSED = "REFUSED";
     }
     public class Enrollment {
-        public int ID { get; set; }
+        public long ID { get; set; }
         public int UserID { get; set; }
         public int CourseID { get; set; }
         public decimal Price { get; set; }
