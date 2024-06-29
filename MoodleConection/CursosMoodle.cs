@@ -53,7 +53,7 @@ namespace MoodleConection
                             curso.IdMoodle = (int)item["id"];
                             curso.Nombre = (string)item["fullname"];
                             curso.Visible = (bool)item["visible"];
-                            //curso.Url = $"{moodleUrl}/course/view.php?id={(int)item["id"]}"
+                            curso.ImagenPortada = (string)item["courseimage"];
 
                         }
                         return curso;
@@ -103,7 +103,7 @@ namespace MoodleConection
                                 IdMoodle = (int)item["id"],
                                 Nombre = (string)item["fullname"],
                                 Visible = (bool)item["visible"],
-                                //Url = $"{moodleUrl}/course/view.php?id={(int)item["id"]}"
+
                             };
                             cursos.Add(curso);
                         }

@@ -30,13 +30,13 @@ namespace MoodleConection
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
                     Dictionary<string, string> postData = new Dictionary<string, string>
-                {
-                    { "users[0][username]", usuario.Email },
-                    { "users[0][password]", usuario.Contrasenia },
-                    { "users[0][firstname]", usuario.Nombre },
-                    { "users[0][lastname]", usuario.Apellido },
-                    { "users[0][email]", usuario.Email }
-                };
+                    {
+                        { "users[0][username]", usuario.Email },
+                        { "users[0][password]", usuario.Contrasenia },
+                        { "users[0][firstname]", usuario.Nombre },
+                        { "users[0][lastname]", usuario.Apellido },
+                        { "users[0][email]", usuario.Email }
+                    };
 
                     FormUrlEncodedContent content = new FormUrlEncodedContent(postData);
 
