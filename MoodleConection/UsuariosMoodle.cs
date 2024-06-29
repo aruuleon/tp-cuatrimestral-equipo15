@@ -13,9 +13,9 @@ namespace MoodleConection
     public class UsuariosMoodle
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
-        private static string token = "b8ea84e7c42a2e8aa2835ab45b7f4683"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683"
+        private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683"
 
-        public async Task<int> CreateUser(Usuario usuario)
+        public static async Task<int> CreateUser(Usuario usuario)
         {
             try
             {

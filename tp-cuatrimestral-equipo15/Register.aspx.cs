@@ -7,10 +7,11 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 using MoodleConection;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace tp_cuatrimestral_equipo15 {
     public partial class Register : System.Web.UI.Page {
-        private UsuariosMoodle usersMoodle = new UsuariosMoodle();
+        //private UsuariosMoodle usersMoodle = new UsuariosMoodle();
         protected void Page_Load(object sender, EventArgs e) {
             
         }
@@ -27,7 +28,8 @@ namespace tp_cuatrimestral_equipo15 {
                     lblUserInDb.Visible = true;
                     return;
                 } else {
-                    int idMoodle = await usersMoodle.CreateUser(usuario);
+                    int idMoodle = await UsuariosMoodle.CreateUser(usuario);
+                    if(idMoodle == -1) Response.Redirect("Login.aspx", false);
                     if (usuarioNegocio.Register(usuario, idMoodle)) {
                         //EmailService emailService = new EmailService();
                         //emailService.SendEmailRegister(usuario);
