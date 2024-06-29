@@ -170,8 +170,10 @@ namespace MoodleConection
                             usuario.Email = (string)item["email"];
                             usuario.Apellido = (string)item["lastname"];
                             usuario.TipoUsuario = TipoUsuario.STUDENT;
-
-                            usuarios.Add(usuario);
+                            if (!(usuario.IdMoodle == 1 || usuario.IdMoodle == 2))
+                            {
+                                usuarios.Add(usuario);
+                            }
                         }
                         return usuarios;
                     }

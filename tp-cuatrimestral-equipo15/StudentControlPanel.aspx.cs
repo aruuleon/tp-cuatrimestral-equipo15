@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using MoodleConection;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -9,15 +10,26 @@ using System.Web.UI.WebControls;
 
 namespace tp_cuatrimestral_equipo15 {
     public partial class UserControlPanel : System.Web.UI.Page {
-        protected void Page_Load(object sender, EventArgs e) {
+        //protected void Page_Load(object sender, EventArgs e) {
+        //    UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+        //    List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Editar", "Eliminar" };
+        //    List<Usuario> UserList = usuarioNegocio.GetList();
+        //    userList.DataSource = UserList;
+        //    userList.DataBind();
+        //    columnList.DataSource = ColumnList;
+        //    columnList.DataBind();
+            
+        //}
+        protected async void Page_Load(object sender, EventArgs e)
+        {
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
             List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Editar", "Eliminar" };
-            List<Usuario> UserList = usuarioNegocio.GetList();
+            List<Usuario> UserList = await UsuariosMoodle.GetUsers();
             userList.DataSource = UserList;
             userList.DataBind();
             columnList.DataSource = ColumnList;
             columnList.DataBind();
-            
+
         }
         protected void DeleteUserButton_Click(object sender, EventArgs e) {
             CommandEventArgs commandEventArgs = e as CommandEventArgs;
