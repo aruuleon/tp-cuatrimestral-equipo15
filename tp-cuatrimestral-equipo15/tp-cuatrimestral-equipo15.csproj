@@ -218,6 +218,10 @@
       <Project>{fb00466f-1297-4866-a86f-e43b3c8c80ba}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MoodleConection\MoodleConection.csproj">
+      <Project>{bce42bf5-67df-48f4-8cb1-bc5b47ed6824}</Project>
+      <Name>MoodleConection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Negocio\Negocio.csproj">
       <Project>{b2c27aed-1b7a-4ce7-adcb-66704ffdb785}</Project>
       <Name>Negocio</Name>
