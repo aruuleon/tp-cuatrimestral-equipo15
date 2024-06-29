@@ -14,7 +14,6 @@ namespace MoodleConection
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
         private static string token = "b8ea84e7c42a2e8aa2835ab45b7f4683"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683"
-
         public static async Task<int> CreateUser(Usuario usuario)
         {
             try
@@ -77,7 +76,7 @@ namespace MoodleConection
         }
 
         //Get
-        static async Task<Usuario> GetUsersbyID(int id)
+        public static async Task<Usuario> GetUsersbyID(int id)
         {
             try
             {
@@ -127,7 +126,7 @@ namespace MoodleConection
             }
         }
 
-        static async Task<List<Usuario>> GetUsers()
+        public static async Task<List<Usuario>> GetUsers()
         {
             List<Usuario> usuarios = new List<Usuario>();
             try
@@ -190,7 +189,7 @@ namespace MoodleConection
         }
 
         //Delete
-        static async Task<bool> DeleteUsersbyID(int id)
+        public static async Task<bool> DeleteUsersbyID(int id)
         {
             try
             {
@@ -240,7 +239,7 @@ namespace MoodleConection
         }
 
         //Update
-        static async Task<bool> UpdateUser(Usuario usuario)
+        public static async Task<bool> UpdateUser(Usuario usuario)
         {
             try
             {
@@ -291,7 +290,7 @@ namespace MoodleConection
 
         }
 
-        static async Task<List<Usuario>> GetStudentsByCourse(int idMoodle)
+        public static async Task<List<Usuario>> GetStudentsByCourse(int idMoodle)
         {
             List<Usuario> usuarios = new List<Usuario>();
             try
@@ -350,7 +349,7 @@ namespace MoodleConection
             }
         }
 
-        static async Task<bool> EnrolStudent(int courseId, int userId)
+        public static async Task<bool> EnrolStudent(int courseId, int userId)
         {
             int roleId = 5;
             try
@@ -405,7 +404,7 @@ namespace MoodleConection
             }
         }
 
-        static async Task<bool> UnenrolStudent(int courseId, int userId)
+        public static async Task<bool> UnenrolStudent(int courseId, int userId)
         {
             try
             {
@@ -452,7 +451,7 @@ namespace MoodleConection
             }
         }
 
-        static async Task<bool> SuspendOrActivateUser(int courseId, int userId, int suspend)
+        public static async Task<bool> SuspendOrActivateUser(int courseId, int userId, int suspend)
         {
             try
             {

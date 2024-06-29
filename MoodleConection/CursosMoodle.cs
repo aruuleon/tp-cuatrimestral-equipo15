@@ -15,9 +15,7 @@ namespace MoodleConection
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
         private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d";
-
-
-        static async Task<Curso> GetCourseByID(int id)
+        public static async Task<Curso> GetCourseByID(int id)
         {
             try
             {
@@ -72,7 +70,7 @@ namespace MoodleConection
             }
         }
 
-        static async Task<List<Curso>> GetCourses()
+        public static async Task<List<Curso>> GetCourses()
         {
             try
             {
@@ -125,7 +123,7 @@ namespace MoodleConection
             }
         }
 
-        static async Task<List<Curso>> GetCourseByStudent(int idMoodle)
+        public static async Task<List<Curso>> GetCourseByStudent(int idMoodle)
         {
             try
             {
@@ -185,7 +183,7 @@ namespace MoodleConection
             }
         }
 
-        static async Task<bool> VisibleCourse(int idMoodle, int visible)
+        public static async Task<bool> VisibleCourse(int idMoodle, int visible)
         {
             try
             {
