@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace tp_cuatrimestral_equipo15 {
+namespace tp_cuatrimestral_equipo15
+{
 
 
-    public partial class CourseControlPanel {
+    public partial class CourseControlPanel
+    {
 
         /// <summary>
         /// columnList control.
@@ -83,5 +85,23 @@ namespace tp_cuatrimestral_equipo15 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonConfirm;
+
+        /// <summary>
+        /// btnCursosDB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCursosDB;
+
+        /// <summary>
+        /// btnCursosMoodle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCursosMoodle;
     }
 }

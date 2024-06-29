@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MoodleConection
 {
-    internal class CursosMoodle
+    public class CursosMoodle
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
         private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d";
