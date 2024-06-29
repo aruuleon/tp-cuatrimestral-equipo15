@@ -57,12 +57,14 @@ namespace Negocio {
         public List<object> ListPending() {
             var enrollmentList = new List<object>();
             try {
-                dataAccess.setearConsulta("SELECT I.IDInscripcion, CONCAT(U.Nombre, ' ', U.Apellido) AS NombreCompletoUsuario, C.Nombre AS NombreCurso, I.FechaSolicitud, I.Costo, I.Estado FROM Inscripciones " +
+                dataAccess.setearConsulta("SELECT I.IDInscripcion, I.IDUsuario, I.IDCurso, CONCAT(U.Nombre, ' ', U.Apellido) AS NombreCompletoUsuario, C.Nombre AS NombreCurso, I.FechaSolicitud, I.Costo, I.Estado FROM Inscripciones " +
                                           "I INNER JOIN Usuarios U ON I.IDUsuario = U.ID INNER JOIN Cursos C ON I.IDCurso = C.ID WHERE I.Estado = 'PENDING'");
                 dataAccess.ejecutarLectura();
                 while (dataAccess.Lector.Read()) {
                     var enrollment = new {
-                        ID = (long)dataAccess.Lector["IDInscripcion"],
+                        EnrollmentID = (long)dataAccess.Lector["IDInscripcion"],
+                        UserID = (int)dataAccess.Lector["IDUsuario"],
+                        CourseID = (int)dataAccess.Lector["IDCurso"],
                         User = dataAccess.Lector["NombreCompletoUsuario"].ToString(),
                         Course = dataAccess.Lector["NombreCurso"].ToString(),
                         EnrollmentDate = (DateTime)dataAccess.Lector["FechaSolicitud"],

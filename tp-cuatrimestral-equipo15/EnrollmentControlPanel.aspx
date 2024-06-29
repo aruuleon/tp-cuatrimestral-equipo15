@@ -22,7 +22,7 @@
                 <asp:Repeater runat="server" id="enrollmentList">
                     <ItemTemplate>
                         <tr class="align-middle text-center">
-                            <td><%#Eval("ID")%></td>
+                            <td><%#Eval("EnrollmentID")%></td>
                             <td class="text-start"><%#Eval("Course")%></td>
                             <td class="text-start"><%#Eval("User")%></td>
                             <td><%# Eval("EnrollmentDate", "{0:dd/MM/yyyy}") %></td>
@@ -30,10 +30,10 @@
                             <td><asp:HyperLink ID="HyperLinkVoucher" NavigateUrl='#' runat="server" CssClass="fa fa-file text-primary" Target="_blank"></asp:HyperLink></td>
                             <td class="text-center d-flex justify-content-around align-items-center">
                                 <div>
-                                    <asp:LinkButton ID="LinkButtonApproved" runat="server" CommandArgument='<%#Eval("ID")%>' CommandName="APPROVED" OnCommand="LinkButton_Command" CssClass="fas fa-check text-success" style="text-decoration: none;"></asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButtonApproved" runat="server" CommandArgument='<%# Eval("EnrollmentID") + "|" + Eval("UserID") + "|" + Eval("CourseID") %>' CommandName="APPROVED" OnCommand="LinkButton_Command" CssClass="fas fa-check text-success" style="text-decoration: none;"></asp:LinkButton>
                                 </div>
                                 <div>
-                                    <asp:LinkButton ID="LinkButtonRefused" runat="server" CommandArgument='<%#Eval("ID")%>' CommandName="REFUSED" OnCommand="LinkButton_Command" CssClass="fas fa-times text-danger" style="text-decoration: none;"></asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButtonRefused" runat="server" CommandArgument='<%# Eval("EnrollmentID") + "|" + Eval("UserID") + "|" + Eval("CourseID") %>'  CommandName="REFUSED" OnCommand="LinkButton_Command" CssClass="fas fa-times text-danger" style="text-decoration: none;"></asp:LinkButton>
                                 </div>
                             </td>
                         </tr>

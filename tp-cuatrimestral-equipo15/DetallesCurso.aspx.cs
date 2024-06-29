@@ -18,6 +18,7 @@ namespace tp_cuatrimestral_equipo15
     public partial class DetallesCurso : System.Web.UI.Page {
         private BusinessEnrollment businessEnrollment = new BusinessEnrollment();
         private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+        private EmailService emailService = new EmailService();
         public Curso course;
         public string ImagenPortada;
         protected void Page_Load(object sender, EventArgs e) {
@@ -50,7 +51,9 @@ namespace tp_cuatrimestral_equipo15
             }
         }
         protected void LinkButtonBuy_Click(object sender, EventArgs e) {
-            Usuario user = (Usuario)Session["usuario"];
+            Usuario userLogged = (Usuario)Session["usuario"];
+            Usuario user = usuarioNegocio.ListarById(userLogged.ID);
+            emailService.SendEmailEnrollmentToAdministrator(user, course);
             businessEnrollment.Generate(new Enrollment(user.ID, course.ID, course.Precio));
             CheckEnrollmentStatus(user.ID, course.ID);
             string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormBuy')); myModal.hide();";

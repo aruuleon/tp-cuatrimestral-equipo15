@@ -17,6 +17,11 @@ namespace Negocio
                     "INSERT into Usuarios(IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar) " +
                     "VALUES(@IdMoodle, @Nombre, @Apellido, @Emal, @Contrasena, @Tipo, @Avatar)"
                 );
+                //int idMoodle = moodle.RegisterUser(usuario);
+                //if(idMoodle != 0) {
+
+                //}
+                //accesoDatos.setearParametros("@IdMoodle", idMoodle);
                 accesoDatos.setearParametros("@IdMoodle", 104);
                 accesoDatos.setearParametros("@Nombre", usuario.Nombre);
                 accesoDatos.setearParametros("@Apellido", usuario.Apellido);
