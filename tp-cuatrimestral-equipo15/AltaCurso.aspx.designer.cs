@@ -7,48 +7,73 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace tp_cuatrimestral_equipo15
-{
+namespace tp_cuatrimestral_equipo15 {
 
 
-    public partial class AltaCurso
-    {
+    public partial class AltaCurso {
 
         /// <summary>
-        /// lblMensajeError control.
+        /// txtNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeError;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
-        /// txtImagen control.
+        /// txtResumen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputFile txtImagen;
+        protected global::System.Web.UI.WebControls.TextBox txtResumen;
 
         /// <summary>
-        /// txtImagenUrl control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtImagenUrl;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// imgPortada control.
+        /// txtDescripcion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPortada;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+
+        /// <summary>
+        /// validatorTxtDescripcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorTxtDescripcion;
+
+        /// <summary>
+        /// txtConocimientos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConocimientos;
+
+        /// <summary>
+        /// validatorTxtConocimientos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorTxtConocimientos;
 
         /// <summary>
         /// txtPrograma control.
@@ -94,60 +119,6 @@ namespace tp_cuatrimestral_equipo15
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator validatorPositivoTxtPrecio;
-
-        /// <summary>
-        /// txtDescripcion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
-
-        /// <summary>
-        /// validatorTxtDescripcion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorTxtDescripcion;
-
-        /// <summary>
-        /// txtConocimientos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConocimientos;
-
-        /// <summary>
-        /// validatorTxtConocimientos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator validatorTxtConocimientos;
-
-        /// <summary>
-        /// txtResumen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResumen;
-
-        /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
         /// btnGuardar control.

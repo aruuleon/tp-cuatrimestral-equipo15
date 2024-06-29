@@ -39,14 +39,14 @@ namespace tp_cuatrimestral_equipo15
                     txtDescripcion.Text =curso.Descripcion;
                     txtResumen.Text = curso.Resumen;
                     txtPrecio.Text = ((float)curso.Precio).ToString();
-                    if (curso.ImagenPortada.StartsWith("curso-img-"))
-                    {
-                        imgPortada.ImageUrl = "~/Archivos/Imagenes/Curso/" + curso.ImagenPortada;
-                    }
-                    else
-                    {
-                        imgPortada.ImageUrl = curso.ImagenPortada;
-                    }
+                    //if (curso.ImagenPortada.StartsWith("curso-img-"))
+                    //{
+                    //    imgPortada.ImageUrl = "~/Archivos/Imagenes/Curso/" + curso.ImagenPortada;
+                    //}
+                    //else
+                    //{
+                    //    imgPortada.ImageUrl = curso.ImagenPortada;
+                    //}
 
                     Session["Mod"] = false;
                 } 
@@ -88,29 +88,29 @@ namespace tp_cuatrimestral_equipo15
                 curso.Visible = true;
 
 
-                if (txtImagen.PostedFile.FileName != "" && (!string.IsNullOrEmpty(txtImagenUrl.Text)))
-                {
-                    lblMensajeError.Text = "Eliga solo una manera de subir la imagen de portada..";
-                    lblMensajeError.Visible = true;
-                    return;
-                }
-                else if (txtImagen.PostedFile.FileName != "")
-                {
-                    string rutaImagen = Server.MapPath("./Archivos/Imagenes/Curso/");
-                    txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + curso.ID + ".jpg");
-                    curso.ImagenPortada = "curso-img-" + curso.ID + ".jpg";
-                }
-                else if(!string.IsNullOrEmpty(txtImagenUrl.Text))
-                {
-                    curso.ImagenPortada = txtImagenUrl.Text;
-                }
-                else if ((bool)Session["todVal"] == true)
-                {
+                //if (txtImagen.PostedFile.FileName != "" && (!string.IsNullOrEmpty(txtImagenUrl.Text)))
+                //{
+                //    lblMensajeError.Text = "Eliga solo una manera de subir la imagen de portada..";
+                //    lblMensajeError.Visible = true;
+                //    return;
+                //}
+                //else if (txtImagen.PostedFile.FileName != "")
+                //{
+                //    string rutaImagen = Server.MapPath("./Archivos/Imagenes/Curso/");
+                //    txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + curso.ID + ".jpg");
+                //    curso.ImagenPortada = "curso-img-" + curso.ID + ".jpg";
+                //}
+                //else if(!string.IsNullOrEmpty(txtImagenUrl.Text))
+                //{
+                //    curso.ImagenPortada = txtImagenUrl.Text;
+                //}
+                //else if ((bool)Session["todVal"] == true)
+                //{
 
-                    lblMensajeError.Text = "Alguno de los dos campos de imagen debe ser cargado... ";
-                    lblMensajeError.Visible = true;
-                    return;
-                }
+                //    lblMensajeError.Text = "Alguno de los dos campos de imagen debe ser cargado... ";
+                //    lblMensajeError.Visible = true;
+                //    return;
+                //}
 
                 //if (txtPrograma.PostedFile.FileName != "")
                 //{

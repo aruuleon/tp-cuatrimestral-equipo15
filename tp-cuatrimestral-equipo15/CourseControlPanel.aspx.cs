@@ -13,7 +13,8 @@ namespace tp_cuatrimestral_equipo15 {
           
 
             CursoNegocio cursoNegocio = new CursoNegocio();
-            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar", "Estudiantes" };
+            //List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar", "Estudiantes" };
+            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "ImagenPortada", "Habilitar" };
             List<Curso> CourseList = cursoNegocio.GetList();
             courseList.DataSource = CourseList;
             courseList.DataBind();
@@ -30,6 +31,10 @@ namespace tp_cuatrimestral_equipo15 {
             }
 
             return ResolveUrl(imageUrl);
+        }
+        protected void LinkButtonEnable_Click(object sender, EventArgs e) {
+            string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.show();";
+            ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
         }
     }
 }
