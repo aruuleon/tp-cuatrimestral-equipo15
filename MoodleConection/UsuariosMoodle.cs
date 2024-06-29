@@ -16,6 +16,71 @@ namespace MoodleConection
         private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d";
 
 
+
+
+        static async Task<int> CreateUser(Usuario usuario)
+        {
+            try
+            {
+                int IdMoodle = -1;
+
+                using (HttpClient client = new HttpClient())
+                {
+
+
+                    string function = "core_user_create_users";
+
+                    client.BaseAddress = new Uri(moodleUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+                    Dictionary<string, string> postData = new Dictionary<string, string>
+                {
+                    { "users[0][username]", usuario.Email },
+                    { "users[0][password]", usuario.Contrasenia },
+                    { "users[0][firstname]", usuario.Nombre },
+                    { "users[0][lastname]", usuario.Apellido },
+                    { "users[0][email]", usuario.Email }
+                };
+
+                    FormUrlEncodedContent content = new FormUrlEncodedContent(postData);
+
+                    HttpResponseMessage response = await client.PostAsync($"/webservice/rest/server.php?wstoken={token}&wsfunction={function}&moodlewsrestformat=json", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+
+                        if (result.StartsWith("{\"exception\""))
+                            return IdMoodle;
+
+
+                        JArray jArray = JArray.Parse(result);
+
+                        foreach (var item in jArray)
+                        {
+                            IdMoodle = (int)item["id"];
+                        }
+
+                        return IdMoodle;
+
+                    }
+                    else
+                    {
+                        // Console.WriteLine($"Error: {response.StatusCode}");
+                        return IdMoodle;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         //Get
         static async Task<Usuario> GetUsersbyID(int id)
         {
