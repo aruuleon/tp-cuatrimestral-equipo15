@@ -60,16 +60,16 @@ namespace tp_cuatrimestral_equipo15 {
                 UsuarioNegocio UsuarioNegocio = new UsuarioNegocio();
                 usuario = UsuarioNegocio.ListarById(usuario.ID);
 
-                if (usuario.Avatar.StartsWith("perfil-img-"))
-                {
-                    imgAvatarAlumno.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
-                    imgAvatarAdmin.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
-                }
-                else
-                {
-                    imgAvatarAlumno.ImageUrl = usuario.Avatar;
-                    imgAvatarAdmin.ImageUrl = usuario.Avatar;
-                }
+                //if (usuario.Avatar.StartsWith("perfil-img-"))
+                //{
+                //    imgAvatarAlumno.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
+                //    imgAvatarAdmin.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
+                //}
+                //else
+                //{
+                //    imgAvatarAlumno.ImageUrl = usuario.Avatar;
+                //    imgAvatarAdmin.ImageUrl = usuario.Avatar;
+                //}
             }
 
             if (!IsPostBack)
