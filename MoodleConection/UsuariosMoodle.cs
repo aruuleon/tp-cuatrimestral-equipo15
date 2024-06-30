@@ -109,6 +109,7 @@ namespace MoodleConection
                             usuario.Email = (string)item["email"];
                             usuario.Apellido = (string)item["lastname"];
                             usuario.TipoUsuario = TipoUsuario.STUDENT;
+                            usuario.Suspendido = (int)item["suspended"];
                         }
                         return usuario;
                     }
