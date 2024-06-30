@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AltaCurso.aspx.cs" Inherits="tp_cuatrimestral_equipo15.AltaCurso" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AltaCurso.aspx.cs" Inherits="tp_cuatrimestral_equipo15.AltaCurso" Async="true"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style>
@@ -20,9 +20,9 @@
                 <div>
                     <div class="mb-4">
                         <label class="form-label">Nombre</label>
-                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" TextMode="SingleLine" Text="C# Nivel 1" ReadOnly="true"></asp:TextBox>
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator2" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtResumen"></asp:RequiredFieldValidator>--%>
-                        <asp:Label Text="Modificar nombre en Moodle" runat="server" CssClass="validacion"/>
+                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" TextMode="SingleLine"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtResumen"></asp:RequiredFieldValidator>
+                        <%--<asp:Label Text="Modificar nombre en Moodle" runat="server" CssClass="validacion"/>--%>
                     </div>
                     <div>
                         <label class="form-label">Resumen</label>

@@ -49,7 +49,7 @@ namespace MoodleConection
                             curso.IdMoodle = (int)item["id"];
                             curso.Nombre = (string)item["fullname"];
                             curso.Visible = (bool)item["visible"];
-                            string imagenPortada = (string)item["courseimage"]; //http:\/\/localhost\/pluginfile.php\/26\/course\/generated\/course.svg
+                            string imagenPortada = (string)item["courseimage"]; 
                             if (!imagenPortada.EndsWith("course.svg"))
                                 curso.ImagenPortada = (string)item["courseimage"];
                             else curso.ImagenPortada = "https://th.bing.com/th/id/R.3708994bdca38cd8dbea509f233f3cf4?rik=p1v2LkWH17fSEg&pid=ImgRaw&r=0";
@@ -203,6 +203,51 @@ namespace MoodleConection
                     {
                         { "courses[0][id]", idMoodle.ToString() },
                         { "courses[0][visible]", visible.ToString() }, //1: available to student, 0:not available
+                    };
+
+                    FormUrlEncodedContent content = new FormUrlEncodedContent(postData);
+
+                    HttpResponseMessage response = await client.PostAsync($"/webservice/rest/server.php?wstoken={token}&wsfunction={function}&moodlewsrestformat=json", content);
+
+                    List<Curso> cursos = new List<Curso>();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        // Console.WriteLine(result);
+                        return true;
+                    }
+                    else
+                    {
+                        //Console.WriteLine($"Error: {response.StatusCode}");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static async Task<bool> ChangeNameCourse(int idMoodle, string name)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+
+                    string function = "core_course_update_courses";
+
+                    client.BaseAddress = new Uri(moodleUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+
+                    Dictionary<string, string> postData = new Dictionary<string, string>
+                    {
+                        { "courses[0][id]", idMoodle.ToString() },
+                        { "courses[0][fullname]", name }, 
                     };
 
                     FormUrlEncodedContent content = new FormUrlEncodedContent(postData);

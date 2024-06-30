@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
+using MoodleConection;
 
 namespace tp_cuatrimestral_equipo15
 {
@@ -29,7 +30,7 @@ namespace tp_cuatrimestral_equipo15
 
                 if(modificar == true)
                 {
-
+                    txtNombre.Text = curso.Nombre;
                     txtPrograma.Text = curso.Programa;
                     txtConocimientos.Text = curso.ConocimientosRequeridos;
                     txtDescripcion.Text =curso.Descripcion;
@@ -54,7 +55,7 @@ namespace tp_cuatrimestral_equipo15
             Response.Redirect("CourseControlPanel.aspx?", false);
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected async void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -70,10 +71,12 @@ namespace tp_cuatrimestral_equipo15
                 curso.ConocimientosRequeridos = txtConocimientos.Text;
                 curso.Resumen=txtResumen.Text;
                 curso.Programa=txtPrograma.Text;
+                curso.Nombre = txtNombre.Text;
+                await CursosMoodle.ChangeNameCourse(curso.IdMoodle,curso.Nombre);
                 //curso.Visible = true;
 
 
-                
+
                 CursoNegocio cursoNegocio = new CursoNegocio();
 
                 cursoNegocio.Modificar(curso);

@@ -40,7 +40,9 @@
                                     <asp:LinkButton ID="LinkButton1" runat="server" CssClass="fa fa-edit text-success" PostBackUrl='<%# String.Format("~/AltaCurso.aspx?id={0}", Eval("ID")) %>'></asp:LinkButton>
                                 </td>
                                 <td class="text-center">
-                                    <asp:LinkButton ID="LinkButtonRemoveCourse" runat="server" CssClass="fa fa-trash text-danger"></asp:LinkButton>
+                                    <%--<asp:LinkButton ID="LinkButtonRemoveCourse" runat="server" CssClass="fa fa-trash text-danger" OnCommand="LinkButtonRemoveCourse_Command" CommandArgument="><%#Eval("ID")%>"> </asp:LinkButton>--%>
+                                    <%--<asp:CheckBox Text="" runat="server" ID="checkBoxActivo" OnCheckedChanged="checkBoxActivo_CheckedChanged" AutoPostBack="true"/>--%>
+                                     <asp:LinkButton ID="LinkButtonActivate" runat="server" OnCommand="LinkButtonActivate_Command" CommandArgument='<%# Eval("ID") %>' CssClass='<%# activeBotton((bool)Eval("Visible")) %>'></asp:LinkButton>
                                 </td>
                                 <td class="text-center">
                                     <asp:LinkButton ID="LinkButtonStudents" runat="server" CssClass="fas fa-users text-warning"></asp:LinkButton>

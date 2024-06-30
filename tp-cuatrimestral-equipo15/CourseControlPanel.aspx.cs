@@ -23,7 +23,7 @@ namespace tp_cuatrimestral_equipo15 {
             }
         }
         protected void LinkButtonPlatformCourse_Click(object sender, EventArgs e) { //boton lista plataforma
-            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar", "Estudiantes" };
+            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Activo", "Estudiantes" };
             AdjustSettings(ColumnList, businessCourse.GetList(), columnListPlatform, courseListPlatform, "Platform");
         }
         protected async void LinkButtonMoodleCourse_Click(object sender, EventArgs e) { //boton lista moodle
@@ -38,7 +38,7 @@ namespace tp_cuatrimestral_equipo15 {
             string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.show();";
             ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
         }
-        protected void LinkButtonConfirm_Click(object sender, EventArgs e) {  //Habilitar de Modal
+        protected async void LinkButtonConfirm_Click(object sender, EventArgs e) {  //Habilitar de Modal
             Curso courseToRegister = new Curso();
             courseToRegister.IdMoodle = int.Parse(lblIdMoodle.Text);
             courseToRegister.Nombre = lblNameFormCourse.Text;
@@ -48,6 +48,8 @@ namespace tp_cuatrimestral_equipo15 {
             courseToRegister.ConocimientosRequeridos = txtRequiredKnowledgeFormCourse.Text;
             courseToRegister.Programa = txtProgramFormCourse.Text;
             courseToRegister.Precio = decimal.Parse(txtPriceFormCourse.Text);
+            courseToRegister.Visible = true;
+            await CursosMoodle.VisibleCourse(courseToRegister.IdMoodle, 1);
             businessCourse.Agregar(courseToRegister);
             string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.hide();";
             ScriptManager.RegisterStartupScript(this, GetType(), "CloseModalScript", script, true);
@@ -108,5 +110,40 @@ namespace tp_cuatrimestral_equipo15 {
             }
             return cursos;
         }
+
+        protected async void LinkButtonActivate_Command(object sender, CommandEventArgs e)
+        {
+            CommandEventArgs commandEventArgs = e as CommandEventArgs;
+            int id = int.Parse(commandEventArgs.CommandArgument.ToString());
+            int activar;
+
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            Curso curso = cursoNegocio.BuscarPorId(id);
+            if (curso.Visible)
+            {
+                curso.Visible = false;
+                activar = 0;
+            }
+            else
+            {
+                curso.Visible = true;
+                activar = 1;
+            }
+            cursoNegocio.Actualizar(curso);
+            await CursosMoodle.VisibleCourse(curso.IdMoodle, activar);
+            Response.Redirect("CourseControlPanel.aspx?", false);
+
+        }
+        protected string activeBotton(bool active)
+        {
+            if (active)
+            {
+                return "bi bi bi-check-square text-success";
+            }
+
+            return "bi bi-x-square text-danger";
+        }
+
+
     }
 }
