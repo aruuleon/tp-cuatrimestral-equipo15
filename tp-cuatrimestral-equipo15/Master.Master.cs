@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
+
 namespace tp_cuatrimestral_equipo15 {
     public partial class Master : System.Web.UI.MasterPage {
         protected void Page_Load(object sender, EventArgs e) {
@@ -60,21 +61,20 @@ namespace tp_cuatrimestral_equipo15 {
                 UsuarioNegocio UsuarioNegocio = new UsuarioNegocio();
                 usuario = UsuarioNegocio.ListarById(usuario.ID);
 
-                //if (usuario.Avatar.StartsWith("perfil-img-"))
-                //{
-                //    imgAvatarAlumno.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
-                //    imgAvatarAdmin.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
-                //}
-                //else
-                //{
-                //    imgAvatarAlumno.ImageUrl = usuario.Avatar;
-                //    imgAvatarAdmin.ImageUrl = usuario.Avatar;
-                //}
+                if (usuario.Avatar.StartsWith("perfil-img-"))
+                {
+                    imgAvatarAlumno.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
+                    imgAvatarAdmin.ImageUrl = "~/Archivos/Imagenes/Perfil/" + usuario.Avatar;
+                }
+                else
+                {
+                    imgAvatarAlumno.ImageUrl = usuario.Avatar;
+                    imgAvatarAdmin.ImageUrl = usuario.Avatar;
+                }
             }
 
             if (!IsPostBack)
             {
-
                 if (isLoginOrRegister())
                 {
                     ShowOnlyPanel(LoginOrRegisterHeaderPanel);
@@ -87,6 +87,15 @@ namespace tp_cuatrimestral_equipo15 {
                 {
                     ShowOnlyPanel(UserHeaderPanel);
                 }
+
+
+
+
+
+
+
+
+
             }
         }
         public bool isLoginOrRegister() {

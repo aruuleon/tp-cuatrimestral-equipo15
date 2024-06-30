@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using MoodleConection;
 using Negocio;
 
 namespace tp_cuatrimestral_equipo15 {
@@ -14,11 +15,29 @@ namespace tp_cuatrimestral_equipo15 {
         protected void Page_Load(object sender, EventArgs e) {
           
             CursoNegocio cursoNegocio = new CursoNegocio();
+            ActualizarCursos();
             Session.Add("listaCursos", cursoNegocio.GetList());
             listaCursos.DataSource = Session["listaCursos"];
             listaCursos.DataBind();
         }
-
+        protected async void ActualizarCursos()
+        {
+            List<Curso> cursoSimples = await CursosMoodle.GetCourses();
+            List<Curso> cursos = new List<Curso>();
+            foreach (var item in cursoSimples)
+            {
+                if (item.IdMoodle != 1)
+                {
+                    Curso curso = new Curso();
+                    curso = await CursosMoodle.GetCourseByID(item.IdMoodle);
+                    CursoNegocio cursoNegocio = new CursoNegocio();
+                    if (cursoNegocio.Cargado(curso.IdMoodle))
+                    {
+                        cursoNegocio.Actualizar(curso);
+                    }
+                }
+            }
+        }
         protected string ImagenUrl(string imageUrl)
         {
 

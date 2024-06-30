@@ -14,7 +14,7 @@ namespace MoodleConection
     public class CursosMoodle
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
-        private static string token = ""; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683"; "77c9cceb61d68808c3fb68bf95ceefdf"
+        private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683"; "77c9cceb61d68808c3fb68bf95ceefdf"
         public static async Task<Curso> GetCourseByID(int id)
         {
             try
@@ -49,7 +49,12 @@ namespace MoodleConection
                             curso.IdMoodle = (int)item["id"];
                             curso.Nombre = (string)item["fullname"];
                             curso.Visible = (bool)item["visible"];
-                            curso.ImagenPortada = (string)item["courseimage"];
+                            string imagenPortada = (string)item["courseimage"]; //http:\/\/localhost\/pluginfile.php\/26\/course\/generated\/course.svg
+                            if (!imagenPortada.EndsWith("course.svg"))
+                                curso.ImagenPortada = (string)item["courseimage"];
+                            else curso.ImagenPortada = "https://th.bing.com/th/id/R.3708994bdca38cd8dbea509f233f3cf4?rik=p1v2LkWH17fSEg&pid=ImgRaw&r=0";
+
+
                         }
                         return curso;
                     }

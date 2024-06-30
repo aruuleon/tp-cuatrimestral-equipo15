@@ -14,21 +14,23 @@ namespace tp_cuatrimestral_equipo15 {
         CursoNegocio businessCourse = new CursoNegocio();
         public Curso course;
         protected async void Page_Load(object sender, EventArgs e) {
+
+            ActualizarCursos();
             if (!IsPostBack) {
                 PanelPlatformCourse.Visible = true;
                 PanelMoodleCourse.Visible = false;
                 LinkButtonPlatformCourse_Click(sender, e);
             }
         }
-        protected void LinkButtonPlatformCourse_Click(object sender, EventArgs e) {
+        protected void LinkButtonPlatformCourse_Click(object sender, EventArgs e) { //boton lista plataforma
             List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar", "Estudiantes" };
             AdjustSettings(ColumnList, businessCourse.GetList(), columnListPlatform, courseListPlatform, "Platform");
         }
-        protected async void LinkButtonMoodleCourse_Click(object sender, EventArgs e) {
+        protected async void LinkButtonMoodleCourse_Click(object sender, EventArgs e) { //boton lista moodle
             List<string> ColumnList = new List<string> { "Identificador", "Nombre", "ImagenPortada", "Habilitar" };
             AdjustSettings(ColumnList, await CursosMoodleList(), columnListMoodle, courseListMoodle, "Moodle");
         }
-        protected async void LinkButtonEnable_Command(object sender, CommandEventArgs e) {
+        protected async void LinkButtonEnable_Command(object sender, CommandEventArgs e) { //Boton abrir modal
             course = await CursosMoodle.GetCourseByID(Convert.ToInt32(e.CommandArgument));
             lblIdMoodle.Text = course.IdMoodle.ToString();
             lblNameFormCourse.Text = course.Nombre;
@@ -36,7 +38,7 @@ namespace tp_cuatrimestral_equipo15 {
             string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.show();";
             ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
         }
-        protected void LinkButtonConfirm_Click(object sender, EventArgs e) {
+        protected void LinkButtonConfirm_Click(object sender, EventArgs e) {  //Habilitar de Modal
             Curso courseToRegister = new Curso();
             courseToRegister.IdMoodle = int.Parse(lblIdMoodle.Text);
             courseToRegister.Nombre = lblNameFormCourse.Text;
@@ -73,14 +75,35 @@ namespace tp_cuatrimestral_equipo15 {
             }
             panelToShow.Visible = true;
         }
+        protected async void ActualizarCursos()
+        {
+            List<Curso> cursoSimples = await CursosMoodle.GetCourses();
+            List<Curso> cursos = new List<Curso>();
+            foreach (var item in cursoSimples)
+            {
+                if (item.IdMoodle != 1)
+                {
+                    Curso curso = new Curso();
+                    curso = await CursosMoodle.GetCourseByID(item.IdMoodle);
+                    CursoNegocio cursoNegocio = new CursoNegocio();
+                    if (cursoNegocio.Cargado(curso.IdMoodle))
+                    {
+                        cursoNegocio.Actualizar(curso);
+                    }
+                }
+            }
+        }
         protected async Task<List<Curso>> CursosMoodleList() {
             List<Curso> cursoSimples = await CursosMoodle.GetCourses();
             List<Curso> cursos = new List<Curso>();
             foreach (var item in cursoSimples) {
                 if (item.IdMoodle != 1) {
-                    Curso curso = new Curso();
-                    curso = await CursosMoodle.GetCourseByID(item.IdMoodle);
-                    cursos.Add(curso);
+                    CursoNegocio cursoNegocio = new CursoNegocio();
+                    if (!cursoNegocio.Cargado(item.IdMoodle)) {
+                        Curso curso = new Curso();
+                        curso = await CursosMoodle.GetCourseByID(item.IdMoodle);
+                        cursos.Add(curso);
+                    }
                 }
             }
             return cursos;

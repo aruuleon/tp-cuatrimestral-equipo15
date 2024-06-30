@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace tp_cuatrimestral_equipo15 {
+namespace tp_cuatrimestral_equipo15
+{
 
 
-    public partial class AltaCurso {
+    public partial class AltaCurso
+    {
 
         /// <summary>
         /// txtNombre control.
@@ -119,6 +121,15 @@ namespace tp_cuatrimestral_equipo15 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator validatorPositivoTxtPrecio;
+
+        /// <summary>
+        /// imgCurso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgCurso;
 
         /// <summary>
         /// btnGuardar control.

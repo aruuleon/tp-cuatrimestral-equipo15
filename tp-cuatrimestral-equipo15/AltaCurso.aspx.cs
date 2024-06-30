@@ -19,34 +19,23 @@ namespace tp_cuatrimestral_equipo15
         {
             try
             {
-                
+                if(!IsPostBack) Session["Mod"] = true;
 
-                if (!IsPostBack)
-                {
-                    Session["Mod"] = false; //Temporal Cambiar(Cambia modo modificar o dar alta) // ESTO NO VA 
-                    Session["todVal"] = true;
-                }
-                modificar = (bool)Session["Mod"]; //LE LLEGA TRUE O FALSE DEPENDE SI SE QUIERE MODIFICAR O NO
+
+                modificar = (bool)Session["Mod"];
                 int id = !string.IsNullOrEmpty(Request.QueryString["id"]) ? int.Parse(Request.QueryString["id"]) : 1;
                 CursoNegocio cursoNegocio = new CursoNegocio();
                 curso = cursoNegocio.ListarById(id); //Busca el curso a modificar
 
                 if(modificar == true)
                 {
-                    Session["todVal"] = false;
+
                     txtPrograma.Text = curso.Programa;
                     txtConocimientos.Text = curso.ConocimientosRequeridos;
                     txtDescripcion.Text =curso.Descripcion;
                     txtResumen.Text = curso.Resumen;
                     txtPrecio.Text = ((float)curso.Precio).ToString();
-                    //if (curso.ImagenPortada.StartsWith("curso-img-"))
-                    //{
-                    //    imgPortada.ImageUrl = "~/Archivos/Imagenes/Curso/" + curso.ImagenPortada;
-                    //}
-                    //else
-                    //{
-                    //    imgPortada.ImageUrl = curso.ImagenPortada;
-                    //}
+                    imgCurso.ImageUrl = curso.ImagenPortada;
 
                     Session["Mod"] = false;
                 } 
@@ -71,10 +60,6 @@ namespace tp_cuatrimestral_equipo15
             {
     
                 Page.Validate();
-                if ((bool)Session["todVal"] == false)
-                {
-                    validatorTxtPrograma.IsValid = true;
-                }
                 if (!Page.IsValid)
                 {
                      return;
@@ -85,39 +70,10 @@ namespace tp_cuatrimestral_equipo15
                 curso.ConocimientosRequeridos = txtConocimientos.Text;
                 curso.Resumen=txtResumen.Text;
                 curso.Programa=txtPrograma.Text;
-                curso.Visible = true;
+                //curso.Visible = true;
 
 
-                //if (txtImagen.PostedFile.FileName != "" && (!string.IsNullOrEmpty(txtImagenUrl.Text)))
-                //{
-                //    lblMensajeError.Text = "Eliga solo una manera de subir la imagen de portada..";
-                //    lblMensajeError.Visible = true;
-                //    return;
-                //}
-                //else if (txtImagen.PostedFile.FileName != "")
-                //{
-                //    string rutaImagen = Server.MapPath("./Archivos/Imagenes/Curso/");
-                //    txtImagen.PostedFile.SaveAs(rutaImagen + "curso-img-" + curso.ID + ".jpg");
-                //    curso.ImagenPortada = "curso-img-" + curso.ID + ".jpg";
-                //}
-                //else if(!string.IsNullOrEmpty(txtImagenUrl.Text))
-                //{
-                //    curso.ImagenPortada = txtImagenUrl.Text;
-                //}
-                //else if ((bool)Session["todVal"] == true)
-                //{
-
-                //    lblMensajeError.Text = "Alguno de los dos campos de imagen debe ser cargado... ";
-                //    lblMensajeError.Visible = true;
-                //    return;
-                //}
-
-                //if (txtPrograma.PostedFile.FileName != "")
-                //{
-                //    string rutaPrograma = Server.MapPath("./Archivos/ProgramasPDF/");
-                //    txtPrograma.PostedFile.SaveAs(rutaPrograma + "curso-prog-" + curso.IdMoodle + ".pdf");
-                //    curso.Programa = "curso-prog-" + curso.ID + ".pdf";
-                //}
+                
                 CursoNegocio cursoNegocio = new CursoNegocio();
 
                 cursoNegocio.Modificar(curso);

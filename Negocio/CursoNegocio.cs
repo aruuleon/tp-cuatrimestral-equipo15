@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -201,6 +202,58 @@ namespace Negocio
             catch (Exception exception)
             {
                 throw exception;
+            }
+        }
+          
+        public bool Cargado(int IdMoodle)
+        {
+            int id = -1;
+            try
+            {
+                accesoDatos.setearConsulta(
+                    "SELECT C.ID FROM Cursos C WHERE IdMoodle = " + IdMoodle
+                );
+                accesoDatos.ejecutarLectura();
+
+
+                while (accesoDatos.Lector.Read())
+                {
+                    if (!(accesoDatos.Lector["ID"] is DBNull))
+                        id = (int)accesoDatos.Lector["ID"];
+                }
+
+                if(id == -1) return false;
+
+                return true;
+                
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void Actualizar(Curso curso)
+        {
+            try
+            {
+                accesoDatos.setearConsulta("UPDATE Cursos SET Nombre = @Nombre, ImagenPortada = @ImagenPortada, Visible =@Visible WHERE IdMoodle =" + curso.IdMoodle);
+                accesoDatos.setearParametros("@Nombre", curso.Nombre);
+                accesoDatos.setearParametros("@ImagenPortada", curso.ImagenPortada);
+                accesoDatos.setearParametros("@Visible", curso.Visible);
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
             }
         }
     }

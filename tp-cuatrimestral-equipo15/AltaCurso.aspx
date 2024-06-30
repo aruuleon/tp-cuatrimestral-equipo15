@@ -22,6 +22,7 @@
                         <label class="form-label">Nombre</label>
                         <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" TextMode="SingleLine" Text="C# Nivel 1" ReadOnly="true"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator2" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtResumen"></asp:RequiredFieldValidator>--%>
+                        <asp:Label Text="Modificar nombre en Moodle" runat="server" CssClass="validacion"/>
                     </div>
                     <div>
                         <label class="form-label">Resumen</label>
@@ -51,8 +52,12 @@
                     <asp:RegularExpressionValidator ID="validatorPositivoTxtPrecio" CssClass="validacion" runat="server" ErrorMessage="* Solo valores positivos" ControlToValidate="txtPrecio" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
                 </div>
                 <picture class="d-flex justify-content-center" style="width:100%; min-height: 200px; margin-top:20px">
-                    <img src="https://maxiprograma.com/assets/images/nivel-1.jpg" style="max-width: 100%; height:200px;" />
+                    <asp:Image ID="imgCurso"  runat="server" style="max-width: 100%; height:200px;"/>
                 </picture>
+                <div class="justify-content-center" style="text-align: center; align-content: center; margin-bottom: 40px">
+                    <asp:Label Text="Modificar imagen en Moodle" runat="server" CssClass="validacion"/>
+                </div>
+                
                 <div class="justify-content-center" style="text-align: center; align-content: center; margin: 40px">
                     <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary btn-lg px-4 gap-3" Text="Guardar" OnClick="btnGuardar_Click" />
                     <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger btn-lg px-4 gap-3" Text="Cancelar" OnClick="btnCancelar_Click" />
