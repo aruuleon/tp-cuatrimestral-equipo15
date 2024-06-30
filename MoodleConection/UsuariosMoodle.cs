@@ -13,7 +13,7 @@ namespace MoodleConection
     public class UsuariosMoodle
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
-        private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683"
+        private static string token = "77c9cceb61d68808c3fb68bf95ceefdf"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683" ; "77c9cceb61d68808c3fb68bf95ceefdf"
         public static async Task<int> CreateUser(Usuario usuario)
         {
             try
@@ -170,6 +170,8 @@ namespace MoodleConection
                             usuario.Email = (string)item["email"];
                             usuario.Apellido = (string)item["lastname"];
                             usuario.TipoUsuario = TipoUsuario.STUDENT;
+                            usuario.Suspendido = (int)item["suspended"];
+
                             if (!(usuario.IdMoodle == 1 || usuario.IdMoodle == 2))
                             {
                                 usuarios.Add(usuario);
@@ -262,6 +264,7 @@ namespace MoodleConection
                     { "users[0][password]", usuario.Contrasenia },
                     { "users[0][firstname]", usuario.Nombre },
                     { "users[0][lastname]", usuario.Apellido },
+                    { "users[0][suspended]", usuario.Suspendido.ToString() },
                 };
 
                     FormUrlEncodedContent content = new FormUrlEncodedContent(postData);
@@ -273,7 +276,13 @@ namespace MoodleConection
                         string result = await response.Content.ReadAsStringAsync();
                         //Console.WriteLine(result);
                         if (result.StartsWith("{\"exception\""))
+                        {
+                            if (result == "{\"exception\":\"moodle_exception\",\"errorcode\":\"Message was not sent.\",\"message\":\"error\\/Message was not sent.\"}")
+                            {
+                                return false;
+                            }
                             return false;
+                        }//    return false;
                         return true;
                     }
                     else

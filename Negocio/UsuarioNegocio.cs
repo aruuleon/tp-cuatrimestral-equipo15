@@ -116,12 +116,12 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        public Usuario ListarById(int Id)
+        public Usuario ListarById(int IdMoodle)
         {
             try
             {
                 Usuario usuario = new Usuario();
-                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios WHERE ID = " + Id
+                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios WHERE IdMoodle = " + IdMoodle
                 );
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())

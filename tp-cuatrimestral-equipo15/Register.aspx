@@ -44,6 +44,7 @@
             <div class="form-floating mb-4">
                 <asp:TextBox ID="txtContrasenia" Cssclass="form-control" runat="server" TextMode="Password" placeholder="Contraseña"></asp:TextBox>
                 <div style="position: relative;">
+                    <asp:RegularExpressionValidator Cssclass="validacion" ErrorMessage="Formato Incorrecto.. requisitos: Longitud de al menos 8 caracteres. Al menos 1 letra minúscula. Al menos 1 letra mayúscula.Al menos 1 dígito.Al menos 1 carácter no alfanumérico (como un símbolo o espacio)." ControlToValidate="txtContrasenia" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$" runat="server" />
                     <asp:RequiredFieldValidator Cssclass="validacion"  ErrorMessage="* Este campo es obligatorio" ControlToValidate="txtContrasenia" runat="server" style="position: absolute; left: 0;" />
                 </div>
                 <label for="floatingPassword">Contraseña</label>

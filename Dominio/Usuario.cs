@@ -20,7 +20,7 @@ namespace Dominio
         public string Contrasenia { get; set; }
         public string Avatar { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
-
+        public int Suspendido { get; set; }
         public Usuario() {
         }
         public Usuario(string nombre, string apellido, string email, string contrasenia) {
@@ -29,6 +29,7 @@ namespace Dominio
             Email = email;
             Contrasenia = contrasenia;
             TipoUsuario = TipoUsuario.STUDENT;
+            Suspendido = 0;
         }
         public Usuario(string email, string contrasenia, bool admin) {
             Email = email;

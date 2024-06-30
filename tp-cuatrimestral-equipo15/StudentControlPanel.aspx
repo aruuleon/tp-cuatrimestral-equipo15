@@ -22,16 +22,17 @@
                 <asp:Repeater runat="server" id="userList">
                     <ItemTemplate>
                         <tr class="align-middle">
-                            <td class="text-center"><%#Eval("ID")%></td>
+                            <td class="text-center"><%#Eval("IdMoodle")%></td>
                             <td><%#Eval("Nombre")%></td>
                             <td><%#Eval("Apellido")%></td>
                             <td><%#Eval("Email")%></td>
-                            <td><img src='<%#ImagenUrl(Eval("Avatar").ToString())%>' class="mx-auto d-block" alt="Avatar" style="width: 50px; height: 50px;"></td>
+                            <td><%#Eval("Suspendido")%></td>
+                            <%--<td><img src='<%#ImagenUrl(Eval("Avatar").ToString())%>' class="mx-auto d-block" alt="Avatar" style="width: 50px; height: 50px;"></td>--%>
                             <td class="text-center">
                                 <asp:LinkButton ID="LinkButtonEditUser" runat="server" CssClass="fa fa-edit text-success"></asp:LinkButton>
                             </td>
                             <td class="text-center">
-                                <asp:LinkButton ID="LinkButtonRemoveUser" runat="server" OnCommand="DeleteUserButton_Click" CommandArgument='<%# Eval("ID") %>' CssClass="fa fa-trash text-danger"></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButtonRemoveUser" runat="server" OnCommand="DeleteUserButton_Click" CommandArgument='<%# Eval("IdMoodle") %>' CssClass="fa fa-trash text-danger"></asp:LinkButton>
                             </td>
                         </tr>
                     </ItemTemplate>
