@@ -36,7 +36,7 @@ namespace tp_cuatrimestral_equipo15 {
             CommandEventArgs commandEventArgs = e as CommandEventArgs;
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
             Usuario usuarioAux = await UsuariosMoodle.GetUsersbyID(int.Parse(commandEventArgs.CommandArgument.ToString()));
-            Usuario usuarioAux2 = usuarioNegocio.ListarById(int.Parse(commandEventArgs.CommandArgument.ToString()));
+            Usuario usuarioAux2 = usuarioNegocio.ListarByIdMoodle(int.Parse(commandEventArgs.CommandArgument.ToString()));
             usuarioAux.Suspendido = usuarioAux.Suspendido == 0 ?  1 : 0;
             usuarioAux.Contrasenia = usuarioAux2.Contrasenia;
             await UsuariosMoodle.UpdateUser(usuarioAux);

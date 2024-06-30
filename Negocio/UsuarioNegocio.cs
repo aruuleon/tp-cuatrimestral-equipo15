@@ -148,7 +148,38 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
+        public Usuario ListarByIdMoodle(int IdMoodle)
+        {
+            try
+            {
+                Usuario usuario = new Usuario();
+                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios WHERE IdMoodle = " + IdMoodle
+                );
+                accesoDatos.ejecutarLectura();
+                while (accesoDatos.Lector.Read())
+                {
+                    usuario.ID = (int)accesoDatos.Lector["Id"];
+                    usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
+                    usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
+                    usuario.Email = (string)accesoDatos.Lector["Email"];
+                    if (!(bool)accesoDatos.Lector["Tipo"]) usuario.TipoUsuario = TipoUsuario.STUDENT;
+                    else { usuario.TipoUsuario = TipoUsuario.ADMIN; }
 
+                    usuario.Apellido = (string)accesoDatos.Lector["Apellido"];
+                    usuario.Avatar = (string)accesoDatos.Lector["Avatar"];
+                }
+                return usuario;
+            }
+            catch (Exception excepción)
+            {
+                throw excepción;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
         //public void Agregar(Usuario usuario)
         //{
 
