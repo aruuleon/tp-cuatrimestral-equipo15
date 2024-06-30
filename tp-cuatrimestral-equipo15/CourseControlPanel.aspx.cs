@@ -11,36 +11,15 @@ using System.Web.UI.WebControls;
 
 namespace tp_cuatrimestral_equipo15 {
     public partial class CourseControlPanel : System.Web.UI.Page {
+        CursoNegocio businessCourse = new CursoNegocio();
+        public Curso course;
         protected async void Page_Load(object sender, EventArgs e) {
-
-            if(!Page.IsPostBack) Session["Moodle"] = false;
-
-            List<Curso> CourseList = new List<Curso>();
-            List<string> ColumnList = new List<string>();
-
-            if ((bool)Session["Moodle"] == true)
-            {
-                CourseList = await CursosMoodleList();
-                ColumnList = new List<string> { "Identificador", "Nombre", "ImagenPortada", "Habilitar" };
-                courseList.DataSource = CourseList;
-                courseList.DataBind();
-                columnList.DataSource = ColumnList;
-                columnList.DataBind();
-            } 
-            else
-            {
-                CursoNegocio cursoNegocio = new CursoNegocio();
-                ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar", "Estudiantes" };
-                CourseList = cursoNegocio.GetList();
-                courseList.DataSource = CourseList;
-                courseList.DataBind();
-                columnList.DataSource = ColumnList;
-                columnList.DataBind();
+            if (!IsPostBack) {
+                PanelPlatformCourse.Visible = true;
+                PanelMoodleCourse.Visible = false;
+                LinkButtonPlatformCourse_Click(sender, e);
             }
-
-            
         }
-
         protected string ImagenUrl(string imageUrl)
         {
 
@@ -51,36 +30,61 @@ namespace tp_cuatrimestral_equipo15 {
 
             return ResolveUrl(imageUrl);
         }
-        protected void LinkButtonEnable_Click(object sender, EventArgs e) {
-            string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.show();";
-            ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
-        }
-
         protected async Task<List<Curso>> CursosMoodleList()
         {
             List<Curso> cursoSimples = await CursosMoodle.GetCourses();
             List<Curso> cursos = new List<Curso>();
-            foreach (var item in cursoSimples)
-            {
-                if (item.IdMoodle != 1)
-                {   
+            foreach (var item in cursoSimples) {
+                if (item.IdMoodle != 1) {   
                     Curso curso = new Curso();
                     curso = await CursosMoodle.GetCourseByID(item.IdMoodle);
                     cursos.Add(curso);
                 }
             }
-
             return cursos;
         }
-
-        protected void btnCursosDB_Click(object sender, EventArgs e)
-        {
-            Session["Moodle"] = false;
+        protected void LinkButtonPlatformCourse_Click(object sender, EventArgs e) {
+            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar", "Estudiantes" };
+            AdjustSettings(ColumnList, businessCourse.GetList(), columnListPlatform, courseListPlatform, "Platform");
         }
+        protected async void LinkButtonMoodleCourse_Click(object sender, EventArgs e) {
+            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "ImagenPortada", "Habilitar" };
+            AdjustSettings(ColumnList, await CursosMoodleList(), columnListMoodle, courseListMoodle, "Moodle");
+        }
+        protected async void LinkButtonEnable_Command(object sender, CommandEventArgs e) {
+            course = await CursosMoodle.GetCourseByID(Convert.ToInt32(e.CommandArgument));
+            lblNameFormCourse.Text = course.Nombre;
+            imagenPortadaFormCourse.ImageUrl = course.ImagenPortada;
+            string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.show();";
+            ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
+        }
+        protected void AdjustSettings(List<string> ColumnList, List<Curso> CourseList, Repeater repeaterColumnList, Repeater repeaterCourseList, string table) {
+            if(table == "Platform") {
+                LinkButtonPlatformCourse.Style.Value = " background-color: #7b1fa2; color:#fff";
+                LinkButtonMoodleCourse.Style.Value = " background-color: #fff; color:#7b1fa2; border: 1px solid #7b1fa2";
+                ShowOnlyPanel(PanelPlatformCourse);
+            } else if(table == "Moodle") {
+                LinkButtonMoodleCourse.Style.Value = " background-color: #7b1fa2; color:#fff";
+                LinkButtonPlatformCourse.Style.Value = " background-color: #fff; color:#7b1fa2; border: 1px solid #7b1fa2";
+                ShowOnlyPanel(PanelMoodleCourse);
+            }
+            repeaterColumnList.DataSource = ColumnList;
+            repeaterColumnList.DataBind();
+            repeaterCourseList.DataSource = CourseList;
+            repeaterCourseList.DataBind();
+        }
+        public void ShowOnlyPanel(Panel panelToShow) {
+            Panel[] allPanels = { PanelPlatformCourse, PanelMoodleCourse };
+            foreach (Panel panel in allPanels) {
+                panel.Visible = false;
+            }
+            panelToShow.Visible = true;
+        }
+        protected void LinkButtonConfirm_Click(object sender, EventArgs e) {
 
-        protected void btnCursosMoodle_Click(object sender, EventArgs e)
-        {
-            Session["Moodle"] = true;
+        }
+        protected void UploadPaymentForm(Usuario user, Curso course) {
+            
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MoodleConection
     public class CursosMoodle
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
-        private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d";
+        private static string token = "b8ea84e7c42a2e8aa2835ab45b7f4683"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683"
         public static async Task<Curso> GetCourseByID(int id)
         {
             try
@@ -46,13 +46,10 @@ namespace MoodleConection
 
                         foreach (var item in jArray)
                         {
-
-
                             curso.IdMoodle = (int)item["id"];
                             curso.Nombre = (string)item["fullname"];
                             curso.Visible = (bool)item["visible"];
                             curso.ImagenPortada = (string)item["courseimage"];
-
                         }
                         return curso;
                     }
