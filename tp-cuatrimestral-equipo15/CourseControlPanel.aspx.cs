@@ -20,29 +20,6 @@ namespace tp_cuatrimestral_equipo15 {
                 LinkButtonPlatformCourse_Click(sender, e);
             }
         }
-        protected string ImagenUrl(string imageUrl)
-        {
-
-            if (imageUrl.StartsWith("curso-img-"))
-            {
-                imageUrl = "~/Archivos/Imagenes/Curso/" + imageUrl;
-            }
-
-            return ResolveUrl(imageUrl);
-        }
-        protected async Task<List<Curso>> CursosMoodleList()
-        {
-            List<Curso> cursoSimples = await CursosMoodle.GetCourses();
-            List<Curso> cursos = new List<Curso>();
-            foreach (var item in cursoSimples) {
-                if (item.IdMoodle != 1) {   
-                    Curso curso = new Curso();
-                    curso = await CursosMoodle.GetCourseByID(item.IdMoodle);
-                    cursos.Add(curso);
-                }
-            }
-            return cursos;
-        }
         protected void LinkButtonPlatformCourse_Click(object sender, EventArgs e) {
             List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Precio", "ImagenPortada", "Programa", "Editar", "Eliminar", "Estudiantes" };
             AdjustSettings(ColumnList, businessCourse.GetList(), columnListPlatform, courseListPlatform, "Platform");
@@ -53,10 +30,26 @@ namespace tp_cuatrimestral_equipo15 {
         }
         protected async void LinkButtonEnable_Command(object sender, CommandEventArgs e) {
             course = await CursosMoodle.GetCourseByID(Convert.ToInt32(e.CommandArgument));
+            lblIdMoodle.Text = course.IdMoodle.ToString();
             lblNameFormCourse.Text = course.Nombre;
             imagenPortadaFormCourse.ImageUrl = course.ImagenPortada;
             string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.show();";
             ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
+        }
+        protected void LinkButtonConfirm_Click(object sender, EventArgs e) {
+            Curso courseToRegister = new Curso();
+            courseToRegister.IdMoodle = int.Parse(lblIdMoodle.Text);
+            courseToRegister.Nombre = lblNameFormCourse.Text;
+            courseToRegister.ImagenPortada = imagenPortadaFormCourse.ImageUrl;
+            courseToRegister.Resumen = txtResumeFormCourse.Text;
+            courseToRegister.Descripcion = txtDescriptionFormCourse.Text;
+            courseToRegister.ConocimientosRequeridos = txtRequiredKnowledgeFormCourse.Text;
+            courseToRegister.Programa = txtProgramFormCourse.Text;
+            courseToRegister.Precio = decimal.Parse(txtPriceFormCourse.Text);
+            businessCourse.Agregar(courseToRegister);
+            string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.hide();";
+            ScriptManager.RegisterStartupScript(this, GetType(), "CloseModalScript", script, true);
+            Response.Redirect("CourseControlPanel.aspx", false);
         }
         protected void AdjustSettings(List<string> ColumnList, List<Curso> CourseList, Repeater repeaterColumnList, Repeater repeaterCourseList, string table) {
             if(table == "Platform") {
@@ -80,11 +73,17 @@ namespace tp_cuatrimestral_equipo15 {
             }
             panelToShow.Visible = true;
         }
-        protected void LinkButtonConfirm_Click(object sender, EventArgs e) {
-
-        }
-        protected void UploadPaymentForm(Usuario user, Curso course) {
-            
+        protected async Task<List<Curso>> CursosMoodleList() {
+            List<Curso> cursoSimples = await CursosMoodle.GetCourses();
+            List<Curso> cursos = new List<Curso>();
+            foreach (var item in cursoSimples) {
+                if (item.IdMoodle != 1) {
+                    Curso curso = new Curso();
+                    curso = await CursosMoodle.GetCourseByID(item.IdMoodle);
+                    cursos.Add(curso);
+                }
+            }
+            return cursos;
         }
     }
 }

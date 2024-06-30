@@ -137,14 +137,13 @@ namespace Negocio
             }
         }
 
-        public int Agregar(Curso curso)
+        public bool Agregar(Curso curso)
         {
-            int idCurso;
             try
             {
                 accesoDatos.setearConsulta(
-                   "INSERT INTO Cursos(IdMoodle, Nombre, ImagenPortada, Descripcion, Programa, Precio, Visible, ConocimientosRequeridos,Resumen)" +
-                    " VALUES(@IdMoodle, @Nombre, @Descripcion, @ImagenPortada, @Programa, @Precio, @Visible, @ConocimientosRequeridos,@Resumen)"
+                   "INSERT INTO Cursos(IdMoodle, Nombre, ImagenPortada, Descripcion, ConocimientosRequeridos, Programa, Precio, Visible, Resumen)" +
+                    " VALUES(@IdMoodle, @Nombre, @ImagenPortada, @Descripcion, @ConocimientosRequeridos, @Programa, @Precio, @Visible, @Resumen)"
                 );
                 accesoDatos.setearParametros("@IdMoodle", curso.IdMoodle);
                 accesoDatos.setearParametros("@Nombre", curso.Nombre);
@@ -155,9 +154,7 @@ namespace Negocio
                 accesoDatos.setearParametros("@Precio", curso.Precio);
                 accesoDatos.setearParametros("@Visible", curso.Visible);
                 accesoDatos.setearParametros("@Resumen", curso.Resumen);
-
-                idCurso = accesoDatos.ejecutarScalar();
-                return idCurso;
+                return accesoDatos.ejecutarAccion();
             }
             catch (Exception exception)
             {

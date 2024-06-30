@@ -98,6 +98,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body">
+                                    <asp:Label ID="lblIdMoodle" runat="server" Visible="false"></asp:Label>
                                     <picture class="d-flex justify-content-center align-items-center" style="min-height: 150px; margin-bottom: 20px">
                                         <asp:Image ID="imagenPortadaFormCourse" runat="server" Style="max-width: 100%; height: 150px" />
                                     </picture>
