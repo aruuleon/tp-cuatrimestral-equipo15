@@ -59,14 +59,14 @@ namespace Negocio {
             smtpClient.Send(mailMessage);
         }
         public void SendEmailEnrollmentToAdministrator(Usuario user, Curso course) {
-            mailMessage = new MailMessage {
+            /*mailMessage = new MailMessage {
                 From = new MailAddress(ConfigurationManager.AppSettings["SMTP_EMAIL"]),
                 Subject = SUBJECT_STUDENT_ENROLLMENT_COURSE_CONFIRMATION,
                 Body = CreateEmailEnrollmentForAdministrator(user.Nombre, user.Apellido, course.Nombre),
                 IsBodyHtml = true
             };
             mailMessage.To.Add(ConfigurationManager.AppSettings["SMTP_EMAIL"]);
-            smtpClient.Send(mailMessage);
+            smtpClient.Send(mailMessage);*/
         }
         public string CreateEmailForStudent(string firstname) {
             return $@"

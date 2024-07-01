@@ -100,7 +100,7 @@ namespace Negocio {
         public string GetStatus(int userId, int courseId) {
             try {
                 //dataAccess.setearConsulta("SELECT Estado FROM Inscripciones WHERE IdUsuario = " + userId + " AND IdCurso = " + courseId);
-                dataAccess.setearConsulta("SELECT TOP 1 Estado FROM Inscripciones WHERE IDUsuario = " + userId + " AND IDCurso = " + courseId + " ORDER BY ID DESC");
+                dataAccess.setearConsulta("SELECT TOP 1 Estado FROM Inscripciones WHERE IDUsuario = " + userId + " AND IDCurso = " + courseId + " ORDER BY IDInscripcion  DESC");
                 dataAccess.ejecutarLectura();
                 if (dataAccess.Lector.Read()) {
                     return dataAccess.Lector.GetString(0);
@@ -154,7 +154,7 @@ namespace Negocio {
                     usuario.Apellido = (string)dataAccess.Lector["Apellido"];
                     usuario.Email = (string)dataAccess.Lector["Email"];
                     usuario.Avatar = (string)dataAccess.Lector["Avatar"];
-                    //usuario.IdMoodle= (int)dataAccess.Lector["IdMoodle"];
+                    usuario.IdMoodle= (int)dataAccess.Lector["IdMoodle"];
                     userList.Add(usuario);
                 }
                 return userList;
@@ -168,11 +168,11 @@ namespace Negocio {
                 dataAccess.cerrarConexion();
             }
         }
-        public void ModificarEnrollmentByIdUsuario(Usuario usuario, string state)
+        public void ModificarEnrollmentByIdUsuario(Usuario usuario, string state, int cursoID)
         {
             try
             {
-                dataAccess.setearConsulta("Update Inscripciones SET Estado= @State WHERE IDUsuario = " + usuario.ID);
+                dataAccess.setearConsulta("Update Inscripciones SET Estado= @State WHERE IDUsuario = " + usuario.ID + "and IDCurso = " + cursoID + "and Estado <> '" + StateType.REFUSED.ToString() + "'" + "and Estado <> '" + StateType.PENDING.ToString() + "'");
 
                 dataAccess.setearParametros("@State", state);
 

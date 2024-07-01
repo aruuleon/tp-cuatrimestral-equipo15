@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using MoodleConection;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,15 @@ namespace tp_cuatrimestral_equipo15
 
             courseId = !string.IsNullOrEmpty(Request.QueryString["CourseId"]) ? int.Parse(Request.QueryString["CourseId"]) : -1;
 
-            
 
 
-                List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Editar", "Suspender", "Estado" };
+            List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Activo", "Estado" };
                 List<Usuario> UserList;
 
                 
 
-                BusinessEnrollment businessEnrollment = new BusinessEnrollment();
-                UserList = businessEnrollment.GetUsersByCourse(courseId);
+                
+                UserList = usuariosFiltrada();
 
 
                 userList.DataSource = UserList;
@@ -36,13 +36,13 @@ namespace tp_cuatrimestral_equipo15
                 columnList.DataBind();
             
         }
-        protected void DeleteUserButton_Click(object sender, EventArgs e)
-        {
-            CommandEventArgs commandEventArgs = e as CommandEventArgs;
-            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            usuarioNegocio.Remove(int.Parse(commandEventArgs.CommandArgument.ToString()));
-            Response.Redirect(Request.RawUrl);
-        }
+        //protected void DeleteUserButton_Click(object sender, EventArgs e)
+        //{
+        //    CommandEventArgs commandEventArgs = e as CommandEventArgs;
+        //    UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+        //    usuarioNegocio.Remove(int.Parse(commandEventArgs.CommandArgument.ToString()));
+        //    Response.Redirect(Request.RawUrl);
+        //}
         protected string ImagenUrl(string imageUrl)
         {
 
@@ -53,6 +53,23 @@ namespace tp_cuatrimestral_equipo15
 
             return ResolveUrl(imageUrl);
         }
+
+        protected List<Usuario> usuariosFiltrada()
+        {
+            BusinessEnrollment businessEnrollment = new BusinessEnrollment();
+            List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(courseId);
+            List<Usuario> usuariosNuevos = new List<Usuario>();
+            foreach (var item in usuarios)
+            {
+                if(CheckEnrollmentStatus(item.ID) != "Rechazado")
+                {
+                   usuariosNuevos.Add(item);
+                }
+            }
+            return usuariosNuevos;
+            
+        }
+
 
         protected string CheckEnrollmentStatus(int userId)
         {
@@ -69,22 +86,47 @@ namespace tp_cuatrimestral_equipo15
                     status = "Activo";
                     break;
                 case StateType.REFUSED:
+                    status = "Rechazado";
+                    break;
+                case StateType.SUSPENDING:
                     status = "Suspendido";
                     break;
             }
             return status;
         }
-        protected string activeBotton2(int active)
+        protected string activeBotton2(int userId)
         {
-            if (active == 1)
+            BusinessEnrollment businessEnrollment = new BusinessEnrollment();
+            int active = 1;
+
+            switch (businessEnrollment.GetStatus(userId, courseId))
             {
-                return "bi bi bi-check-square text-success";
+                
+                case StateType.APPROVED:
+                    active = 1;
+                    break; 
+                case StateType.SUSPENDING:
+                    active = 0;
+                    break;
+                case StateType.PENDING:
+                    active = 2;
+                    break;
             }
 
-            return "bi bi-x-square text-danger";
+
+            if (active == 1)
+            {
+                return "bi bi-check-square text-success";
+            }
+            else if (active ==0)
+            {
+                return "bi bi-x-square text-danger";
+            }
+
+            return "bi bi-circle-fill text-warning";
         }
 
-        protected void LinkButtonActivate2_Command(object sender, CommandEventArgs e)
+        protected async void LinkButtonActivate2_Command(object sender, CommandEventArgs e)
         {
             CommandEventArgs commandEventArgs = e as CommandEventArgs;
             int id = int.Parse(commandEventArgs.CommandArgument.ToString());
@@ -96,23 +138,26 @@ namespace tp_cuatrimestral_equipo15
             Usuario usuario = usuarioNegocio.ListarById(id);
             string status = CheckEnrollmentStatus(usuario.ID);
 
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            Curso curso = cursoNegocio.BuscarPorId(courseId);
+
 
 
             if (status == "Activo")
             {
-                businessEnrol.ModificarEnrollmentByIdUsuario(usuario, StateType.REFUSED);
-                activar = 0;
-            }
-            else
-            {
-                businessEnrol.ModificarEnrollmentByIdUsuario(usuario, StateType.APPROVED);
-
+                businessEnrol.ModificarEnrollmentByIdUsuario(usuario, StateType.SUSPENDING, courseId);
                 activar = 1;
             }
-            //cursoNegocio.Actualizar(curso);
+            else if (status == "Suspendido")
+            {
+                businessEnrol.ModificarEnrollmentByIdUsuario(usuario, StateType.APPROVED, courseId);
 
-            //await CursosMoodle.VisibleCourse(curso.IdMoodle, activar);
-            Response.Redirect("StudentOnCoursePanel.aspx?", false);
+                activar = 0;
+            }
+            else return;
+
+            await UsuariosMoodle.SuspendOrActivateUser(curso.IdMoodle,usuario.IdMoodle,activar);
+            Response.Redirect("StudentOnCoursePanel.aspx?CourseId=" + courseId, false);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="StudentOnCoursePanel.aspx.cs" Inherits="tp_cuatrimestral_equipo15.StudenOnCoursePanel" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="StudentOnCoursePanel.aspx.cs" Inherits="tp_cuatrimestral_equipo15.StudenOnCoursePanel"  Async="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
@@ -30,11 +30,8 @@
                                 <img src='<%# ImagenUrl(Eval("Avatar").ToString())%>' class="mx-auto d-block" alt="Avatar" style="width: 50px; height: 50px;">
                             </td>
                             <td class="text-center">
-                                <asp:LinkButton ID="LinkButtonEditUser" runat="server" CssClass="fa fa-edit text-success"></asp:LinkButton>
-                            </td>
-                            <td class="text-center">
                                 <%--<asp:LinkButton ID="LinkButtonRemoveUser" runat="server" OnCommand="DeleteUserButton_Click" CommandArgument='<%# Eval("ID") %>' CssClass="bi bi-person-fill-x text-danger"></asp:LinkButton>--%>
-                                <asp:LinkButton ID= "LinkButtonActivate2" runat="server" OnCommand="LinkButtonActivate2_Command" CommandArgument='<%#Eval("ID") %>' CssClass='<%# activeBotton2((int)Eval("Suspendido")) %>'></asp:LinkButton>
+                                <asp:LinkButton ID= "LinkButtonActivate2" runat="server" OnCommand="LinkButtonActivate2_Command" CommandArgument='<%#Eval("ID") %>' CssClass='<%# activeBotton2((int)Eval("ID")) %>'></asp:LinkButton>
 
                             </td>
                             <td class="text-center">

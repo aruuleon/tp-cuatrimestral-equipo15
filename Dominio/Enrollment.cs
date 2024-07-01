@@ -9,6 +9,7 @@ namespace Dominio {
         public const string PENDING = "PENDING";
         public const string APPROVED = "APPROVED";
         public const string REFUSED = "REFUSED";
+        public const string SUSPENDING = "SUSPENDING";
     }
     public class Enrollment {
         public long ID { get; set; }

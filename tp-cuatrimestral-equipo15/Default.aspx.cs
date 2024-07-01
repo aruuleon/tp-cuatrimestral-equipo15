@@ -13,10 +13,11 @@ namespace tp_cuatrimestral_equipo15 {
 
         public string ImageUrl;
         protected void Page_Load(object sender, EventArgs e) {
-          
+
             CursoNegocio cursoNegocio = new CursoNegocio();
             ActualizarCursos();
-            Session.Add("listaCursos", cursoNegocio.GetList());
+
+            Session.Add("listaCursos", FiltrarActivos());
             listaCursos.DataSource = Session["listaCursos"];
             listaCursos.DataBind();
         }
@@ -38,6 +39,22 @@ namespace tp_cuatrimestral_equipo15 {
                 }
             }
         }
+
+        protected List<Curso> FiltrarActivos()
+        {
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            List<Curso> cursoSimples = cursoNegocio.GetList();
+            List<Curso> cursos = new List<Curso>();
+            foreach (var item in cursoSimples)
+            {
+                if (item.Visible)
+                {
+                    cursos.Add(item);
+                }
+            }
+            return cursos;
+        }
+
         protected string ImagenUrl(string imageUrl)
         {
 
