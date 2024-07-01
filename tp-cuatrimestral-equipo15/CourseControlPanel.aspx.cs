@@ -143,7 +143,14 @@ namespace tp_cuatrimestral_equipo15 {
 
             return "bi bi-x-square text-danger";
         }
+        protected void LinkButtonStudents_Command(object sender, CommandEventArgs e)
+        {
 
+            CommandEventArgs commandEventArgs = e as CommandEventArgs;
+            int id = int.Parse(commandEventArgs.CommandArgument.ToString());
+            Response.Redirect("StudentOnCoursePanel.aspx?CourseId=" + id, false);
+        }
 
+        
     }
 }

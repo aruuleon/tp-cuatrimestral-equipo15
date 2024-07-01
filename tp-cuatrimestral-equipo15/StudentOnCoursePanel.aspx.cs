@@ -68,8 +68,51 @@ namespace tp_cuatrimestral_equipo15
                 case StateType.APPROVED:
                     status = "Activo";
                     break;
+                case StateType.REFUSED:
+                    status = "Suspendido";
+                    break;
             }
             return status;
+        }
+        protected string activeBotton2(int active)
+        {
+            if (active == 1)
+            {
+                return "bi bi bi-check-square text-success";
+            }
+
+            return "bi bi-x-square text-danger";
+        }
+
+        protected void LinkButtonActivate2_Command(object sender, CommandEventArgs e)
+        {
+            CommandEventArgs commandEventArgs = e as CommandEventArgs;
+            int id = int.Parse(commandEventArgs.CommandArgument.ToString());
+            int activar;
+            BusinessEnrollment businessEnrol = new BusinessEnrollment();
+            Enrollment enrollment = new Enrollment();
+
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            Usuario usuario = usuarioNegocio.ListarById(id);
+            string status = CheckEnrollmentStatus(usuario.ID);
+
+
+
+            if (status == "Activo")
+            {
+                businessEnrol.ModificarEnrollmentByIdUsuario(usuario, StateType.REFUSED);
+                activar = 0;
+            }
+            else
+            {
+                businessEnrol.ModificarEnrollmentByIdUsuario(usuario, StateType.APPROVED);
+
+                activar = 1;
+            }
+            //cursoNegocio.Actualizar(curso);
+
+            //await CursosMoodle.VisibleCourse(curso.IdMoodle, activar);
+            Response.Redirect("StudentOnCoursePanel.aspx?", false);
         }
     }
 }

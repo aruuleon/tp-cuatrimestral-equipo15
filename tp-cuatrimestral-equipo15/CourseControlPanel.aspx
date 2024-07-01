@@ -45,7 +45,9 @@
                                      <asp:LinkButton ID="LinkButtonActivate" runat="server" OnCommand="LinkButtonActivate_Command" CommandArgument='<%# Eval("ID") %>' CssClass='<%# activeBotton((bool)Eval("Visible")) %>'></asp:LinkButton>
                                 </td>
                                 <td class="text-center">
-                                    <asp:LinkButton ID="LinkButtonStudents" runat="server" CssClass="fas fa-users text-warning"></asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButtonStudents" runat="server" OnCommand="LinkButtonStudents_Command" CommandArgument='<%#Eval("ID") %>' CssClass="fas fa-users text-warning"></asp:LinkButton>
+                                  
+
                                 </td>
                             </tr>
                         </ItemTemplate>

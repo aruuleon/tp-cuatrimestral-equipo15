@@ -33,7 +33,9 @@
                                 <asp:LinkButton ID="LinkButtonEditUser" runat="server" CssClass="fa fa-edit text-success"></asp:LinkButton>
                             </td>
                             <td class="text-center">
-                                <asp:LinkButton ID="LinkButtonRemoveUser" runat="server" OnCommand="DeleteUserButton_Click" CommandArgument='<%# Eval("ID") %>' CssClass="bi bi-person-fill-x text-danger"></asp:LinkButton>
+                                <%--<asp:LinkButton ID="LinkButtonRemoveUser" runat="server" OnCommand="DeleteUserButton_Click" CommandArgument='<%# Eval("ID") %>' CssClass="bi bi-person-fill-x text-danger"></asp:LinkButton>--%>
+                                <asp:LinkButton ID= "LinkButtonActivate2" runat="server" OnCommand="LinkButtonActivate2_Command" CommandArgument='<%#Eval("ID") %>' CssClass='<%# activeBotton2((int)Eval("Suspendido")) %>'></asp:LinkButton>
+
                             </td>
                             <td class="text-center">
                                 <p><%# CheckEnrollmentStatus((int)Eval("ID")) %></p>

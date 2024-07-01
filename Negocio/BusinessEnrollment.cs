@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,7 +100,7 @@ namespace Negocio {
         public string GetStatus(int userId, int courseId) {
             try {
                 //dataAccess.setearConsulta("SELECT Estado FROM Inscripciones WHERE IdUsuario = " + userId + " AND IdCurso = " + courseId);
-                dataAccess.setearConsulta("SELECT TOP 1 Estado FROM Inscripciones WHERE IDUsuario = " + userId + " AND IDCurso = " + courseId + " ORDER BY IDInscripcion DESC");
+                dataAccess.setearConsulta("SELECT TOP 1 Estado FROM Inscripciones WHERE IDUsuario = " + userId + " AND IDCurso = " + courseId + " ORDER BY ID DESC");
                 dataAccess.ejecutarLectura();
                 if (dataAccess.Lector.Read()) {
                     return dataAccess.Lector.GetString(0);
@@ -143,12 +144,12 @@ namespace Negocio {
             List<Usuario> userList = new List<Usuario>();
             try
             {
-                dataAccess.setearConsulta("SELECT Id, Nombre, Apellido, Email, Avatar FROM Inscripciones I INNER JOIN Usuarios U ON U.ID = I.IdUsuario WHERE IdCurso = " + courseId + " AND Estado <> '" + StateType.REFUSED.ToString() + "'");
+                dataAccess.setearConsulta("SELECT U.ID, U.IdMoodle, Nombre, Apellido, Email, Avatar FROM Inscripciones I INNER JOIN Usuarios U ON U.ID = I.IdUsuario WHERE I.IDCurso = "+ courseId); //+ " AND Estado <> '" + StateType.REFUSED.ToString() + "'");
                 dataAccess.ejecutarLectura();
                 while (dataAccess.Lector.Read())
                 {
                     Usuario usuario = new Usuario();
-                    usuario.ID = (int)dataAccess.Lector["Id"];
+                    usuario.ID = (int)dataAccess.Lector["ID"];
                     usuario.Nombre = (string)dataAccess.Lector["Nombre"];
                     usuario.Apellido = (string)dataAccess.Lector["Apellido"];
                     usuario.Email = (string)dataAccess.Lector["Email"];
@@ -161,6 +162,28 @@ namespace Negocio {
             catch (Exception exception)
             {
                 throw exception;
+            }
+            finally
+            {
+                dataAccess.cerrarConexion();
+            }
+        }
+        public void ModificarEnrollmentByIdUsuario(Usuario usuario, string state)
+        {
+            try
+            {
+                dataAccess.setearConsulta("Update Inscripciones SET Estado= @State WHERE IDUsuario = " + usuario.ID);
+
+                dataAccess.setearParametros("@State", state);
+
+
+
+                dataAccess.ejecutarAccion();
+
+            }
+            catch (Exception excepción)
+            {
+                throw excepción;
             }
             finally
             {
