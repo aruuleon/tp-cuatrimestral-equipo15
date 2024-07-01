@@ -172,11 +172,9 @@ namespace Negocio {
         {
             try
             {
-                dataAccess.setearConsulta("Update Inscripciones SET Estado= @State WHERE IDUsuario = " + usuario.ID + "and IDCurso = " + cursoID + "and Estado <> '" + StateType.REFUSED.ToString() + "'" + "and Estado <> '" + StateType.PENDING.ToString() + "'");
+                dataAccess.setearConsulta("Update Inscripciones SET Estado= '" + state + "' WHERE IDUsuario = " + usuario.ID + "and IDCurso = " + cursoID + "and Estado <> '" + StateType.REFUSED.ToString() + "'" + "and Estado <> '" + StateType.PENDING.ToString() + "'");
 
-                dataAccess.setearParametros("@State", state);
-
-
+                //dataAccess.setearParametros("@State", state);
 
                 dataAccess.ejecutarAccion();
 

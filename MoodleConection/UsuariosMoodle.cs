@@ -511,5 +511,71 @@ namespace MoodleConection
                 throw ex;
             }
         }
+
+        public static async Task<string> GetUserStatusInCourse(int idCourse, int idUsuario)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string function = "core_enrol_get_enrolled_users";
+
+                    client.BaseAddress = new Uri(moodleUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+                    Dictionary<string, string> postData = new Dictionary<string, string>
+                {
+                    { "courseid", idCourse.ToString() }
+                };
+
+                    FormUrlEncodedContent content = new FormUrlEncodedContent(postData);
+
+                    HttpResponseMessage response = await client.PostAsync($"/webservice/rest/server.php?wstoken={token}&wsfunction={function}&moodlewsrestformat=json", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+
+                        if (result.StartsWith("{\"exception\""))
+                            return "error";
+
+                        JArray jArray = JArray.Parse(result);
+
+                        foreach (var item in jArray)
+                        {
+
+                            if ((int)item["id"] == idUsuario)
+                            {
+                                int IdMoodle = (int)item["id"];
+
+                                List<Curso> inscriptos = await CursosMoodle.GetCourseByStudent(IdMoodle);
+
+                                foreach (var ins in inscriptos)
+                                {
+                                    if (ins.IdMoodle == idCourse)
+                                    {
+                                        return "Activo";
+                                    }
+                                }
+                                return "Suspendido";
+
+                            }
+                        }
+                        return "No inscripto";
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: {response.StatusCode}");
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

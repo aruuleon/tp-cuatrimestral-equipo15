@@ -19,21 +19,17 @@ namespace tp_cuatrimestral_equipo15
 
             courseId = !string.IsNullOrEmpty(Request.QueryString["CourseId"]) ? int.Parse(Request.QueryString["CourseId"]) : -1;
 
-
+            
 
             List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Activo", "Estado" };
-                List<Usuario> UserList;
+            List<Usuario> UserList;
 
-                
+            UserList = usuariosFiltrada();
 
-                
-                UserList = usuariosFiltrada();
-
-
-                userList.DataSource = UserList;
-                userList.DataBind();
-                columnList.DataSource = ColumnList;
-                columnList.DataBind();
+            userList.DataSource = UserList;
+            userList.DataBind();
+            columnList.DataSource = ColumnList;
+            columnList.DataBind();
             
         }
         //protected void DeleteUserButton_Click(object sender, EventArgs e)
@@ -54,11 +50,40 @@ namespace tp_cuatrimestral_equipo15
             return ResolveUrl(imageUrl);
         }
 
-        protected List<Usuario> usuariosFiltrada()
+        protected async void ActulizarEstado()
         {
             BusinessEnrollment businessEnrollment = new BusinessEnrollment();
             List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(courseId);
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            Curso curso = cursoNegocio.BuscarPorId(courseId);
+            BusinessEnrollment businessEnrol = new BusinessEnrollment();
+
+            foreach (var user in usuarios)
+            {
+                string status = await UsuariosMoodle.GetUserStatusInCourse(curso.IdMoodle,user.IdMoodle);
+                if (status == "Activo")
+                {
+                    businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.APPROVED, courseId);
+                }
+                else if (status == "Suspendido")
+                {
+                    businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, courseId);
+                }
+                else return;
+                
+
+            }
+        }
+
+
+
+        protected List<Usuario> usuariosFiltrada()
+        {
+            ActulizarEstado();
+            BusinessEnrollment businessEnrollment = new BusinessEnrollment();
+            List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(courseId);
             List<Usuario> usuariosNuevos = new List<Usuario>();
+
             foreach (var item in usuarios)
             {
                 if(CheckEnrollmentStatus(item.ID) != "Rechazado")
@@ -92,6 +117,7 @@ namespace tp_cuatrimestral_equipo15
                     status = "Suspendido";
                     break;
             }
+
             return status;
         }
         protected string activeBotton2(int userId)
