@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,32 +14,58 @@ namespace tp_cuatrimestral_equipo15
 {
     public partial class StudenOnCoursePanel : System.Web.UI.Page
     {
-        public int courseId; 
-        protected void Page_Load(object sender, EventArgs e)
+        public int courseId;
+        protected async void Page_Load(object sender, EventArgs e)
         {
-
             courseId = !string.IsNullOrEmpty(Request.QueryString["CourseId"]) ? int.Parse(Request.QueryString["CourseId"]) : -1;
-
-            
+            if (courseId != -1)
+            {
+                await ActualizarEstado();
+            }
 
             List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Activo", "Estado" };
-            List<Usuario> UserList;
-
-            UserList = usuariosFiltrada();
+            List<Usuario> UserList = usuariosFiltrada();
 
             userList.DataSource = UserList;
             userList.DataBind();
             columnList.DataSource = ColumnList;
             columnList.DataBind();
-            
         }
-        //protected void DeleteUserButton_Click(object sender, EventArgs e)
-        //{
-        //    CommandEventArgs commandEventArgs = e as CommandEventArgs;
-        //    UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-        //    usuarioNegocio.Remove(int.Parse(commandEventArgs.CommandArgument.ToString()));
-        //    Response.Redirect(Request.RawUrl);
-        //}
+
+        protected async Task ActualizarEstado()
+        {
+            BusinessEnrollment businessEnrollment = new BusinessEnrollment();
+            List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(courseId);
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            Curso curso = cursoNegocio.BuscarPorId(courseId);
+            BusinessEnrollment businessEnrol = new BusinessEnrollment();
+
+            List<Task> tasks = new List<Task>();
+
+            foreach (var user in usuarios)
+            {
+                tasks.Add(UpdateUserStatusAsync(user, curso.IdMoodle, courseId, businessEnrol));
+            }
+
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task UpdateUserStatusAsync(Usuario user, int cursoIdMoodle, int courseId, BusinessEnrollment businessEnrol)
+        {
+            string status = await UsuariosMoodle.GetUserStatusInCourse(cursoIdMoodle, user.IdMoodle);
+
+            if (status == "Activo")
+            {
+                 businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.APPROVED, courseId);
+            }
+            else if (status == "Suspendido")
+            {
+                 businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, courseId);
+            }
+        }
+
+
+
         protected string ImagenUrl(string imageUrl)
         {
 
@@ -50,36 +77,9 @@ namespace tp_cuatrimestral_equipo15
             return ResolveUrl(imageUrl);
         }
 
-        protected async void ActulizarEstado()
-        {
-            BusinessEnrollment businessEnrollment = new BusinessEnrollment();
-            List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(courseId);
-            CursoNegocio cursoNegocio = new CursoNegocio();
-            Curso curso = cursoNegocio.BuscarPorId(courseId);
-            BusinessEnrollment businessEnrol = new BusinessEnrollment();
-
-            foreach (var user in usuarios)
-            {
-                string status = await UsuariosMoodle.GetUserStatusInCourse(curso.IdMoodle,user.IdMoodle);
-                if (status == "Activo")
-                {
-                    businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.APPROVED, courseId);
-                }
-                else if (status == "Suspendido")
-                {
-                    businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, courseId);
-                }
-                else return;
-                
-
-            }
-        }
-
-
 
         protected List<Usuario> usuariosFiltrada()
         {
-            ActulizarEstado();
             BusinessEnrollment businessEnrollment = new BusinessEnrollment();
             List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(courseId);
             List<Usuario> usuariosNuevos = new List<Usuario>();
