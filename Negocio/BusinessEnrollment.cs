@@ -144,7 +144,7 @@ namespace Negocio {
             List<Usuario> userList = new List<Usuario>();
             try
             {
-                dataAccess.setearConsulta("SELECT U.ID, U.IdMoodle, Nombre, Apellido, Email, Avatar FROM Inscripciones I INNER JOIN Usuarios U ON U.ID = I.IdUsuario WHERE I.IDCurso = "+ courseId); //+ " AND Estado <> '" + StateType.REFUSED.ToString() + "'");
+                dataAccess.setearConsulta("SELECT U.ID, U.IdMoodle, Nombre, Apellido, Email, Avatar FROM Inscripciones I INNER JOIN Usuarios U ON U.ID = I.IdUsuario WHERE I.IDCurso = "+ courseId + " AND Estado <> '" + StateType.REFUSED.ToString() + "'");
                 dataAccess.ejecutarLectura();
                 while (dataAccess.Lector.Read())
                 {

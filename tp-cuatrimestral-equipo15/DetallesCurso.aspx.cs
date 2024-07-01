@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using Dominio;
+using MoodleConection;
 using Negocio;
 
 namespace tp_cuatrimestral_equipo15
@@ -21,6 +22,7 @@ namespace tp_cuatrimestral_equipo15
         private EmailService emailService = new EmailService();
         public Curso course;
         public string ImagenPortada;
+        int id;
         protected void Page_Load(object sender, EventArgs e) {
 
             List<string> listaInformacionDocente = new List<string> {
@@ -30,8 +32,9 @@ namespace tp_cuatrimestral_equipo15
                 "Maximiliano es creador de contenido y divulgador de temas relacionados con la programación y la tecnología por medio de sus canales en YouTube e Instagram donde lo encuentran como “Maxi Programa”."
             };
             CursoNegocio cursoNegocio = new CursoNegocio();
-            int id = !string.IsNullOrEmpty(Request.QueryString["id"]) ? int.Parse(Request.QueryString["id"]) : 1;
+            id = !string.IsNullOrEmpty(Request.QueryString["id"]) ? int.Parse(Request.QueryString["id"]) : 1;
             course = cursoNegocio.BuscarPorId(id);
+            ActulizarEstado();
             ImagenPortada = course.ImagenPortada.StartsWith("curso-img-") ? "~/Archivos/Imagenes/Curso/" + course.ImagenPortada : ImagenPortada = course.ImagenPortada;
 
             Usuario user = (Usuario)Session["usuario"];
@@ -80,7 +83,37 @@ namespace tp_cuatrimestral_equipo15
             UsuariosXCursosNegocio usuariosXCursosNegocio = new UsuariosXCursosNegocio();
             return usuariosXCursosNegocio.CheckIfUserHasCourse(courseId, userId);
         }
+
+        protected async void ActulizarEstado()
+        {
+            BusinessEnrollment businessEnrollment = new BusinessEnrollment();
+            List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(id);
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            Curso curso = cursoNegocio.BuscarPorId(id);
+            BusinessEnrollment businessEnrol = new BusinessEnrollment();
+
+            foreach (var user in usuarios)
+            {
+                string status = await UsuariosMoodle.GetUserStatusInCourse(curso.IdMoodle, user.IdMoodle);
+                if (status == "Activo")
+                {
+                    businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.APPROVED, id);
+                }
+                else if (status == "Suspendido")
+                {
+                    businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, id);
+                }
+                else return;
+
+
+            }
+        }
+
         protected void CheckEnrollmentStatus(int userId, int courseId) {
+
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            Curso curso = cursoNegocio.BuscarPorId(courseId);
+
             switch (businessEnrollment.GetStatus(userId, courseId)) {
                 case StateType.PENDING:
                     LinkButtonGetOrView.Text = "Solicitud en Proceso";
@@ -89,11 +122,17 @@ namespace tp_cuatrimestral_equipo15
                 case StateType.APPROVED:
                     LinkButtonGetOrView.Text = "Ver Curso";
                     LinkButtonGetOrView.CssClass += " btn btn-success";
+                    LinkButtonGetOrView.PostBackUrl = "http://localhost/course/view.php?id=" + curso.IdMoodle;
                     LabelPrice.Visible = false;
+                    break;
+                case StateType.SUSPENDING:
+                    LinkButtonGetOrView.Text = "Suspendido";
+                    LinkButtonGetOrView.CssClass += " btn btn-danger";
                     break;
                 default:
                     LinkButtonGetOrView.Text = "Obtener Curso";
                     LinkButtonGetOrView.CssClass += " btn btn-primary";
+                    
                     break;
             }
         }
