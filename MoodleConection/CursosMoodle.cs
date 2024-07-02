@@ -14,7 +14,7 @@ namespace MoodleConection
     public class CursosMoodle
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
-        private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "b8ea84e7c42a2e8aa2835ab45b7f4683"; "77c9cceb61d68808c3fb68bf95ceefdf"
+        private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "c27e267e21295ee4339500464a1e47aa"; "77c9cceb61d68808c3fb68bf95ceefdf"
         public static async Task<Curso> GetCourseByID(int id)
         {
             try
