@@ -13,9 +13,10 @@ namespace Negocio {
     public class EmailService {
         private MailMessage mailMessage;
         private SmtpClient smtpClient;
-        private const string SUBJECT_STUDENT_ACCOUNT_REGISTRATION = "MaxiPrograma - Registro Exitoso";
+        private const string SUBJECT_STUDENT_ACCOUNT_REGISTRATION = "MaxiPrograma - Registro exitoso";
         private const string SUBJECT_ADMINISTRATOR_ACCOUNT_REGISTRATION = "MaxiPrograma - Tenes un nuevo estudiante";
-        private const string SUBJECT_STUDENT_ENROLLMENT_COURSE_CONFIRMATION = "MaxiPrograma - Inscripción a Curso";
+        private const string SUBJECT_STUDENT_ENROLLMENT_COURSE_CONFIRMATION = "MaxiPrograma - Inscripción a curso";
+        private const string SUBJECT_RECOVER_PASSWORD = "MaxiPrograma - Recuperaciòn de contraseña";
 
         public EmailService() {
             smtpClient = new SmtpClient();
@@ -67,6 +68,16 @@ namespace Negocio {
             };
             mailMessage.To.Add(ConfigurationManager.AppSettings["SMTP_EMAIL"]);
             smtpClient.Send(mailMessage);*/
+        }
+        public void SendEmailRecoverPassword(string email) {
+            mailMessage = new MailMessage {
+                From = new MailAddress(ConfigurationManager.AppSettings["SMTP_EMAIL"]),
+                Subject = SUBJECT_RECOVER_PASSWORD,
+                Body = "",
+                IsBodyHtml = true
+            };
+            mailMessage.To.Add(email);
+            smtpClient.Send(mailMessage);
         }
         public string CreateEmailForStudent(string firstname) {
             return $@"

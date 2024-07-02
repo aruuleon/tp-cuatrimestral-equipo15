@@ -30,8 +30,33 @@
             <asp:Label Text="Email o Contraseña incorectos" runat="server"  CssClass="validacion_2" Visible="false" ID="lblIncorrecto" />
             <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-success w-50 mx-auto mb-3 d-block" style="margin-top: 30px" Text="Ingresar" OnClick="LoginButton_Click" />
             <div style="margin-top: 40px">
-                <p style="text-align: center"> Todavía no te registraste? <a href="Register.aspx"> Registrarme </a> </p>
-                <p style="text-align: center"> Olvidaste tu contraseña? <a href="#"> Recuperar </a> </p>
+                <p style="text-align: center"> Todavía no te registraste? 
+                    <asp:HyperLink ID="HyperLinkRegister" runat="server" NavigateUrl="~/Register.aspx">Registrarme</asp:HyperLink> 
+                </p>
+                <p style="text-align: center"> Olvidaste tu contraseña? 
+                    <asp:LinkButton ID="LinkButtonRecoverPassword" runat="server" CssClass="link-style" OnClick="LinkButtonRecoverPassword_Click">Recuperar</asp:LinkButton>
+                </p>
+            </div>
+            <div id="ModalFormRecoverPassword" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Recuperar contraseña</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-secondary" style="font-size: 14px">Te enviaremos un correo electrónico con la nueva contraseña para que puedas ingresar a la plataforma. Podrás cambiar la misma cuando quieras.</p>
+                            <br />
+                            <div class="form-floating mb-3">
+                                <asp:TextBox ID="txtEmailFormBuy" runat="server" CssClass="form-control" TextMode="Email" placeholder="Correo Electrónico"></asp:TextBox>
+                                <label for="floatingInput">Correo Electrónico</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center align-items-center">
+                            <asp:LinkButton ID="LinkButtonSendEmail" runat="server" CssClass="btn w-25" style="background-color: #7b1fa2; color: #fff" OnClick="LinkButtonSendEmail_Click">Enviar</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

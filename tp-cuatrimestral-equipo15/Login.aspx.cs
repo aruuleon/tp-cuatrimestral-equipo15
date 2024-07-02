@@ -9,6 +9,7 @@ using Negocio;
 
 namespace tp_cuatrimestral_equipo15 {
     public partial class Login : System.Web.UI.Page {
+        EmailService emailService = new EmailService();
         Usuario usuario=new Usuario();
         protected void Page_Load(object sender, EventArgs e) {
 
@@ -66,6 +67,13 @@ namespace tp_cuatrimestral_equipo15 {
             {
                 Session.Add("error", exception.ToString());
             }
+        }
+        protected void LinkButtonRecoverPassword_Click(object sender, EventArgs e) {
+            string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormRecoverPassword')); myModal.show();";
+            ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
+        }
+        protected void LinkButtonSendEmail_Click(object sender, EventArgs e) {
+            
         }
     }
 }
