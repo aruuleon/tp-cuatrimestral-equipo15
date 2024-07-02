@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using MoodleConection;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -21,15 +22,21 @@ namespace tp_cuatrimestral_equipo15 {
             columnList.DataSource = ColumnList;
             columnList.DataBind();
         }
-        protected void LinkButton_Command(object sender, CommandEventArgs e) {
+        protected async void LinkButton_Command(object sender, CommandEventArgs e) {
             string[] args = e.CommandArgument.ToString().Split('|');
             int enrollmentId = Convert.ToInt32(args[0]);
             Usuario user = businessUser.ListarById(Convert.ToInt32(args[1]));
             Curso course = businessCourse.BuscarPorId(Convert.ToInt32(args[2]));
             int action = e.CommandName == StateType.APPROVED ? 1 : 2;
-            if(businessEnrollment.ApproveOrReject(action, enrollmentId)) {
+            if (action == 1)
+            {
+                await UsuariosMoodle.EnrolStudent(course.IdMoodle,user.IdMoodle);
+            }
+            if (businessEnrollment.ApproveOrReject(action, enrollmentId)) {
                 //emailService.SendEmailEnrollmentToStudent(user, course, action);
+                
                 Response.Redirect(Request.RawUrl);
+                
             }
         }
     }

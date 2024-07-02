@@ -85,30 +85,8 @@ namespace tp_cuatrimestral_equipo15
             return usuariosXCursosNegocio.CheckIfUserHasCourse(courseId, userId);
         }
 
-        //protected async void ActulizarEstado()
-        //{
-        //    BusinessEnrollment businessEnrollment = new BusinessEnrollment();
-        //    List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(id);
-        //    CursoNegocio cursoNegocio = new CursoNegocio();
-        //    Curso curso = cursoNegocio.BuscarPorId(id);
-        //    BusinessEnrollment businessEnrol = new BusinessEnrollment();
-
-        //    foreach (var user in usuarios)
-        //    {
-        //        string status = await UsuariosMoodle.GetUserStatusInCourse(curso.IdMoodle, user.IdMoodle);
-        //        if (status == "Activo")
-        //        {
-        //            businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.APPROVED, id);
-        //        }
-        //        else if (status == "Suspendido")
-        //        {
-        //            businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, id);
-        //        }
-        //        else return;
-
-
-        //    }
-        //}
+       
+  
 
         protected void CheckEnrollmentStatus(int userId, int courseId) {
 
@@ -168,6 +146,10 @@ namespace tp_cuatrimestral_equipo15
             else if (status == "Suspendido")
             {
                 businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, courseId);
+            }
+            else if (status == "No inscripto")
+            {
+                businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.REFUSED, courseId);
             }
         }
     }

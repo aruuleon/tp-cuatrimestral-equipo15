@@ -62,6 +62,11 @@ namespace tp_cuatrimestral_equipo15
             {
                  businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, courseId);
             }
+            else if (status == "No inscripto")
+            {
+                businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.REFUSED, courseId);
+            }
+            
         }
 
 
