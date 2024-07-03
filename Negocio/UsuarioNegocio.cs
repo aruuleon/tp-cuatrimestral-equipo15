@@ -80,11 +80,10 @@ namespace Negocio
         public Usuario GetByEmail(string email) {
             try {
                 Usuario usuario = new Usuario();
-                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Email, Contrasenia, Suspendido from Usuarios WHERE Email = " + email);
+                accesoDatos.setearConsulta("SELECT ID, Nombre, Email, Contrasenia, Suspendido from Usuarios WHERE Email = '" + email + "'");
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read()) {
-                    usuario.ID = (int)accesoDatos.Lector["Id"];
-                    usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.ID = (int)accesoDatos.Lector["ID"];
                     usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
                     usuario.Email = (string)accesoDatos.Lector["Email"];
                     usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
@@ -97,14 +96,12 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        public bool Update(Usuario user) {
+        public void Update(Usuario user) {
             try {
-                Usuario usuario = new Usuario();
-                accesoDatos.setearConsulta("Update Usuarios SET Nombre=@Nombre, Email=@Email, Contrasenia=@Contrasenia, WHERE ID = " + usuario.ID);
-                accesoDatos.setearParametros("@Nombre", usuario.Nombre);
-                accesoDatos.setearParametros("@Email", usuario.Email);
-                accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
-                return accesoDatos.ejecutarAccion();
+                accesoDatos.setearConsulta("Update Usuarios SET Contrasenia=@Contrasenia WHERE ID = @ID");
+                accesoDatos.setearParametros("@Contrasenia", user.Contrasenia);
+                accesoDatos.setearParametros("@ID", user.ID);
+                accesoDatos.ejecutarAccion();
             } catch (Exception excepción) {
                 throw excepción;
             } finally {
@@ -226,7 +223,6 @@ namespace Negocio
                 accesoDatos.setearParametros("@Tipo", usuario.TipoUsuario);
                 accesoDatos.setearParametros("@Avatar", usuario.Avatar);
                 accesoDatos.ejecutarAccion();
-
             }
             catch (Exception excepción)
             {

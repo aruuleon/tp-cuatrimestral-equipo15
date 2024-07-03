@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="tp_cuatrimestral_equipo15.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="tp_cuatrimestral_equipo15.Login" Async="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <style>
      .validacion{
@@ -52,9 +52,17 @@
                                 <label for="floatingInput">Correo Electrónico</label>
                             </div>
                         </div>
-                        <div class="modal-footer d-flex justify-content-center align-items-center">
-                            <asp:LinkButton ID="LinkButtonSendEmail" runat="server" CssClass="btn w-25" style="background-color: #7b1fa2; color: #fff" OnClick="LinkButtonSendEmail_Click">Enviar</asp:LinkButton>
-                        </div>
+                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <div class="modal-footer d-flex justify-content-center align-items-center" style="margin-bottom: 10px">
+                                    <asp:LinkButton ID="LinkButtonSendEmail" runat="server" CssClass="btn w-25" style="background-color: #7b1fa2; color: #fff" OnClick="LinkButtonSendEmail_Click">Enviar</asp:LinkButton>
+                                </div>
+                                <div style="text-align: center; margin-bottom: 20px">
+                                    <asp:Label ID="lblMessageRecoverPassword" runat="server" style="font-size: 14px"></asp:Label>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>
