@@ -46,8 +46,6 @@
                                 </td>
                                 <td class="text-center">
                                     <asp:LinkButton ID="LinkButtonStudents" runat="server" OnCommand="LinkButtonStudents_Command" CommandArgument='<%#Eval("ID") %>' CssClass="fas fa-users text-warning"></asp:LinkButton>
-                                  
-
                                 </td>
                             </tr>
                         </ItemTemplate>
