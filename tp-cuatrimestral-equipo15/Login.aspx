@@ -48,7 +48,7 @@
                             <p class="text-secondary" style="font-size: 14px">Te enviaremos un correo electrónico con la nueva contraseña para que puedas ingresar a la plataforma. Podrás cambiar la misma cuando quieras.</p>
                             <br />
                             <div class="form-floating mb-3">
-                                <asp:TextBox ID="txtEmailFormBuy" runat="server" CssClass="form-control" TextMode="Email" placeholder="Correo Electrónico"></asp:TextBox>
+                                <asp:TextBox ID="txtEmailFormRecoverPassword" runat="server" CssClass="form-control" TextMode="Email" placeholder="Correo Electrónico"></asp:TextBox>
                                 <label for="floatingInput">Correo Electrónico</label>
                             </div>
                         </div>

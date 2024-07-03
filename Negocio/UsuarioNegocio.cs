@@ -77,6 +77,40 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
+        public Usuario GetByEmail(string email) {
+            try {
+                Usuario usuario = new Usuario();
+                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Email, Contrasenia, Suspendido from Usuarios WHERE Email = " + email);
+                accesoDatos.ejecutarLectura();
+                while (accesoDatos.Lector.Read()) {
+                    usuario.ID = (int)accesoDatos.Lector["Id"];
+                    usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.Nombre = (string)accesoDatos.Lector["Nombre"];
+                    usuario.Email = (string)accesoDatos.Lector["Email"];
+                    usuario.Contrasenia = (string)accesoDatos.Lector["Contrasenia"];
+                    usuario.Suspendido = (int)accesoDatos.Lector["Suspendido"];
+                }
+                return usuario;
+            } catch (Exception excepción) {
+                throw excepción;
+            } finally {
+                accesoDatos.cerrarConexion();
+            }
+        }
+        public bool Update(Usuario user) {
+            try {
+                Usuario usuario = new Usuario();
+                accesoDatos.setearConsulta("Update Usuarios SET Nombre=@Nombre, Email=@Email, Contrasenia=@Contrasenia, WHERE ID = " + usuario.ID);
+                accesoDatos.setearParametros("@Nombre", usuario.Nombre);
+                accesoDatos.setearParametros("@Email", usuario.Email);
+                accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
+                return accesoDatos.ejecutarAccion();
+            } catch (Exception excepción) {
+                throw excepción;
+            } finally {
+                accesoDatos.cerrarConexion();
+            }
+        }
         public List<Usuario> GetList() {
             List<Usuario> userList = new List<Usuario>();
             try
@@ -180,51 +214,17 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        //public void Agregar(Usuario usuario)
-        //{
-
-        //    try
-        //    {
-        //        accesoDatos.setearConsulta(
-        //            "INSERT into Usuarios(NombreUsuario, Nombre, Apellido, Email, Contrasenia, Tipo) " +
-        //            "VALUES(@NombreUsuario, @Nombre, @Apellido, @Email, @Contrasenia, @Tipo)"
-        //        );
-
-
-        //        accesoDatos.setearParametros("@NombreUsuario", usuario.NombreUsuario);
-        //        accesoDatos.setearParametros("@Nombre", usuario.Nombre);
-        //        accesoDatos.setearParametros("@Apellido", usuario.Apellido);
-        //        accesoDatos.setearParametros("@Email", usuario.Email);
-        //        accesoDatos.setearParametros("@Contrasenia", usuario.Contraseña);
-        //        accesoDatos.setearParametros("@Tipo", usuario.TipoUsuario);
-
-
-        //        accesoDatos.ejecutarAccion();
-        //    }
-        //    catch (Exception excepción)
-        //    {
-        //        throw excepción;
-        //    }
-        //    finally
-        //    {
-        //        accesoDatos.cerrarConexion();
-        //    }
-        //}
         public void ModificarById(Usuario usuario)
         {
             try
             {
                 accesoDatos.setearConsulta("Update Usuarios SET Nombre=@Nombre, Apellido=@Apellido, Email=@Email, Contrasenia=@Contrasenia, Tipo=@Tipo, Avatar=@Avatar WHERE ID = "  + usuario.ID);
-
                 accesoDatos.setearParametros("@Nombre", usuario.Nombre);
                 accesoDatos.setearParametros("@Apellido", usuario.Apellido);
                 accesoDatos.setearParametros("@Email", usuario.Email);
                 accesoDatos.setearParametros("@Contrasenia", usuario.Contrasenia);
                 accesoDatos.setearParametros("@Tipo", usuario.TipoUsuario);
                 accesoDatos.setearParametros("@Avatar", usuario.Avatar);
-
-
-
                 accesoDatos.ejecutarAccion();
 
             }

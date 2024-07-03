@@ -5,12 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using MoodleConection;
 using Negocio;
+using Bogus;
 
 namespace tp_cuatrimestral_equipo15 {
     public partial class Login : System.Web.UI.Page {
-        EmailService emailService = new EmailService();
-        Usuario usuario=new Usuario();
+        private EmailService emailService = new EmailService();
+        private UsuarioNegocio businessUser = new UsuarioNegocio();
+        Usuario usuario =new Usuario();
         protected void Page_Load(object sender, EventArgs e) {
 
 
@@ -37,7 +40,6 @@ namespace tp_cuatrimestral_equipo15 {
         }
         protected void LoginButton_Click(object sender, EventArgs e) {
             
-            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
             try
             {
                 Page.Validate();
@@ -47,7 +49,7 @@ namespace tp_cuatrimestral_equipo15 {
                 }
              
 
-                if (usuarioNegocio.Login(usuario)) {
+                if (businessUser.Login(usuario)) {
                     Session.Add("usuario", usuario);
                     if(usuario.TipoUsuario == TipoUsuario.ADMIN) {
                         Response.Redirect("AdministratorHome.aspx", false);
@@ -72,8 +74,31 @@ namespace tp_cuatrimestral_equipo15 {
             string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormRecoverPassword')); myModal.show();";
             ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
         }
-        protected void LinkButtonSendEmail_Click(object sender, EventArgs e) {
-            
+        protected async void LinkButtonSendEmail_Click(object sender, EventArgs e) {
+            if(businessUser.UserInDb(txtEmailFormRecoverPassword.Text)) {
+                Usuario user = (Usuario)businessUser.GetByEmail(txtEmailFormRecoverPassword.Text);
+                if(user.Suspendido != 1) {
+                    user.Contrasenia = GenerateRandomPassword();
+                    businessUser.Update(user);
+                    await UsuariosMoodle.UpdateUser(user);
+                    emailService.SendEmailRecoverPassword(user);
+                } else {
+                    // esta suspendido de la plataforma
+                }
+            } else {
+                // no esta en db
+            }
+        }
+        protected string GenerateRandomPassword() {
+            var faker = new Faker();
+            var password = new {
+                LowerCase = faker.Random.Char('a', 'z').ToString(),
+                UpperCase = faker.Random.Char('A', 'Z').ToString(),
+                Digit = faker.Random.Number(0, 9).ToString(),
+                SpecialChar = faker.Random.ListItem(new[] { "!", "@", "#", "$", "%" }),
+                Rest = faker.Random.String2(4)
+            };
+            return $"{password.LowerCase}{password.LowerCase}{password.UpperCase}{password.Digit}{password.SpecialChar}{password.Rest}";
         }
     }
 }

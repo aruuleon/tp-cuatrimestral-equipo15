@@ -69,14 +69,14 @@ namespace Negocio {
             mailMessage.To.Add(ConfigurationManager.AppSettings["SMTP_EMAIL"]);
             smtpClient.Send(mailMessage);*/
         }
-        public void SendEmailRecoverPassword(string email) {
+        public void SendEmailRecoverPassword(Usuario user) {
             mailMessage = new MailMessage {
                 From = new MailAddress(ConfigurationManager.AppSettings["SMTP_EMAIL"]),
                 Subject = SUBJECT_RECOVER_PASSWORD,
-                Body = "",
+                Body = CreateEmailRecoverPassword(user.Nombre, user.Email, user.Contrasenia),
                 IsBodyHtml = true
             };
-            mailMessage.To.Add(email);
+            mailMessage.To.Add(user.Email);
             smtpClient.Send(mailMessage);
         }
         public string CreateEmailForStudent(string firstname) {
@@ -136,6 +136,23 @@ namespace Negocio {
                 <p>Estimado/a {firstname},</p>
                 {selectedMessage}
                 <p>Si tenés alguna pregunta o necesitas más detalles sobre nuestros cursos, no dudes en comunicarte con nosotros a través de este correo electrónico o a través de los medios de contacto proporcionados en nuestra <a href='https://maxiprograma.com/'>página web</a>.</p>
+                <br>
+                <p>Te saluda, MaxiPrograma.</p>
+                <br>
+                <hr>
+                <br>
+                <div> <a href='https://maxiprograma.com/'> <img src='https://maxiprograma.com/assets/images/maxi-programa-banner-solo.png' width='25%' height='100px'/> </a> </div>";
+        }
+        public string CreateEmailRecoverPassword(string firstname, string email, string password) {
+            return $@"
+                <p>Estimado/a {firstname},</p>
+                <p>Recibimos tu solicitud por haber olvidado tu contraseña. Vamos a proporcionarse una contraseña para que puedas acceder a tu cuenta, pero recordá que podes cambiarla cuando quieras.</p>
+                <p>Estas son las credenciales con las que debes acceder a la plataforma:</p>
+                <ul>
+                    <li><b>Correo electrónico:</b> {email} </li>
+                    <li><b>Contraseña:</b> {password} </li>
+                </ul>
+                <p>Si tenés problemas para volver a acceder a tu cuenta, no dudes en comunicarte con nosotros a través de este correo electrónico o a través de los medios de contacto proporcionados en nuestra <a href='https://maxiprograma.com/'>página web</a>.</p>
                 <br>
                 <p>Te saluda, MaxiPrograma.</p>
                 <br>
