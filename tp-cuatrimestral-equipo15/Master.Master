@@ -41,7 +41,6 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" style="background-color:#7b1fa2;">
                                     <li><a class="dropdown-item text-white" href="DetallesPerfil.aspx" style="background-color: #7b1fa2;">Mi Perfil</a></li>
-                                    <li><a class="dropdown-item text-white" href="#" style="background-color: #7b1fa2;">Configuracion</a></li>
                                     <li><asp:Button Text="Cerrar Sesión" CssClass="dropdown-item text-white" ID="Button1" Style="background-color: #7b1fa2;" runat="server" OnClick="btnCerrarSesion_Click"/></li>
                                 </ul>
                             </li>
@@ -81,7 +80,6 @@
                                       </button>
                                       <ul class="dropdown-menu dropdown-menu-end" style="background-color:#7b1fa2;">
                                         <li><a class="dropdown-item text-white" href="DetallesPerfil.aspx" style="background-color: #7b1fa2;">Mi Perfil</a></li>
-                                        <li><a class="dropdown-item text-white" href="#" style="background-color: #7b1fa2;">Configuracion</a></li>
                                         <li><asp:Button Text="Cerrar Sesión" CssClass="dropdown-item text-white" ID="btnCerrarSesion" Style="background-color: #7b1fa2;" runat="server" OnClick="btnCerrarSesion_Click"/></li>
                                       </ul>
                                     </li>

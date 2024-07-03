@@ -13,8 +13,8 @@
         </div>
         <div class="col" style="max-width: 20%; position:absolute; right: 10%">
             <div class="card h-100">
-                <picture style="min-height: 200px; border-bottom: 1px solid rgba(0, 0, 0, 0.175)">
-                    <img src="<%= ResolveUrl(ImagenPortada).ToString() %>" style="max-width: 100%; height:200px" />
+                <picture style="min-height: auto; border-bottom: 1px solid rgba(0, 0, 0, 0.175)">
+                    <img src="<%= ResolveUrl(ImagenPortada).ToString() %>" style="width: 100%; height: auto; object-fit: cover; " />
                 </picture>
                 <div class="card-body mb-4">
                     <h5 class="card-title"><%= course.Nombre.ToString() %></h5>

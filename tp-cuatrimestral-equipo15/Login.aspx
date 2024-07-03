@@ -27,7 +27,10 @@
               <label for="floatingPassword">Contraseña</label>
               <asp:RequiredFieldValidator ID="validatorTxtPassword" CssClass="validacion" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
             </div>
-            <asp:Label Text="Email o Contraseña incorectos" runat="server"  CssClass="validacion_2" Visible="false" ID="lblIncorrecto" />
+            <div style="text-align:center; align-content:center">
+                <asp:Label Text="Email o Contraseña incorectos" runat="server"  CssClass="validacion_2" Visible="false" ID="lblIncorrecto" />
+                <asp:Label Text="Usuario Suspendido" runat="server"  CssClass="validacion_2" Visible="false" ID="lblSuspendido" />
+            </div>
             <asp:Button ID="LoginButton" runat="server" CssClass="btn btn-success w-50 mx-auto mb-3 d-block" style="margin-top: 30px" Text="Ingresar" OnClick="LoginButton_Click" />
             <div style="margin-top: 40px">
                 <p style="text-align: center"> Todavía no te registraste? 

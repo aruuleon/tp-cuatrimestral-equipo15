@@ -42,4 +42,7 @@
             </tbody>
         </table>
     </div>
+    <div class="justify-content-center" style="text-align:center; align-content:center; margin:50px" >
+        <asp:HyperLink ID="btnCancelar" CssClass="btn btn-danger btn-lg px-4 gap-3" runat="server" href="AdministratorHome.aspx" Visible="true">Volver</asp:HyperLink>
+    </div>
 </asp:Content>

@@ -13,9 +13,9 @@ namespace tp_cuatrimestral_equipo15 {
          
             SectionControlPanel studentControlPanel = new SectionControlPanel("Estudiantes", "StudentControlPanel.aspx", "fas fa-user-graduate");
             SectionControlPanel courseControlPanel = new SectionControlPanel("Cursos", "CourseControlPanel.aspx", "fas fa-book");
-            SectionControlPanel administratorControlPanel = new SectionControlPanel("Administradores", "AdministratorControlPanel.aspx", "fas fa-user-shield");
+            //SectionControlPanel administratorControlPanel = new SectionControlPanel("Administradores", "AdministratorControlPanel.aspx", "fas fa-user-shield");
             SectionControlPanel enrollmentControlPanel = new SectionControlPanel("Inscripciones", "EnrollmentControlPanel.aspx", "fas fa-file-alt");
-            List<SectionControlPanel> SectionControlPanelList = new List<SectionControlPanel> { studentControlPanel, courseControlPanel, administratorControlPanel, enrollmentControlPanel };
+            List<SectionControlPanel> SectionControlPanelList = new List<SectionControlPanel> { studentControlPanel, courseControlPanel, /*administratorControlPanel,*/ enrollmentControlPanel };
             sectionControlPanelList.DataSource = SectionControlPanelList;
             sectionControlPanelList.DataBind();
         }

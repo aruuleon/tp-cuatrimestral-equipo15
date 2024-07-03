@@ -21,6 +21,8 @@ namespace tp_cuatrimestral_equipo15 {
         Usuario usuario =new Usuario();
         protected void Page_Load(object sender, EventArgs e) {
 
+            lblSuspendido.Visible = false;
+            lblIncorrecto.Visible = false;
 
             if (Session["usuario"] != null)
             {
@@ -51,6 +53,14 @@ namespace tp_cuatrimestral_equipo15 {
              
 
                 if (businessUser.Login(usuario)) {
+
+                    Usuario user = businessUser.ListarById(usuario.ID);
+                    if (user.Suspendido == 1)
+                    {
+                        lblSuspendido.Visible = true;
+                        return;
+                    }
+
                     Session.Add("usuario", usuario);
                     if(usuario.TipoUsuario == TipoUsuario.ADMIN) {
                         Response.Redirect("AdministratorHome.aspx", false);

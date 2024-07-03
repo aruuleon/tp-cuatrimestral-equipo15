@@ -108,11 +108,12 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        public List<Usuario> GetList() {
+        public List<Usuario> GetList()
+        {
             List<Usuario> userList = new List<Usuario>();
             try
             {
-                accesoDatos.setearConsulta("SELECT Id, Nombre, Apellido, Email, Avatar from Usuarios WHERE Tipo = 0");
+                accesoDatos.setearConsulta("SELECT Id, Nombre, Apellido, Email, Avatar, IdMoodle,Suspendido from Usuarios WHERE Tipo = 0");
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
                 {
@@ -122,7 +123,9 @@ namespace Negocio
                     usuario.Apellido = (string)accesoDatos.Lector["Apellido"];
                     usuario.Email = (string)accesoDatos.Lector["Email"];
                     usuario.Avatar = (string)accesoDatos.Lector["Avatar"];
-                    //usuario.IdMoodle= (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.IdMoodle = (int)accesoDatos.Lector["IdMoodle"];
+                    usuario.Suspendido = (int)accesoDatos.Lector["Suspendido"];
+
                     userList.Add(usuario);
                 }
                 return userList;
@@ -152,7 +155,7 @@ namespace Negocio
             try
             {
                 Usuario usuario = new Usuario();
-                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios WHERE Id = " + Id
+                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar, Suspendido from Usuarios WHERE Id = " + Id
                 );
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
@@ -167,6 +170,8 @@ namespace Negocio
 
                     usuario.Apellido = (string)accesoDatos.Lector["Apellido"];
                     usuario.Avatar = (string)accesoDatos.Lector["Avatar"];
+                    usuario.Suspendido = (int)accesoDatos.Lector["Suspendido"];
+
                 }
                 return usuario;
             }
@@ -184,7 +189,7 @@ namespace Negocio
             try
             {
                 Usuario usuario = new Usuario();
-                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar from Usuarios WHERE IdMoodle = " + IdMoodle
+                accesoDatos.setearConsulta("SELECT Id, IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar, Suspendido from Usuarios WHERE IdMoodle = " + IdMoodle
                 );
                 accesoDatos.ejecutarLectura();
                 while (accesoDatos.Lector.Read())
@@ -199,6 +204,7 @@ namespace Negocio
 
                     usuario.Apellido = (string)accesoDatos.Lector["Apellido"];
                     usuario.Avatar = (string)accesoDatos.Lector["Avatar"];
+                    usuario.Suspendido = (int)accesoDatos.Lector["Suspendido"];
                 }
                 return usuario;
             }
@@ -247,5 +253,23 @@ namespace Negocio
             }
         }
 
+        public void Suspender(Usuario usuario)
+        {
+            try
+            {
+                accesoDatos.setearConsulta("Update Usuarios SET Suspendido = " + usuario.Suspendido + " WHERE ID = " + usuario.ID);
+
+
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception excepción)
+            {
+                throw excepción;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
     }
 }
