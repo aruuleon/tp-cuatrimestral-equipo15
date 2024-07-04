@@ -31,9 +31,10 @@
             <div class="mb-3">
                 <label class="form-label">Contrasenia</label>
                 <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" />  
+                <div style="position: relative;">
                 <asp:RequiredFieldValidator  CssClass="validacion" ErrorMessage="*No se acepta este campo vacio" ControlToValidate="txtContrasenia" runat="server" />
                 <asp:RegularExpressionValidator ID="RegularExpression"  CssClass="validacion" ErrorMessage="Formato Incorrecto.. requisitos: Longitud de al menos 8 caracteres. Al menos 1 letra minúscula. Al menos 1 letra mayúscula.Al menos 1 dígito.Al menos 1 carácter no alfanumérico (como un símbolo o espacio)." CauseValidation="true" ControlToValidate="txtContrasenia" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$" runat="server" />
-            
+                                                 </div>
             </div>
         
         </div>
