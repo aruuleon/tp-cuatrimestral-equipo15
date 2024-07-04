@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="CourseControlPanel.aspx.cs" Inherits="tp_cuatrimestral_equipo15.CourseControlPanel" Async="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <style>
+     .validacion {
+         color: red;
+         font-size: 20px;
+     }
+ </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <div class="p-3" style="width: 50%; margin-left: 10%; margin-bottom: 10px">
@@ -90,13 +96,14 @@
                     </asp:Repeater>
                 </tbody>
             </table>
-            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+            <asp:UpdatePanel ID="UpdatePanelModal" runat="server">
                 <ContentTemplate>
                     <div id="ModalFormCourse" class="modal fade" role="dialog">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <asp:Label ID="lblNameFormCourse" runat="server" CssClass="modal-title fw-semibold" Style="font-size: 20px"></asp:Label>
+                                    
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body">
@@ -135,6 +142,13 @@
                                         </div>
                                         <asp:LinkButton ID="LinkButtonConfirm" runat="server" CssClass="btn btn-success w-25" OnClick="LinkButtonConfirm_Click">Habilitar</asp:LinkButton>
                                     </div>
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                         <ContentTemplate>
+                                            <div class="align-items-center text-center" style="margin:10px">
+                                                <asp:Label ID="lblValidacion" runat="server" CssClass="validacion" Style="font-size:16px" ></asp:Label>
+                                            </div>
+                                         </ContentTemplate>
+                                 </asp:UpdatePanel>
                                 </div>
                             </div>
                         </div>

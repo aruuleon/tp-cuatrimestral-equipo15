@@ -96,13 +96,13 @@ namespace tp_cuatrimestral_equipo15
         protected global::System.Web.UI.WebControls.Repeater courseListMoodle;
 
         /// <summary>
-        /// UpdatePanel2 control.
+        /// UpdatePanelModal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelModal;
 
         /// <summary>
         /// lblNameFormCourse control.
@@ -184,6 +184,24 @@ namespace tp_cuatrimestral_equipo15
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonConfirm;
+
+        /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// lblValidacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblValidacion;
 
         /// <summary>
         /// btnCancelar control.

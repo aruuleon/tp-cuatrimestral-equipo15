@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Bogus.DataSets;
 
 namespace tp_cuatrimestral_equipo15 {
     public partial class CourseControlPanel : System.Web.UI.Page {
@@ -16,7 +17,9 @@ namespace tp_cuatrimestral_equipo15 {
         protected async void Page_Load(object sender, EventArgs e) {
 
             ActualizarCursos();
+            Session["Validacion"] = "";
             if (!IsPostBack) {
+                
                 PanelPlatformCourse.Visible = true;
                 PanelMoodleCourse.Visible = false;
                 LinkButtonPlatformCourse_Click(sender, e);
@@ -31,30 +34,91 @@ namespace tp_cuatrimestral_equipo15 {
             AdjustSettings(ColumnList, await CursosMoodleList(), columnListMoodle, courseListMoodle, "Moodle");
         }
         protected async void LinkButtonEnable_Command(object sender, CommandEventArgs e) { //Boton abrir modal
+            Session["Argument"] = e;
             course = await CursosMoodle.GetCourseByID(Convert.ToInt32(e.CommandArgument));
             lblIdMoodle.Text = course.IdMoodle.ToString();
             lblNameFormCourse.Text = course.Nombre;
             imagenPortadaFormCourse.ImageUrl = course.ImagenPortada;
+            lblValidacion.Text = (string)Session["Validacion"];
+     
             string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.show();";
             ScriptManager.RegisterStartupScript(this, GetType(), "OpenModalScript", script, true);
         }
         protected async void LinkButtonConfirm_Click(object sender, EventArgs e) {  //Habilitar de Modal
-            Curso courseToRegister = new Curso();
-            courseToRegister.IdMoodle = int.Parse(lblIdMoodle.Text);
-            courseToRegister.Nombre = lblNameFormCourse.Text;
-            courseToRegister.ImagenPortada = imagenPortadaFormCourse.ImageUrl;
-            courseToRegister.Resumen = txtResumeFormCourse.Text;
-            courseToRegister.Descripcion = txtDescriptionFormCourse.Text;
-            courseToRegister.ConocimientosRequeridos = txtRequiredKnowledgeFormCourse.Text;
-            courseToRegister.Programa = txtProgramFormCourse.Text;
-            courseToRegister.Precio = decimal.Parse(txtPriceFormCourse.Text);
-            courseToRegister.Visible = true;
-            await CursosMoodle.VisibleCourse(courseToRegister.IdMoodle, 1);
-            businessCourse.Agregar(courseToRegister);
-            string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.hide();";
-            ScriptManager.RegisterStartupScript(this, GetType(), "CloseModalScript", script, true);
-            Response.Redirect("CourseControlPanel.aspx", false);
+            lblValidacion.Text = "";
+            if (ValidateModal())
+            {
+                Curso courseToRegister = new Curso();
+                courseToRegister.IdMoodle = int.Parse(lblIdMoodle.Text);
+                courseToRegister.Nombre = lblNameFormCourse.Text;
+                courseToRegister.ImagenPortada = imagenPortadaFormCourse.ImageUrl;
+                courseToRegister.Resumen = txtResumeFormCourse.Text;
+                courseToRegister.Descripcion = txtDescriptionFormCourse.Text;
+                courseToRegister.ConocimientosRequeridos = txtRequiredKnowledgeFormCourse.Text;
+                courseToRegister.Programa = txtProgramFormCourse.Text;
+                courseToRegister.Precio = decimal.Parse(txtPriceFormCourse.Text);
+                courseToRegister.Visible = true;
+                await CursosMoodle.VisibleCourse(courseToRegister.IdMoodle, 1);
+                businessCourse.Agregar(courseToRegister);
+
+                string script = "var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse')); myModal.hide();";
+                ScriptManager.RegisterStartupScript(this, GetType(), "CloseModalScript", script, true);
+                Response.Redirect("CourseControlPanel.aspx", false);
+            }
+
+
+            string closeModalScript = @"
+            var myModal = new bootstrap.Modal(document.getElementById('ModalFormCourse'));
+            myModal.hide();
+            document.body.classList.remove('modal-open');
+            var modals = document.getElementsByClassName('modal-backdrop');
+            while(modals.length > 0) {
+                modals[0].parentNode.removeChild(modals[0]);
+            }";
+            ScriptManager.RegisterStartupScript(this, GetType(), "CloseModalOnErrorScript", closeModalScript, true);
+
+
+            LinkButtonEnable_Command(sender, (CommandEventArgs)Session["Argument"]);
+
         }
+
+        
+
+        protected bool ValidateModal()
+        {
+            
+            if (string.IsNullOrEmpty(txtResumeFormCourse.Text))
+            {
+                Session["Validacion"] = "Debe completar el Resumen";
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtDescriptionFormCourse.Text))
+            {
+                Session["Validacion"] = "Debe completar la Descripcion";
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtRequiredKnowledgeFormCourse.Text))
+            {
+                Session["Validacion"] = "Debe completar los Conocimientos requeridos";
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtPriceFormCourse.Text))
+            {
+                Session["Validacion"] = "Debe completar el Precio";
+                return false;
+            }
+            if (decimal.Parse(txtPriceFormCourse.Text) < 0)
+            {
+                Session["Validacion"] = "El precio debe ser igual o mayor a 0";
+                return false;
+            }
+
+            return true;
+   
+        }
+
+
+
         protected void AdjustSettings(List<string> ColumnList, List<Curso> CourseList, Repeater repeaterColumnList, Repeater repeaterCourseList, string table) {
             if(table == "Platform") {
                 LinkButtonPlatformCourse.Style.Value = " background-color: #7b1fa2; color:#fff";
