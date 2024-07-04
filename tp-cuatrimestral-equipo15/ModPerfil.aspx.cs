@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using MoodleConection;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace tp_cuatrimestral_equipo15
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
 
             try
             {
@@ -27,6 +28,9 @@ namespace tp_cuatrimestral_equipo15
                     txtApellido.Text = usuario.Apellido;
                     txtNombre.Text = usuario.Nombre;
                     txtEmail.Text = usuario.Email;
+                    txtContrasenia.Text = usuario.Contrasenia;
+
+
 
 
                     if (usuario.Avatar.StartsWith("perfil-img-"))
@@ -49,7 +53,7 @@ namespace tp_cuatrimestral_equipo15
             }
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected async void btnGuardar_Click(object sender, EventArgs e)
         {
             Page.Validate();
             if(!Page.IsValid) return;
@@ -57,6 +61,7 @@ namespace tp_cuatrimestral_equipo15
 
             usuario.Apellido= txtApellido.Text;
             usuario.Nombre = txtNombre.Text;
+            usuario.Contrasenia = txtContrasenia.Text;
 
             if (txtImagen.PostedFile.FileName != "")
             {
@@ -67,7 +72,7 @@ namespace tp_cuatrimestral_equipo15
             UsuarioNegocio UsuarioNegocio = new UsuarioNegocio();
 
             UsuarioNegocio.ModificarById(usuario);
-
+            await UsuariosMoodle.UpdateUser(usuario);
             Response.Redirect("DetallesPerfil.aspx?", false);
         }
 

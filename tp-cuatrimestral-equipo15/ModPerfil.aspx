@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="ModPerfil.aspx.cs" Inherits="tp_cuatrimestral_equipo15.Perfil" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="ModPerfil.aspx.cs" Inherits="tp_cuatrimestral_equipo15.Perfil" Async="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <style>
       .validacion{
@@ -28,6 +28,14 @@
                 <label class="form-label">Email</label>
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" Enabled="false"></asp:TextBox>
             </div>
+            <div class="mb-3">
+                <label class="form-label">Contrasenia</label>
+                <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" />  
+                <asp:RequiredFieldValidator ErrorMessage="errormessage" ControlToValidate="txtContrasenia" runat="server" />
+                <asp:RegularExpressionValidator ID="RegularExpression" ErrorMessage="FormatoIncorrecto" CauseValidation="true" ControlToValidate="txtContrasenia" ValidationExpression="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/" runat="server" />
+            
+            </div>
+        
         </div>
 
         <div class="col-md-4">
