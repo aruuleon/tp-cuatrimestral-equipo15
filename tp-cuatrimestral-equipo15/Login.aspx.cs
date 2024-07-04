@@ -96,7 +96,7 @@ namespace tp_cuatrimestral_equipo15 {
                     user.Contrasenia = GenerateRandomPassword();
                     businessUser.Update(user);
                     await UsuariosMoodle.UpdateUser(user);
-                    //emailService.SendEmailRecoverPassword(user);
+                    emailService.SendEmailRecoverPassword(user);
                     status = 1;
                 } else {
                     status = 2;

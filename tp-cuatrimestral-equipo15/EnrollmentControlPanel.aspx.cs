@@ -33,10 +33,8 @@ namespace tp_cuatrimestral_equipo15 {
                 await UsuariosMoodle.EnrolStudent(course.IdMoodle,user.IdMoodle);
             }
             if (businessEnrollment.ApproveOrReject(action, enrollmentId)) {
-                //emailService.SendEmailEnrollmentToStudent(user, course, action);
-                
+                emailService.SendEmailEnrollmentToStudent(user, course, action);
                 Response.Redirect(Request.RawUrl);
-                
             }
         }
     }

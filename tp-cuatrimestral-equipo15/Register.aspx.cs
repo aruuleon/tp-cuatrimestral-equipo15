@@ -11,6 +11,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace tp_cuatrimestral_equipo15 {
     public partial class Register : System.Web.UI.Page {
+        private EmailService emailService = new EmailService();
         protected void Page_Load(object sender, EventArgs e) {
             
         }
@@ -28,10 +29,13 @@ namespace tp_cuatrimestral_equipo15 {
                         return;
                     } else {
                         int userMoodleID = await UsuariosMoodle.CreateUser(usuario);
-                        if (usuarioNegocio.Register(usuario, userMoodleID)) {
-                            //EmailService emailService = new EmailService();
-                            //await emailService.SendEmailRegister(usuario);
-                            Response.Redirect("Login.aspx", false);
+                        if(userMoodleID != -1) {
+                            if (usuarioNegocio.Register(usuario, userMoodleID)) {
+                                emailService.SendEmailRegister(usuario);
+                                Response.Redirect("Login.aspx", false);
+                            } else {
+                                Response.Redirect("Register.aspx", false);
+                            }
                         } else {
                             Response.Redirect("Register.aspx", false);
                         }

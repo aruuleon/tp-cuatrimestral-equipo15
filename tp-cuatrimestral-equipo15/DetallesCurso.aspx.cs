@@ -84,10 +84,6 @@ namespace tp_cuatrimestral_equipo15
             UsuariosXCursosNegocio usuariosXCursosNegocio = new UsuariosXCursosNegocio();
             return usuariosXCursosNegocio.CheckIfUserHasCourse(courseId, userId);
         }
-
-       
-  
-
         protected void CheckEnrollmentStatus(int userId, int courseId) {
 
             CursoNegocio cursoNegocio = new CursoNegocio();
@@ -115,8 +111,6 @@ namespace tp_cuatrimestral_equipo15
                     break;
             }
         }
-
-
         protected async Task ActualizarEstado()
         {
             BusinessEnrollment businessEnrollment = new BusinessEnrollment();
@@ -134,7 +128,6 @@ namespace tp_cuatrimestral_equipo15
 
             await Task.WhenAll(tasks);
         }
-
         private async Task UpdateUserStatusAsync(Usuario user, int cursoIdMoodle, int courseId, BusinessEnrollment businessEnrol)
         {
             string status = await UsuariosMoodle.GetUserStatusInCourse(cursoIdMoodle, user.IdMoodle);

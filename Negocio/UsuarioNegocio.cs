@@ -14,8 +14,8 @@ namespace Negocio
         public bool Register(Usuario usuario, int idMoodle) {
             try {
                 accesoDatos.setearConsulta(
-                    "INSERT into Usuarios(IdMoodle, Nombre, Apellido, Email, Contrasenia, Tipo, Avatar) " +
-                    "VALUES(@IdMoodle, @Nombre, @Apellido, @Emal, @Contrasena, @Tipo, @Avatar)"
+                    "INSERT into Usuarios(IdMoodle, Nombre, Apellido, Email, Contrasenia, Avatar, Tipo, Suspendido) " +
+                    "VALUES(@IdMoodle, @Nombre, @Apellido, @Emal, @Contrasena, @Avatar, @Tipo, @Suspendido)"
                 );
                 accesoDatos.setearParametros("@IdMoodle", idMoodle);
                 accesoDatos.setearParametros("@Nombre", usuario.Nombre);
@@ -24,6 +24,7 @@ namespace Negocio
                 accesoDatos.setearParametros("@Contrasena", usuario.Contrasenia);
                 accesoDatos.setearParametros("@Tipo", TipoUsuario.STUDENT);
                 accesoDatos.setearParametros("@Avatar", "https://www.filepicker.io/api/file/Km01a73PSDr2Q74TCYoe");
+                accesoDatos.setearParametros("@Suspendido", 0);
                 return accesoDatos.ejecutarAccion();
             } catch (Exception exception) {
                 throw exception;
