@@ -103,6 +103,7 @@ namespace tp_cuatrimestral_equipo15
                 case StateType.SUSPENDING:
                     LinkButtonGetOrView.Text = "Suspendido";
                     LinkButtonGetOrView.CssClass += " btn btn-danger";
+                    LabelPrice.Visible = false;
                     break;
                 default:
                     LinkButtonGetOrView.Text = "Obtener Curso";
