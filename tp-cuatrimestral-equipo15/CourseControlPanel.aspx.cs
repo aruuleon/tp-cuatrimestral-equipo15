@@ -17,6 +17,7 @@ namespace tp_cuatrimestral_equipo15 {
         protected async void Page_Load(object sender, EventArgs e) {
 
             ActualizarCursos();
+            ActualizarCursosEliminados();
             Session["Validacion"] = "";
             if (!IsPostBack) {
                 
@@ -159,6 +160,23 @@ namespace tp_cuatrimestral_equipo15 {
                 }
             }
         }
+
+        protected async void ActualizarCursosEliminados()
+        {
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            List<Curso> cursoModdle = await CursosMoodle.GetCourses();
+            List<Curso> cursosDB = cursoNegocio.GetList();
+            foreach (var db in cursosDB)
+            {
+                if(cursoModdle.Where(x => x.IdMoodle == db.IdMoodle).Count() <= 0)
+                {
+                    cursoNegocio.Eliminar(db);
+                }
+
+            }
+        }
+
+
         protected async Task<List<Curso>> CursosMoodleList() {
             List<Curso> cursoSimples = await CursosMoodle.GetCourses();
             List<Curso> cursos = new List<Curso>();

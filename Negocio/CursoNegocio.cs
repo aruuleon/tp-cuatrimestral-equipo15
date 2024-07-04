@@ -204,7 +204,21 @@ namespace Negocio
                 throw exception;
             }
         }
-          
+
+        //public void EliminarByIdMoodle(Curso curso)
+        //{
+        //    try
+        //    {
+        //        accesoDatos.setearConsulta("DELETE FROM Cursos WHERE ID = " + curso.IdMoodle);
+
+        //        accesoDatos.ejecutarAccion();
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw exception;
+        //    }
+        //}
+
         public bool Cargado(int IdMoodle)
         {
             int id = -1;

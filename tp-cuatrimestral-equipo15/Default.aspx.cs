@@ -15,6 +15,7 @@ namespace tp_cuatrimestral_equipo15 {
         protected void Page_Load(object sender, EventArgs e) {
 
             CursoNegocio cursoNegocio = new CursoNegocio();
+            ActualizarCursosEliminados();
             ActualizarCursos();
 
             Session.Add("listaCursos", FiltrarActivos());
@@ -37,6 +38,20 @@ namespace tp_cuatrimestral_equipo15 {
                         cursoNegocio.Actualizar(curso);
                     }
                 }
+            }
+        }
+        protected async void ActualizarCursosEliminados()
+        {
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            List<Curso> cursoModdle = await CursosMoodle.GetCourses();
+            List<Curso> cursosDB = cursoNegocio.GetList();
+            foreach (var db in cursosDB)
+            {
+                if (cursoModdle.Where(x => x.IdMoodle == db.IdMoodle).Count() <= 0)
+                {
+                    cursoNegocio.Eliminar(db);
+                }
+
             }
         }
 
