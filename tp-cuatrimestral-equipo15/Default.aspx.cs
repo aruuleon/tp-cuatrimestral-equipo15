@@ -43,13 +43,16 @@ namespace tp_cuatrimestral_equipo15 {
         protected async void ActualizarCursosEliminados()
         {
             CursoNegocio cursoNegocio = new CursoNegocio();
+            BusinessEnrollment businessEnrollment = new BusinessEnrollment();
             List<Curso> cursoModdle = await CursosMoodle.GetCourses();
             List<Curso> cursosDB = cursoNegocio.GetList();
             foreach (var db in cursosDB)
             {
                 if (cursoModdle.Where(x => x.IdMoodle == db.IdMoodle).Count() <= 0)
                 {
+                    businessEnrollment.DeleteByCourse(db);
                     cursoNegocio.Eliminar(db);
+
                 }
 
             }

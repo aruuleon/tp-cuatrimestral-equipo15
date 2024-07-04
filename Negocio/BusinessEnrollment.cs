@@ -245,5 +245,18 @@ namespace Negocio {
         }
 
 
+        public void DeleteByCourse(Curso curso)
+        {
+            try
+            {
+                dataAccess.setearConsulta("delete from Inscripciones where IDCurso = " + curso.ID);
+                dataAccess.ejecutarAccion();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
     }
 }
