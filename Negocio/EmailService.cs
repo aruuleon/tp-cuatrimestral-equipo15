@@ -17,7 +17,6 @@ namespace Negocio {
         private const string SUBJECT_ADMINISTRATOR_ACCOUNT_REGISTRATION = "MaxiPrograma - Tenes un nuevo estudiante";
         private const string SUBJECT_STUDENT_ENROLLMENT_COURSE_CONFIRMATION = "MaxiPrograma - Inscripción a curso";
         private const string SUBJECT_RECOVER_PASSWORD = "MaxiPrograma - Recuperaciòn de contraseña";
-
         public EmailService() {
             smtpClient = new SmtpClient();
             smtpClient.Host = ConfigurationManager.AppSettings["SMTP_HOST"];

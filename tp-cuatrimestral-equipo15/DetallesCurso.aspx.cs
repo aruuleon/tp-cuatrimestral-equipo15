@@ -98,6 +98,7 @@ namespace tp_cuatrimestral_equipo15
                     LinkButtonGetOrView.Text = "Ver Curso";
                     LinkButtonGetOrView.CssClass += " btn btn-success";
                     LinkButtonGetOrView.PostBackUrl = "http://localhost/course/view.php?id=" + curso.IdMoodle;
+                    LinkButtonGetOrView.Attributes.Add("target", "_blank");
                     LabelPrice.Visible = false;
                     break;
                 case StateType.SUSPENDING:
