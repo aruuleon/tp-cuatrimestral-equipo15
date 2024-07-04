@@ -13,13 +13,13 @@ namespace MoodleConection
     public class UsuariosMoodle
     {
         private static string moodleUrl = "http://localhost/webservice/rest/server.php";
-        private static string token = "44fd8f48a5cbbdf021e843174d3d9b8d"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "93ea1fa65fec45d8b4018454621a278b" ; "77c9cceb61d68808c3fb68bf95ceefdf"
+        private static string token = "b60b8e025b4eef6661ea1cd4135138ec"; // "44fd8f48a5cbbdf021e843174d3d9b8d"; "93ea1fa65fec45d8b4018454621a278b" ; "77c9cceb61d68808c3fb68bf95ceefdf"
         public static async Task<int> CreateUser(Usuario usuario)
         {
             try
             {
                 int IdMoodle = -1;
-                string UserName = usuario.Email.ToLower();
+                //string UserName = usuario.Email.ToLower();
                 using (HttpClient client = new HttpClient())
                 {
                     string function = "core_user_create_users";
@@ -30,7 +30,7 @@ namespace MoodleConection
 
                     Dictionary<string, string> postData = new Dictionary<string, string>
                     {
-                        { "users[0][username]", UserName },
+                        { "users[0][username]", usuario.Email.ToLower() },
                         { "users[0][password]", usuario.Contrasenia },
                         { "users[0][firstname]", usuario.Nombre },
                         { "users[0][lastname]", usuario.Apellido },
