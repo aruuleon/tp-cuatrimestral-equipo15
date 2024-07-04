@@ -19,7 +19,7 @@ namespace MoodleConection
             try
             {
                 int IdMoodle = -1;
-
+                string UserName = usuario.Email.ToLower();
                 using (HttpClient client = new HttpClient())
                 {
                     string function = "core_user_create_users";
@@ -30,7 +30,7 @@ namespace MoodleConection
 
                     Dictionary<string, string> postData = new Dictionary<string, string>
                     {
-                        { "users[0][username]", usuario.Email },
+                        { "users[0][username]", UserName },
                         { "users[0][password]", usuario.Contrasenia },
                         { "users[0][firstname]", usuario.Nombre },
                         { "users[0][lastname]", usuario.Apellido },
