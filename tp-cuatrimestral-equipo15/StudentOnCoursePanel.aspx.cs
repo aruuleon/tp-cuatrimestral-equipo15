@@ -35,7 +35,8 @@ namespace tp_cuatrimestral_equipo15
         protected async Task ActualizarEstado()
         {
             BusinessEnrollment businessEnrollment = new BusinessEnrollment();
-            List<Usuario> usuarios = businessEnrollment.GetUsersByCourse(courseId);
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            List<Usuario> usuarios = usuarioNegocio.GetList();
             CursoNegocio cursoNegocio = new CursoNegocio();
             Curso curso = cursoNegocio.BuscarPorId(courseId);
             BusinessEnrollment businessEnrol = new BusinessEnrollment();
@@ -53,20 +54,36 @@ namespace tp_cuatrimestral_equipo15
         private async Task UpdateUserStatusAsync(Usuario user, int cursoIdMoodle, int courseId, BusinessEnrollment businessEnrol)
         {
             string status = await UsuariosMoodle.GetUserStatusInCourse(cursoIdMoodle, user.IdMoodle);
+            CursoNegocio cursoNegocio = new CursoNegocio();
+            Curso curso = cursoNegocio.ListarById(courseId);
 
             if (status == "Activo")
             {
-                 businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.APPROVED, courseId);
+                if (businessEnrol.GetStatusActive(user.ID, courseId) != "")
+                {
+                    businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.APPROVED, courseId);
+                }
+                else
+                {
+                    businessEnrol.Habilitar(new Enrollment(user.ID, curso.ID, curso.Precio), 1);
+                }
             }
             else if (status == "Suspendido")
             {
-                 businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, courseId);
+                if (businessEnrol.GetStatusActive(user.ID, courseId) != "")
+                {
+                    businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.SUSPENDING, courseId);
+                }
+                else
+                {
+                    businessEnrol.Habilitar(new Enrollment(user.ID, curso.ID, curso.Precio), 0);
+                }
             }
             else if (status == "No inscripto")
             {
                 businessEnrol.ModificarEnrollmentByIdUsuario(user, StateType.REFUSED, courseId);
             }
-            
+
         }
 
 

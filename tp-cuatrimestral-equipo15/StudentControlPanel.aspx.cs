@@ -227,6 +227,21 @@ namespace tp_cuatrimestral_equipo15
 
         }
 
+        protected async void LinkButtonActivateMoodle_Command(object sender, CommandEventArgs e)
+        {
+            CommandEventArgs commandEventArgs = e as CommandEventArgs;
+            int userIdMoodle = int.Parse(commandEventArgs.CommandArgument.ToString());
 
+            Usuario moodle = await UsuariosMoodle.GetUsersbyID(userIdMoodle);
+            moodle.Contrasenia = "Usuario123!";
+
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            usuarioNegocio.Register(moodle, userIdMoodle);
+
+            Usuario user = usuarioNegocio.ListarByIdMoodle(moodle.IdMoodle);
+            Response.Redirect("StudentControlPanel.aspx", false);
+        }
+
+        
     }
 }

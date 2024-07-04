@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Negocio {
     public class BusinessEnrollment {
@@ -81,8 +82,10 @@ namespace Negocio {
                 dataAccess.cerrarConexion();
             }
         }
-        public bool Generate(Enrollment enrollment) {
-            try {
+        public bool Generate(Enrollment enrollment)
+        {
+            try
+            {
                 dataAccess.setearConsulta("INSERT INTO Inscripciones(IDUsuario, IDCurso, FechaSolicitud, Costo, Estado) " +
                                           "VALUES(@IDUsuario, @IDCurso, @FechaSolicitud, @Costo, @Estado)");
                 dataAccess.setearParametros("@IDUsuario", enrollment.UserID);
@@ -91,12 +94,42 @@ namespace Negocio {
                 dataAccess.setearParametros("@Costo", enrollment.Price);
                 dataAccess.setearParametros("@Estado", StateType.PENDING);
                 return dataAccess.ejecutarAccion();
-            } catch (Exception exception) {
+            }
+            catch (Exception exception)
+            {
                 throw exception;
-            } finally {
+            }
+            finally
+            {
                 dataAccess.cerrarConexion();
             }
         }
+
+        public bool Habilitar(Enrollment enrollment, int status)
+        {
+            string state = status == 1 ? StateType.APPROVED : StateType.SUSPENDING;
+            try
+            {
+                dataAccess.setearConsulta("INSERT INTO Inscripciones(IDUsuario, IDCurso, FechaSolicitud, Costo, Estado) " +
+                                          "VALUES(@IDUsuario, @IDCurso, @FechaSolicitud, @Costo, @Estado)");
+                dataAccess.setearParametros("@IDUsuario", enrollment.UserID);
+                dataAccess.setearParametros("@IDCurso", enrollment.CourseID);
+                dataAccess.setearParametros("@FechaSolicitud", enrollment.EnrollmentDate);
+                dataAccess.setearParametros("@Costo", enrollment.Price);
+                dataAccess.setearParametros("@Estado", state);
+                return dataAccess.ejecutarAccion();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                dataAccess.cerrarConexion();
+            }
+        }
+
+
         public string GetStatus(int userId, int courseId) {
             try {
                 //dataAccess.setearConsulta("SELECT Estado FROM Inscripciones WHERE IdUsuario = " + userId + " AND IdCurso = " + courseId);
@@ -188,5 +221,29 @@ namespace Negocio {
                 dataAccess.cerrarConexion();
             }
         }
+        public string GetStatusActive(int userId, int courseId)
+        {
+            try
+            {
+                //dataAccess.setearConsulta("SELECT Estado FROM Inscripciones WHERE IdUsuario = " + userId + " AND IdCurso = " + courseId);
+                dataAccess.setearConsulta("SELECT TOP 1 Estado FROM Inscripciones WHERE IDUsuario = " + userId + " AND IDCurso = " + courseId + "and Estado <> '" + StateType.REFUSED.ToString() + "'" + "and Estado <> '" + StateType.PENDING.ToString() + "' ORDER BY IDInscripcion  DESC");
+                dataAccess.ejecutarLectura();
+                if (dataAccess.Lector.Read())
+                {
+                    return dataAccess.Lector.GetString(0);
+                }
+                return "";
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                dataAccess.cerrarConexion();
+            }
+        }
+
+
     }
 }

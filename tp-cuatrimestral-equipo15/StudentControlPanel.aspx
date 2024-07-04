@@ -51,7 +51,11 @@
         </div>
     </asp:Panel>
      <asp:Panel ID="PanelMoodleUsers" runat="server" CssClass="tabcontent">
+         <div class="justify-content-center text-center" style="margin-top:10px">
+            <p>La contraseña por defecto cuando se habilite un estudiante es "Usuario123!"</p>
+        </div>
      <div class="m-5 mx-auto w-75 d-flex justify-content-center">
+
          <table class="table table-bordered">
              <thead class="table-dark">
                  <tr class="text-center">
@@ -72,8 +76,7 @@
                              <td><%#Eval("Email")%></td>
 
                              <td class="text-center">
-                                 <%--<asp:LinkButton ID= "LinkButtonActivate2" runat="server" OnCommand="LinkButtonActivate2_Command" CommandArgument='<%#Eval("ID") %>' CssClass='<%# activeBotton2((int)Eval("ID")) %>'></asp:LinkButton>--%>
-                                 <p>Habilitar</p>
+                                 <asp:LinkButton ID= "LinkButtonActivateMoodle" runat="server" OnCommand="LinkButtonActivateMoodle_Command" CommandArgument='<%#Eval("IdMoodle") %>' CssClass='bi bi-person-fill-down text-success'></asp:LinkButton>
                              </td>
                              <td class="text-center">
                                  <p><%# CheckStatusMoodle((int)Eval("Suspendido")) %></p>
