@@ -15,22 +15,76 @@ namespace tp_cuatrimestral_equipo15
     {
 
         /// <summary>
-        /// columnList control.
+        /// LinkButtonPlatformUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater columnList;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonPlatformUsers;
 
         /// <summary>
-        /// userList control.
+        /// LinkButtonMoodleUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater userList;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonMoodleUsers;
+
+        /// <summary>
+        /// PanelPlatformUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPlatformUsers;
+
+        /// <summary>
+        /// columnListPlatform control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater columnListPlatform;
+
+        /// <summary>
+        /// userListPlatform control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater userListPlatform;
+
+        /// <summary>
+        /// PanelMoodleUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelMoodleUsers;
+
+        /// <summary>
+        /// columnListMoodle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater columnListMoodle;
+
+        /// <summary>
+        /// userListMoodle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater userListMoodle;
 
         /// <summary>
         /// btnCancelar control.
