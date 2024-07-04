@@ -22,7 +22,7 @@ namespace tp_cuatrimestral_equipo15 {
 
 
             List<string> ColumnList = new List<string> { "Identificador", "Nombre", "Apellido", "Email", "Avatar", "Activo", "Estado" };
-            List<Usuario> UserList = usuarioNegocio.GetList();
+            List<Usuario> UserList = await UsersFilter();
 
             userList.DataSource = UserList;
             userList.DataBind();
@@ -58,6 +58,27 @@ namespace tp_cuatrimestral_equipo15 {
                     }
                 }
             }
+
+        }
+
+        private async Task<List<Usuario>> UsersFilter()
+        {
+            List<Usuario> usersMoodle = await UsuariosMoodle.GetUsers();
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            List<Usuario> usersPlatform = usuarioNegocio.GetList();
+            List<Usuario> filtrada = new List<Usuario>();
+
+            foreach (var moodle in usersMoodle)
+            {
+                foreach (var plataform in usersPlatform)
+                {
+                    if (moodle.IdMoodle == plataform.IdMoodle)
+                    {
+                        filtrada.Add(plataform);
+                    }
+                }
+            }
+            return filtrada;    
 
         }
 
